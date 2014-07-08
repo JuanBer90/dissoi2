@@ -1,0 +1,287 @@
+<html lang="en-us"><head>
+<title>Añadir asiento contable | Sitio de administración de Django</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/static/admin/css/ie.css" /><![endif]-->
+
+<script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet">
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+<script type="text/javascript" src="/static/admin/js/inlines.js"></script>
+<script type="text/javascript" src="/static/ajax_select/js/bootstrap.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+
+</script><script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+ <link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+<body class="asientos_contables-asientocontable change-form">
+<!-- Container -->
+<div id="container">
+    <!-- Header -->
+    <div id="header"><div id="branding"><h1 id="site-name">Sistema contable - Congregación "Hijas de la Caridad"</h1>
+        </div>
+        <div id="user-tools">
+            Bienvenido/a,
+            <strong>{{request.user.username }}</strong>.
+                <a href="/admin/password_change/">Cambiar contraseña</a> /
+                <a href="/admin/logout/">Terminar sesión</a>
+        </div>
+    </div>
+    <!-- END Header -->
+    
+<div class="breadcrumbs">
+<a href="/admin/">Inicio</a>
+› <a href="/asiento/listar/">Asientos_contables</a>
+› Añadir asiento contable
+</div>
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        <h1>Añadir asiento contable</h1>
+        <div id="content-main">
+
+<form enctype="multipart/form-data" action="" onchange="total()" method="post" id="asientocontable_form">{% csrf_token %}
+<div>
+      <fieldset class="module aligned ">
+        <div class="form-row field-fecha">
+                <div>
+                        <label class="required" for="id_fecha">Fecha:</label>
+                            <input class="vDateField" id="id_fecha" name="fecha" size="10" type="text" value="{{ hoy }}">
+
+                </div>
+        </div>
+</fieldset>
+
+
+
+<div class="inline-group" id="asientocontabledetalle_set-group">
+  <div class="tabular inline-related last-related">
+<input id="id_asientocontabledetalle_set-TOTAL_FORMS" name="asientocontabledetalle_set-TOTAL_FORMS" type="hidden" value="3" autocomplete="off"><input id="id_asientocontabledetalle_set-INITIAL_FORMS" name="asientocontabledetalle_set-INITIAL_FORMS" type="hidden" value="0"><input id="id_asientocontabledetalle_set-MAX_NUM_FORMS" name="asientocontabledetalle_set-MAX_NUM_FORMS" type="hidden" value="1000" autocomplete="off">
+<fieldset class="module">
+   <h2>Asiento contable detalles</h2>
+   <table id="myTable">
+     <thead><tr>
+         <th colspan="2" class="required" style="width: 200px">Cuenta</th>
+       <th class="required">Debe</th>
+       <th class="required">Haber</th>
+         <th>¿Eliminar?</th>
+     </tr></thead>
+     <tbody>
+        <tr class="form-row row1  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-0">
+        <td class="original">
+          <input id="id_asientocontabledetalle_set-0-id" name="asientocontabledetalle_set-0-id" type="hidden">
+          <input id="id_asientocontabledetalle_set-0-asiento_contable" name="asientocontabledetalle_set-0-asiento_contable" type="hidden">
+        </td>
+              <td class="field-cuenta">
+                  <span id="id_asientocontabledetalle_set-0-cuenta_wrapper">
+                <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                 <input type="text" name="asientocontabledetalle_set-0-cuenta_text" id="id_asientocontabledetalle_set-0-cuenta_text" value="" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
+	        <a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-0-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
+
+    <input type="hidden" name="asientocontabledetalle_set-0-cuenta" id="id_asientocontabledetalle_set-0-cuenta" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
+    <div id="id_asientocontabledetalle_set-0-cuenta_on_deck" class="results_on_deck"><div></div></div>
+    </span>
+              </td>
+              <td class="field-debe">
+                  <input id="id_asientocontabledetalle_set-0-debe" name="asientocontabledetalle_set-0-debe"  step="0.01" type="number" value="0">
+              </td>
+              <td class="field-haber">
+                  <input id="id_asientocontabledetalle_set-0-haber" name="asientocontabledetalle_set-0-haber"  step="0.01" type="number" value="0">
+              </td>
+          <td class="delete"></td>
+        </tr>
+       <tr class="form-row row2  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-1">
+        <td class="original">
+          <input id="id_asientocontabledetalle_set-1-id" name="asientocontabledetalle_set-1-id" type="hidden">
+          <input id="id_asientocontabledetalle_set-1-asiento_contable" name="asientocontabledetalle_set-1-asiento_contable" type="hidden">
+        </td>
+              <td class="field-cuenta">
+                  <span id="id_asientocontabledetalle_set-1-cuenta_wrapper">
+<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="asientocontabledetalle_set-1-cuenta_text" id="id_asientocontabledetalle_set-1-cuenta_text" value="" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
+	<a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-1-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
+<input type="hidden" name="asientocontabledetalle_set-1-cuenta" id="id_asientocontabledetalle_set-1-cuenta" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
+<div id="id_asientocontabledetalle_set-1-cuenta_on_deck" class="results_on_deck"><div></div></div>
+
+</span>
+              </td>
+              <td class="field-debe">
+           <input id="id_asientocontabledetalle_set-1-debe" name="asientocontabledetalle_set-1-debe" step="0.01" type="number" value="0">
+              </td>
+            <td class="field-haber">
+              <input id="id_asientocontabledetalle_set-1-haber" name="asientocontabledetalle_set-1-haber" step="0.01" type="number" value="0">
+              </td>
+
+          <td class="delete"></td>
+        
+        </tr>
+     
+        <tr class="form-row row1  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-2">
+        <td class="original">
+          
+          <input id="id_asientocontabledetalle_set-2-id" name="asientocontabledetalle_set-2-id" type="hidden">
+          <input id="id_asientocontabledetalle_set-2-asiento_contable" name="asientocontabledetalle_set-2-asiento_contable" type="hidden">
+          
+        </td>
+
+      <td class="field-cuenta">
+           <span id="id_asientocontabledetalle_set-2-cuenta_wrapper">
+<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+               <input type="text" name="asientocontabledetalle_set-2-cuenta_text" id="id_asientocontabledetalle_set-2-cuenta_text" value="" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
+
+	<a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-2-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
+
+<input type="hidden" name="asientocontabledetalle_set-2-cuenta" id="id_asientocontabledetalle_set-2-cuenta" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
+<div id="id_asientocontabledetalle_set-2-cuenta_on_deck" class="results_on_deck"><div></div></div>
+</span>
+              </td>
+              <td class="field-debe">
+           <input id="id_asientocontabledetalle_set-2-debe" name="asientocontabledetalle_set-2-debe" step="0.01"  type="number" value="0">
+              </td>
+              <td class="field-haber">
+                  <input id="id_asientocontabledetalle_set-2-haber" name="asientocontabledetalle_set-2-haber"  step="0.01" type="number" value="0">
+              </td>
+          <td class="delete"></td>
+        </tr>
+
+        <tr class="form-row row2  empty-form" id="asientocontabledetalle_set-empty">
+        <td class="original">
+          
+          <input id="id_asientocontabledetalle_set-__prefix__-id" name="asientocontabledetalle_set-__prefix__-id" type="hidden">
+          <input id="id_asientocontabledetalle_set-__prefix__-asiento_contable" name="asientocontabledetalle_set-__prefix__-asiento_contable" type="hidden">
+          
+        </td>
+        
+              <td class="field-cuenta">
+                  <span id="id_asientocontabledetalle_set-__prefix__-cuenta_wrapper">
+<input type="text" name="asientocontabledetalle_set-__prefix__-cuenta_text" id="id_asientocontabledetalle_set-__prefix__-cuenta_text" value="" autocomplete="off" maxlength="255">
+
+	<a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-__prefix__-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
+
+<input type="hidden" name="asientocontabledetalle_set-__prefix__-cuenta" id="id_asientocontabledetalle_set-__prefix__-cuenta" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
+<div id="id_asientocontabledetalle_set-__prefix__-cuenta_on_deck" class="results_on_deck"><div></div></div>
+
+</span>
+              </td>
+
+              <td class="field-debe">
+
+                  <input id="id_asientocontabledetalle_set-__prefix__-debe" name="asientocontabledetalle_set-__prefix__-debe" step="0.01" type="number" value="0">
+              
+              </td>
+              <td class="field-haber">
+                  <input id="id_asientocontabledetalle_set-__prefix__-haber" name="asientocontabledetalle_set-__prefix__-haber" step="0.01"  type="number" value="0">
+              </td>
+          <td class="delete"></td>
+        </tr>
+   </table>
+</fieldset>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+(function($) {
+  $("#asientocontabledetalle_set-group .tabular.inline-related tbody tr").tabularFormset({
+    prefix: "asientocontabledetalle_set",
+    adminStaticPrefix: '/static/admin/',
+    addText: "Agregar Asiento Contable Detalle adicional.",
+    deleteText: "Eliminar"
+  });
+})(django.jQuery);
+</script>
+
+<table style="width: 100%" >
+     <tfoot>
+     <td style="width: 375px"></td>
+     <td class="readonly" style="width: 300px">
+         <label><b>Total Debe:</b></label>
+         <input type="number" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
+     <td class="readonly" style="width: 250px">
+         <label><b>Total Haber:</b></label>
+         <input type="number" name="total_h" id="total_h" min="0"  value="0" step="0.01" readonly  ></td>
+     <td class="readonly" style="width: 250px">
+     </tfoot>
+ </table>
+<script type="text/javascript">
+     function total(){
+
+          var table = document.getElementById('myTable');
+           var rowCount = parseInt(table.rows.length);
+         var i;
+          var  total_d=document.getElementById('total_d')
+          var  total_h=document.getElementById('total_h')
+         total_d.value=0.00
+         total_h.value=0.00
+           for (i=0;i<rowCount;i++){
+               var debe=parseFloat(document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe').value);
+               var haber=parseFloat(document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber').value);
+               var aux_debe=parseFloat(total_d.value);
+               var aux_haber=parseFloat(total_h.value);
+                total_d.value=Math.round((aux_debe+debe)*100)/100;
+                total_h.value=Math.round((aux_haber+haber)*100)/100;
+           }
+    }
+</script>
+
+
+
+
+<div class="submit-row">
+<input type="submit" value="Grabar" class="default" name="_save">
+
+
+<input type="submit" value="Grabar y añadir otro" name="_addanother">
+{#<input type="submit" value="Grabar y continuar editando" name="_continue">#}
+</div>
+
+
+
+   <script type="text/javascript">document.getElementById("id_fecha").focus();</script>
+
+
+
+
+<script type="text/javascript">
+(function($) {
+    var field;
+
+
+})(django.jQuery);
+</script>
+
+
+</div>
+
+</form></div>
+
+        
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+
+
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;">
+</ul><ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-2" tabindex="0" style="display: none;">
+
+</ul><ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-3" tabindex="0" style="display: none;">
+
+</ul><div class="calendarbox module" id="calendarbox0" style="display: none; position: absolute;"><div>
+    <a href="javascript:DateTimeShortcuts.drawPrev(0);" class="calendarnav-previous">&lt;</a>
+    <a href="javascript:DateTimeShortcuts.drawNext(0);" class="calendarnav-next">&gt;</a></div>
+    <div id="calendarin0" class="calendar"><table>
+        <caption>Julio 2014</caption><tbody><tr><th>L</th><th>M</th><th>M</th><th>J</th><th>V</th><th>S</th><th>D</th></tr><tr><td style="background-color: rgb(243, 243, 243);"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,6));">6</a></td></tr><tr><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,24));">24</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%d/%m/%Y');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,7,31));">31</a></td><td style="background-color: rgb(243, 243, 243);"> </td><td style="background-color: rgb(243, 243, 243);"> </td><td style="background-color: rgb(243, 243, 243);"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, -1);">Ayer</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, 0);">Hoy</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, +1);">Mañana</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(0);">Cancelar</a></p></div></body></html>

@@ -1,0 +1,22 @@
+{% extends 'admin/base_site.html' %}
+{% block extrahead %}
+{% load my_tags %}
+{% endblock %}
+
+{% block content %}
+
+    <center>
+    <h1>Cuentas</h1>
+    <table>
+      <tr><th>Cuenta</th><th>Tipo</th><th>Nivel</th><th>Debe</th><th>Haber</th><th>Diferencia</th>
+    {% for arbol in arbol_list %}
+        <tr><td style="width: 300px">{{ arbol.cuenta.cuenta }}</td><td style="width: 50px">{{ arbol.cuenta.tipo|tipo_cuenta }}</td>
+            <td>{{ arbol.cuenta.depth }}</td>   <td style="width: 100px">{{ arbol.debe }}</td>
+            <td style="width: 100px">{{ arbol.haber }}</td><td style="width: 100px">{{ arbol.debe|sub:arbol.haber }}</td>
+
+        </tr>
+        {% endfor %}
+        </table>
+
+        </center>
+    {% endblock %}
