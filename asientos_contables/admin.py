@@ -39,7 +39,6 @@ class AsientoContableAdminFilter(AjaxSelectAdmin):
 
 
 class AsientoContableAdmin(AsientoContableAdminFilter):
-    print __file__
     inlines = [AsientoContableDetalleInLine,]
     list_display = ('fecha','comunidad')
     list_filter = ['fecha']

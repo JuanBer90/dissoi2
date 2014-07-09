@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'usuarios',
     'ajax_select',
     'cotizaciones',
+    'cuentas_bancarias',
 )
 
 AJAX_LOOKUP_CHANNELS = {
