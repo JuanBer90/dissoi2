@@ -12,7 +12,7 @@ TIPOS_DE_CUENTA = (
 class Cuenta(MP_Node):
     cuenta = models.CharField(max_length=200)
     tipo = models.CharField(max_length=2, choices=TIPOS_DE_CUENTA)
-    codigo = models.CharField(max_length=30)
+    codigo = models.CharField(max_length=20)
     
     debe = 0
     haber = 0
