@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'asientos_contables',
     'usuarios',
     'ajax_select',
+    'cotizaciones',
 )
 
 AJAX_LOOKUP_CHANNELS = {

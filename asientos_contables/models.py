@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.aggregates import Sum
 from comunidades.models import Comunidad
 from cuentas.models import Cuenta
 import datetime

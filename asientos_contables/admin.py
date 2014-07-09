@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.db.models.aggregates import Sum
 from django.forms.models import BaseInlineFormSet
 from django.utils.functional import curry
-from sphinx.locale import _
+#from sphinx.locale import _
 from asientos_contables.models import AsientoContable, AsientoContableDetalle
 from django.contrib.auth.models import User
 from ajax_select.admin import AjaxSelectAdmin, AjaxSelectAdminTabularInline
