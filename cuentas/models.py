@@ -23,17 +23,17 @@ class Cuenta(MP_Node):
         return self.cuenta
     
     def saldo(self):
-		return self.debe - self.haber
+        return self.debe - self.haber
     
     def cuenta_depth(self):
-		return "____"*(self.depth-1) + self.cuenta
+        return "____"*(self.depth-1) + self.cuenta
     
     def have_child(self):
-	    if self.numchild == 0:
-		    return False
-	    else:
-	        return True
+        if self.numchild == 0:
+            return False
+        else:
+            return True
  
-	
-	        
+
+        
 # Create your models here.
