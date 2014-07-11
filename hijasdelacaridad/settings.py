@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'treebeard/templates')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'treebeard/templates'),os.path.join(BASE_DIR, '/home/seba/git/dissoi2/templates/django_messages')]
 
 TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request',
 								'django.contrib.auth.context_processors.auth']
@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'cotizaciones',
     'cuentas_bancarias',
+    'django_messages',
 )
 
 AJAX_LOOKUP_CHANNELS = {

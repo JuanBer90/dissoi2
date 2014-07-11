@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^search_form',  view='asientos_contables.views.search_form', name='search_form'),
     (r'^admin/lookups/', include(ajax_select_urls)),
     (r'^admin/', include(admin.site.urls)),
+    (r'chat/',include('django_messages.urls')),    
 
 
     #ASIENTOS
