@@ -65,7 +65,7 @@ INSTALLED_APPS = (
     'cuentas_bancarias',
 
 )
-
+#AJAX LOOKUPT CHANNELS
 AJAX_LOOKUP_CHANNELS = {
     # simplest way, automatically construct a search channel by passing a dict
     #'label': {'model': 'example.label', 'search_field': 'name'},
