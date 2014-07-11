@@ -13,8 +13,15 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'treebeard/templates')]
 
-TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request',
-								'django.contrib.auth.context_processors.auth']
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages'
+)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -29,6 +36,13 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
+)
 # Application definition
 
 INSTALLED_APPS = (
@@ -39,6 +53,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dajaxice',
+    'dajax',
     'treebeard',
     'comunidades',
     'cuentas',
@@ -47,6 +63,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'cotizaciones',
     'cuentas_bancarias',
+
 )
 
 AJAX_LOOKUP_CHANNELS = {
@@ -85,6 +102,14 @@ DATABASES = {
         'HOST': '127.0.0.1'
     }
 }
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'dajaxice.finders.DajaxiceFinder',
+)
+
+DAJAXICE_MEDIA_PREFIX = "dajaxice"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

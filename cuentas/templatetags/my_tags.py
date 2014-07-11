@@ -3,7 +3,10 @@ from django import template
 
 #Django template custom math filters
 #Ref : https://code.djangoproject.com/ticket/361
-from cuentas.models import TIPOS_DE_CUENTA
+from django.shortcuts import render
+from django.template.base import Node
+from cuentas.models import TIPOS_DE_CUENTA, Cuenta
+from cuentas_bancarias.models import CuentaBancaria
 
 register = template.Library()
 
@@ -27,8 +30,17 @@ def espacios(value):
     string+=str(total)+"em;"
     return string
 
+class BancoId(Node):
+    def render(self, context):
+        return Cuenta.objects.filter(codigo='1.2.5.2')[0].id
+
+def banco_codigo(parser, token):
+    return BancoId()
+
+
 register.filter('espacios', espacios)
 register.filter('mult', mult)
 register.filter('sub', sub)
 register.filter('div', div)
+register.tag('banco_codigo',banco_codigo)
 

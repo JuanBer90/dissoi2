@@ -5,8 +5,8 @@ TIPOS_DE_CUENTA = (
     ('AC', 'Activo'),
     ('PA', 'Pasivo'),
     ('PN', 'Patrimonio Neto'),
-    ('GA', 'Ganancias'),
-    ('PE', 'Perdidas'),
+    ('IN', 'Ingresos'),
+    ('EG', 'Egresos'),
 )
 
 class Cuenta(MP_Node):
