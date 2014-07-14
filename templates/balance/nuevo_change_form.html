@@ -225,10 +225,9 @@
         </fieldset>
     </div>
 </div>
-
+<a href="/admin/lookups/add_popup/cotizaciones/cotizacion" id="cargar_cotizacion" onclick="return showAddAnotherPopup(this);"></a>
 
 <script type="text/javascript">
-
     (function($) {
         $("#asientocontabledetalle_set-group .tabular.inline-related tbody tr").tabularFormset({
             prefix: "asientocontabledetalle_set",
@@ -272,17 +271,30 @@
 
 <script type="text/javascript">
 
-function my_callback(data){
-    if(data.tipo == 'EG'){
+    function my_callback(data){
         var debe= document.getElementById('id_asientocontabledetalle_set-'+ data.i.toString()+'-debe')
-        debe.readOnly=true;
-    }else if(data.tipo == 'IN'){
         var haber=document.getElementById('id_asientocontabledetalle_set-'+ data.i.toString()+'-haber')
-        haber.readOnly=true;
+        if(data.tipo == 'EG'){
+            debe.value=0
+            debe.readOnly=true;
+            debe.style.background='#C0C0C0'
+            haber.style.background='white'
+            haber.readOnly=false;
+        }else if(data.tipo == 'IN'){
+            haber.readOnly=true;
+            haber.style.background='#C0C0C0'
+            haber.value=0
+            debe.readOnly=false;
+            debe.style.background='white'
+        }else{
+            debe.readOnly=false;
+            haber.readOnly=false;
+            haber.style.background='white'
+            debe.style.background='white'
+        }
     }
-}
 
-function total(){
+    function total(){
         banco()
         var table = document.getElementById('myTable');
         var rowCount = parseInt(table.rows.length);
@@ -294,7 +306,6 @@ function total(){
         for (i=0;i<rowCount;i++){
             var element_debe=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe')
             var element_haber=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber')
-
             var debe=(element_debe != null)?parseFloat(element_debe.value) : 0;
             var haber=(element_haber != null)?parseFloat(element_haber.value) : 0;
             var aux_debe=parseFloat(total_d.value);
@@ -317,8 +328,19 @@ function total(){
         }else if(cantidad_cuentas()){
             document.getElementById('error_0').removeAttribute('hidden')
             document.getElementById('error_3').removeAttribute('hidden')
+        }else{
+            var fecha=document.getElementById('id_fecha').value.toString()
+            Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
+
         }
-        else{
+    }
+
+    function return_existe(data){
+
+        if (data.existe == 'false'){
+            alert('No existe una cotizacion correspondiente a esta fecha. Debe agregarla.')
+            document.getElementById('cargar_cotizacion').click();
+        }else{
             document.getElementById('asientocontable_form').submit();
         }
     }

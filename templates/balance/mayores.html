@@ -1,11 +1,26 @@
 {% extends 'admin/base_site.html' %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
 {% load my_tags %}
 {% block extrahead %}
-{% endblock %}
+        {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    {% bootstrap_javascript_tag %}
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
+{% endblock %}
 {% block content %}
 
     <center>
+    <ul class="nav nav-tabs" role="tablist">
+  <li {% if tipo == 'AC' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'AC' %}">Activo</a></li>
+  <li {% if tipo == 'PA' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'PA' %}">Pasivo</a></li>
+   <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'IN' %}">Ingresos</a></li>
+        <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'EG' %}">Egresos</a></li>
+  <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'PN' %}">Patrimonio Neto</a></li>
+</ul>
+
     <h1>Cuentas</h1>
     <table>
       <tr><th style="width: 500px">Cuenta</th><th>Tipo</th><th>Debe</th><th>Haber</th><th>Saldo</th>
@@ -23,7 +38,6 @@
             <td style="width: 100px"><p style="font-size: 15px">{{ cuenta.debe }}</p></td>
             <td style="width: 100px"><p style="font-size: 15px">{{ cuenta.haber }}</p></td>
             <td style="width: 100px"><p style="font-size: 15px">{{ cuenta.saldo }}</p></td>
-
         </tr>
     {% endfor %}
     </table>

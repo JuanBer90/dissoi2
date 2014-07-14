@@ -2,6 +2,191 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13cbfa3d-0d78-4c03-9382-f0138837c340" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/img/glyphicons-halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/img/glyphicons-halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/img/glyphicons-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/img/glyphicons-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/404.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/404.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/500.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/500.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templatetags/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/admin/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templatetags/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/_version.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/actions.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/actions.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/actions.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/actions.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/auth/user/add_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/auth/user/add_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/admin/css/admin-inlines.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/admin/css/admin-inlines.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/admin_app_name.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/admin_app_name.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/app_index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/app_index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/bootstrapped_extra/app_name.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/bootstrapped_extra/app_name.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/base_site.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base_site.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/css/bootstrap-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/css/bootstrap-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/css/bootstrap-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/css/bootstrap-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/css/bootstrap-theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/css/bootstrap-theme.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/bootstrap/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bootstrap/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templatetags/bootstrap_toolkit.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templatetags/bootstrapped_goodies_tags.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/breadcrumbs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/breadcrumbs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/button.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/cms/page/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/folder/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/image/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/cms/page/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/folder/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/image/change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/change_list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/cms/page/change_list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/change_list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/cms/page/change_list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/change_list_results.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/change_list_results.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/auth/user/change_password.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/auth/user/change_password.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/tools/clipboard/clipboard.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/tools/clipboard/clipboard.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/date_hierarchy.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/date_hierarchy.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/delete_confirmation.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/delete_confirmation.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/delete_selected_confirmation.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/delete_selected_confirmation.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/folder/directory_listing.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/folder/directory_listing.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/folder/directory_table.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/folder/directory_table.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_checkbox.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_choices.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_default.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_errors.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_help.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_horizontal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_inline.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_prepend_append.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_search.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_vertical.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/field_visible.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/cms/page/includes/fieldset.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/includes/fieldset.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/cms/page/includes/fieldset.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/includes/fieldset.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/formset.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/admin/js/generic-lookup.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/admin/js/generic-lookup.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/bootstrap/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/icon.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/static/bootstrap_toolkit/js/init_datepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/cms/page/widgets/installed_plugins_inc.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/cms/page/widgets/installed_plugins_inc.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/invalid_setup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/invalid_setup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/admin/js/jquery-1.9.1.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/admin/js/jquery-1.9.1.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/admin/js/jquery-migrate-1.2.1.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/admin/js/jquery.sortable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/admin/js/jquery.sortable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/language_selector.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/language_selector.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/registration/logged_out.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/registration/logged_out.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/login.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/login.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/cms/page/menu_item.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/cms/page/menu_item.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/messages.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/admin/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/nav.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/non_field_error.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/non_field_errors.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/object_history.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/object_history.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/static/admin/css/overrides.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/static/admin/css/overrides.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/page_submit_line.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/page_submit_line.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/pagination.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/pagination.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/pagination.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/registration/password_change_done.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/registration/password_change_done.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/registration/password_change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/registration/password_change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/registration/password_reset_complete.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/registration/password_reset_complete.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/registration/password_reset_confirm.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/registration/password_reset_confirm.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/registration/password_reset_done.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/registration/password_reset_done.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/registration/password_reset_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/registration/password_reset_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/pills.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/cms/page/plugin_change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/cms/page/plugin_change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/prepopulated_fields_js.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/prepopulated_fields_js.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/search_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/filer/tools/search_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/search_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/filer/tools/search_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/edit_inline/stacked.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/edit_inline/stacked.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/submit_line.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/submit_line.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/templates/bootstrap_toolkit/tabs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/edit_inline/tabular.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/edit_inline/tabular.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap_toolkit/widgets.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/widgets.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asientos_contables/ajax.py" afterPath="$PROJECT_DIR$/asientos_contables/ajax.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/balance.html" afterPath="$PROJECT_DIR$/templates/balance/balance.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/mayores.html" afterPath="$PROJECT_DIR$/templates/balance/mayores.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" afterPath="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hijasdelacaridad/settings.py" afterPath="$PROJECT_DIR$/hijasdelacaridad/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hijasdelacaridad/urls.py" afterPath="$PROJECT_DIR$/hijasdelacaridad/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asientos_contables/views.py" afterPath="$PROJECT_DIR$/asientos_contables/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hijasdelacaridad.iws" />
@@ -25,51 +210,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/asientos_contables/views.py">
+      <file leaf-file-name="mayores.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/balance/mayores.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="102" selection-start="2683" selection-end="2683" vertical-scroll-proportion="0.0" vertical-offset="814" max-vertical-offset="2250">
-              <folding>
-                <element signature="e#42#69#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ajax.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/asientos_contables/ajax.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="4" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-                <marker date="1405093481416" expanded="true" signature="391:434" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/asientos_contables/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="941" selection-end="941" vertical-scroll-proportion="0.94017094" vertical-offset="0" max-vertical-offset="420">
+            <state line="16" column="41" selection-start="519" selection-end="525" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="840">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nuevo_change_form.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/balance/nuevo_change_form.html">
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hijasdelacaridad/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="283" column="0" selection-start="16333" selection-end="16333" vertical-scroll-proportion="-7.2083335" vertical-offset="4072" max-vertical-offset="6540">
+            <state line="48" column="0" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="2070">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cuentas/models.py">
+        <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/admin/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="23" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/asientos_contables/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="146" column="9" selection-start="5974" selection-end="5974" vertical-scroll-proportion="0.0" vertical-offset="1912" max-vertical-offset="3075">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hijasdelacaridad/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="60" selection-start="893" selection-end="893" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="480">
               <folding />
             </state>
           </provider>
@@ -83,12 +263,16 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="JuanBer90" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/templates/balance/balance.html" />
         <option value="$PROJECT_DIR$/templates/admin/includes/fieldset.html" />
         <option value="$PROJECT_DIR$/templates/admin/change_list.html" />
         <option value="$PROJECT_DIR$/templates/admin/edit_inline/tabular.html" />
@@ -98,20 +282,21 @@
         <option value="$PROJECT_DIR$/templates/asientos/asientos_list.html" />
         <option value="$PROJECT_DIR$/templates/balance/nuevo_change_form2.html" />
         <option value="$PROJECT_DIR$/templates/admin/index.html" />
-        <option value="$PROJECT_DIR$/templates/balance/mayores.html" />
         <option value="$PROJECT_DIR$/cuentas/lookups.py" />
         <option value="$PROJECT_DIR$/cuentas/templatetags/my_tags.py" />
         <option value="$PROJECT_DIR$/asientos_contables/models.py" />
         <option value="$PROJECT_DIR$/asientos_contables/admin.py" />
-        <option value="$PROJECT_DIR$/hijasdelacaridad/urls.py" />
         <option value="$PROJECT_DIR$/asientos_contables/__init__.py" />
         <option value="$PROJECT_DIR$/hijasdelacaridad/__init__.py" />
         <option value="$PROJECT_DIR$/hijasdelacaridad/ajax.py" />
-        <option value="$PROJECT_DIR$/hijasdelacaridad/settings.py" />
         <option value="$PROJECT_DIR$/cuentas/models.py" />
-        <option value="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" />
-        <option value="$PROJECT_DIR$/asientos_contables/views.py" />
         <option value="$PROJECT_DIR$/asientos_contables/ajax.py" />
+        <option value="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" />
+        <option value="$PROJECT_DIR$/templates/balance/balance.html" />
+        <option value="$PROJECT_DIR$/hijasdelacaridad/settings.py" />
+        <option value="$PROJECT_DIR$/asientos_contables/views.py" />
+        <option value="$PROJECT_DIR$/hijasdelacaridad/urls.py" />
+        <option value="$PROJECT_DIR$/templates/balance/mayores.html" />
       </list>
     </option>
   </component>
@@ -188,25 +373,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="balance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
               <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="asientos_contables" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -226,6 +393,11 @@
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="SearchEverywhereHistory" value="" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -234,12 +406,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/asientos_contables" />
       <recent name="$PROJECT_DIR$/templates/balance" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/cuentas" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/hijasdelacaridad" />
       <recent name="$PROJECT_DIR$/templates/balance" />
     </key>
@@ -329,7 +504,27 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hijasdelacaridad" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -355,27 +550,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="hijasdelacaridad" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -472,53 +647,69 @@
       <created>1404497766108</created>
       <updated>1404497766108</updated>
     </task>
+    <task id="LOCAL-00001" summary="ahi esta">
+      <created>1405095085611</created>
+      <updated>1405095085611</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;">
+      <created>1405095908494</created>
+      <updated>1405095908494</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;">
+      <created>1405096024246</created>
+      <updated>1405096024246</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="0" width="1372" height="745" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998326" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22205438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22507553" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33668342" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60301507" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60301507" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22205438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33668342" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44556114" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -533,43 +724,14 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="ahi esta" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/asientos_contables/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="43" selection-start="490" selection-end="490" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="405" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cuentas/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1005" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/balance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="15" selection-start="74" selection-end="74" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="41" selection-start="531" selection-end="531" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="315">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/treebeard/tests/test_treebeard.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="231" column="34" selection-start="7205" selection-end="7205" vertical-scroll-proportion="0.83916086" vertical-offset="2985" max-vertical-offset="40065" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/change_list_results.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="8" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.41520467" vertical-offset="87" max-vertical-offset="660" />
@@ -625,19 +787,9 @@
         <state line="57" column="3" selection-start="2456" selection-end="2456" vertical-scroll-proportion="0.33268103" vertical-offset="685" max-vertical-offset="1305" />
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/template/defaultfilters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="712" column="4" selection-start="21885" selection-end="21885" vertical-scroll-proportion="0.9175824" vertical-offset="10031" max-vertical-offset="13170" />
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/admin/static/admin/js/admin/DateTimeShortcuts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="4" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4365" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/balance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="114" selection-end="114" vertical-scroll-proportion="0.18181819" vertical-offset="24" max-vertical-offset="420" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/asientos/asientos_list.html">
@@ -660,11 +812,6 @@
         <state line="40" column="40" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.0" vertical-offset="245" max-vertical-offset="795">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/mayores.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="62" selection-start="966" selection-end="966" vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="630" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cuentas/admin.py">
@@ -698,14 +845,14 @@
           <ID>DjangoModelDependency</ID>
           <OriginalElement>#hijasdelacaridad</OriginalElement>
           <nodes>
-            <node x="" y="">comunidades.models.Pais</node>
             <node x="" y="">asientos_contables.models.AsientoContableDetalle</node>
+            <node x="" y="">comunidades.models.Pais</node>
             <node x="" y="">comunidades.models.Comunidad</node>
-            <node x="" y="">cuentas_bancarias.models.CuentaBancaria</node>
-            <node x="" y="">cuentas.models.Cuenta</node>
             <node x="" y="">treebeard.mp_tree.MP_Node</node>
-            <node x="" y="">cotizaciones.models.Cotizacion</node>
+            <node x="" y="">cuentas.models.Cuenta</node>
+            <node x="" y="">cuentas_bancarias.models.CuentaBancaria</node>
             <node x="" y="">asientos_contables.models.AsientoContable</node>
+            <node x="" y="">cotizaciones.models.Cotizacion</node>
             <node x="" y="">treebeard.models.Node</node>
             <node x="" y="">django.contrib.auth.models.User</node>
             <node x="" y="">usuarios.models.Usuario</node>
@@ -788,72 +935,102 @@
     </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/dajaxice/templatetags/dajaxice_templatetags.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cuentas/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="23" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asientos_contables/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="44" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ejercicios/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="143" selection-end="143" vertical-scroll-proportion="0.2931596" vertical-offset="0" max-vertical-offset="307" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presupuestos/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="351" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presupuestos/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="351" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presupuestos/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="351" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/template/defaultfilters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="709" column="4" selection-start="21774" selection-end="21774" vertical-scroll-proportion="0.33333334" vertical-offset="10197" max-vertical-offset="13170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/db/models/sql/datastructures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="8" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.7154471" vertical-offset="501" max-vertical-offset="1020" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asientos_contables/ajax.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="790" selection-end="790" vertical-scroll-proportion="0.65789473" vertical-offset="0" max-vertical-offset="570" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/balance/balance.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="8" selection-start="446" selection-end="446" vertical-scroll-proportion="0.32967034" vertical-offset="0" max-vertical-offset="600" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bootstrap/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="34020" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/balance/nuevo_change_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="166" selection-end="166" vertical-scroll-proportion="0.028142588" vertical-offset="60" max-vertical-offset="6870" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/admin/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="369">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hijasdelacaridad/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="34" selection-start="3385" selection-end="3385" vertical-scroll-proportion="0.42054263" vertical-offset="1448" max-vertical-offset="2055">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="55" selection-start="633" selection-end="633" vertical-scroll-proportion="0.3558394" vertical-offset="0" max-vertical-offset="548">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/ajax.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="30" selection-start="136" selection-end="136" vertical-scroll-proportion="0.10526316" vertical-offset="0" max-vertical-offset="570">
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cuentas/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="23" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/nuevo_change_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="283" column="0" selection-start="16333" selection-end="16333" vertical-scroll-proportion="-7.2083335" vertical-offset="4072" max-vertical-offset="6540">
+        <state line="48" column="0" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="2070">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/asientos_contables/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="102" selection-start="2683" selection-end="2683" vertical-scroll-proportion="0.0" vertical-offset="814" max-vertical-offset="2250">
-          <folding>
-            <element signature="e#42#69#0" expanded="true" />
-          </folding>
+        <state line="146" column="9" selection-start="5974" selection-end="5974" vertical-scroll-proportion="0.0" vertical-offset="1912" max-vertical-offset="3075">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/asientos_contables/ajax.py">
+    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="4" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <marker date="1405093481416" expanded="true" signature="391:434" placeholder="..." />
-          </folding>
+        <state line="23" column="60" selection-start="893" selection-end="893" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/asientos_contables/models.py">
+    <entry file="file://$PROJECT_DIR$/templates/balance/mayores.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="941" selection-end="941" vertical-scroll-proportion="0.94017094" vertical-offset="0" max-vertical-offset="420">
+        <state line="16" column="41" selection-start="519" selection-end="525" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="840">
           <folding />
         </state>
       </provider>

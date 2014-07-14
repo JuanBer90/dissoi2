@@ -46,7 +46,7 @@ TEMPLATE_LOADERS = (
 # Application definition
 
 INSTALLED_APPS = (
-    #'django_admin_bootstrapped',
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'cotizaciones',
     'cuentas_bancarias',
+    'bootstrap_toolkit',
 
 )
 #AJAX LOOKUPT CHANNELS
