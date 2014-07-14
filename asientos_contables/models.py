@@ -1,5 +1,5 @@
 from django.db import models
-from comunidades.models import Comunidad
+from comunidades.models import Comunidad, Pais
 from cuentas.models import Cuenta
 import datetime
 from cuentas_bancarias.models import CuentaBancaria
