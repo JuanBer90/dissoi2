@@ -198,3 +198,59 @@ def mayor(request,tipo):
             seguir = False
 
     return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
+
+def mayor_general(request,tipo):
+    vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo')
+    usuario_id = request.user.id
+    usuario_objeto = User.objects.get(id=usuario_id)
+    usuario_comunidad_id = usuario_objeto.usuario.comunidad.id
+
+
+#Optimizar la consulta
+    for cuenta in vector_cuentas:
+        if cuenta.numchild == 0:
+            cuenta_id = cuenta.id
+            asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
+            for asiento in asientos:
+                print 'asiento_comunidad: '+str(asiento.comunidad_id())+'  usuario_comunidad: '+str(usuario_comunidad_id)
+                cuenta.debe += asiento.debe_en_dolares()
+                cuenta.haber += asiento.haber_en_dolares()
+            cuenta.cargado = True
+            cuenta.debe = round(cuenta.debe,2)
+            cuenta.haber = round(cuenta.haber,2)
+
+
+    seguir = True
+    longitud = len(vector_cuentas)
+
+    while seguir:
+        contador = 0
+        for cuenta in vector_cuentas:
+            if cuenta.cargado == False:
+                debe = 0
+                haber = 0
+                hijos = cuenta.get_children()
+                cargar = True
+                salir = False
+                for hijo in hijos:
+                    for cuenta_aux in vector_cuentas:
+                        if cuenta_aux.id == hijo.id:
+                            if cuenta_aux.cargado:
+                                debe += cuenta_aux.debe
+                                haber += cuenta_aux.haber
+                            else:
+                                cargar = False
+                                salir = True
+                                break
+                    if salir:
+                        break
+                if cargar:
+                    cuenta.debe = debe
+                    cuenta.haber = haber
+                    cuenta.cargado = True
+            else:
+                contador += 1
+        if contador == longitud:
+            seguir = False
+
+    return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))

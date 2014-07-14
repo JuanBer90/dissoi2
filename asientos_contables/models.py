@@ -26,12 +26,16 @@ class AsientoContableDetalle(models.Model):
         return asiento.comunidad.id
     def pais_id(self):
         pais = Pais.objects.get(comunidad = self.comunidad_id())
-        return Pais.id
+        return pais.id
+    def asiento_contable_fecha(self):
+        asiento = AsientoContable.objects.get(id=self.asiento_contable.id)
+        return asiento.fecha
     def cotizacion_del_dia(self):
-        cotizacion = Cotizacion.objects.get(pais=self.pais_id(),fecha=self.fecha)
+        print "pais: ", self.pais_id(), "fecha: ", self.asiento_contable_fecha() 
+        cotizacion = Cotizacion.objects.get(pais=self.pais_id(),fecha=self.asiento_contable_fecha())
         return cotizacion.monto
     def haber_en_dolares(self):
-        return self.haber*self.cotizacion_del_dia()
+        return self.haber/self.cotizacion_del_dia()
     def debe_en_dolares(self):
-        return self.debe*self.cotizacion_del_dia()
+        return self.debe/self.cotizacion_del_dia()
 
