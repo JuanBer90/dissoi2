@@ -3,6 +3,7 @@ from comunidades.models import Comunidad, Pais
 from cuentas.models import Cuenta
 import datetime
 from cuentas_bancarias.models import CuentaBancaria
+from cotizaciones.models import Cotizacion
 
 
 class AsientoContable(models.Model):
@@ -23,4 +24,14 @@ class AsientoContableDetalle(models.Model):
     def comunidad_id(self):
         asiento = AsientoContable.objects.get(id=self.asiento_contable.id)
         return asiento.comunidad.id
+    def pais_id(self):
+        pais = Pais.objects.get(comunidad = self.comunidad_id())
+        return Pais.id
+    def cotizacion_del_dia(self):
+        cotizacion = Cotizacion.objects.get(pais=self.pais_id(),fecha=self.fecha)
+        return cotizacion.monto
+    def haber_en_dolares(self):
+        return self.haber*self.cotizacion_del_dia()
+    def debe_en_dolares(self):
+        return self.debe*self.cotizacion_del_dia()
 
