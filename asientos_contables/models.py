@@ -12,8 +12,11 @@ class AsientoContable(models.Model):
 
     def __unicode__(self):
         return unicode(self.fecha)
+    def anho(self):
+        return fecha.year()
     class Meta:
         verbose_name_plural = "Asientos contables"
+        
 
 class AsientoContableDetalle(models.Model):
     asiento_contable = models.ForeignKey(AsientoContable)
