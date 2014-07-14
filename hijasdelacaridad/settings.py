@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'cotizaciones',
     'cuentas_bancarias',
     'bootstrap_toolkit',
+    'ejercicios',
 
 )
 #AJAX LOOKUPT CHANNELS
