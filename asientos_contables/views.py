@@ -18,6 +18,7 @@ from cuentas.models import Cuenta
 from cuentas.views import CuentasBalance
 from cuentas_bancarias.models import CuentaBancaria
 from usuarios.models import Usuario
+from ejercicios.models import Ejercicio
 
 
 class SearchForm(forms.Form):
@@ -149,7 +150,8 @@ def mayor(request,tipo):
     usuario_id = request.user.id
     usuario_objeto = User.objects.get(id=usuario_id)
     usuario_comunidad_id = usuario_objeto.usuario.comunidad.id
-
+    ejercicio = Ejercicio.objects.get(actual=True)
+    anho = ejercicio.anho
 
 #Optimizar la consulta
     for cuenta in vector_cuentas:
@@ -157,8 +159,7 @@ def mayor(request,tipo):
             cuenta_id = cuenta.id
             asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
             for asiento in asientos:
-                if asiento.comunidad_id() == usuario_comunidad_id:
-                    print 'asiento_comunidad: '+str(asiento.comunidad_id())+'  usuario_comunidad: '+str(usuario_comunidad_id)
+                if asiento.comunidad_id() == usuario_comunidad_id and asiento.anho == anho:
                     cuenta.debe += asiento.debe
                     cuenta.haber += asiento.haber
             cuenta.cargado = True
@@ -204,7 +205,8 @@ def mayor_general(request,tipo):
     usuario_id = request.user.id
     usuario_objeto = User.objects.get(id=usuario_id)
     usuario_comunidad_id = usuario_objeto.usuario.comunidad.id
-
+    ejercicio = Ejercicio.objects.get(actual=True)
+    anho = ejercicio.anho
 
 #Optimizar la consulta
     for cuenta in vector_cuentas:
@@ -212,9 +214,9 @@ def mayor_general(request,tipo):
             cuenta_id = cuenta.id
             asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
             for asiento in asientos:
-                print 'asiento_comunidad: '+str(asiento.comunidad_id())+'  usuario_comunidad: '+str(usuario_comunidad_id)
-                cuenta.debe += asiento.debe_en_dolares()
-                cuenta.haber += asiento.haber_en_dolares()
+                if asiento.anho == anho:
+                    cuenta.debe += asiento.debe_en_dolares()
+                    cuenta.haber += asiento.haber_en_dolares()
             cuenta.cargado = True
             cuenta.debe = round(cuenta.debe,2)
             cuenta.haber = round(cuenta.haber,2)
