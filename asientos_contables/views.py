@@ -45,9 +45,10 @@ def search_form(request):
 
 # Create your views here.
 def nuevo(request):
-    id_user = request.user.id
-    usuario = Usuario.objects.get(pk=id_user)
-    bancos = CuentaBancaria.objects.filter(comunidad=usuario.comunidad)
+    usuario_id = request.user.id
+    usuario_objeto = User.objects.get(id=usuario_id)
+    bancos = CuentaBancaria.objects.filter(comunidad=usuario_objeto.usuario.comunidad)
+    print len(bancos)
     if request.method == 'POST':
         formulario=request.POST
         return render_to_response('balance/nuevo_change_form.html',
