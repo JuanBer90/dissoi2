@@ -153,14 +153,13 @@ def mayor(request,tipo):
     usuario_comunidad_id = usuario_objeto.usuario.comunidad.id
     ejercicio = Ejercicio.objects.get(actual=True)
     anho = ejercicio.anho
-
 #Optimizar la consulta
     for cuenta in vector_cuentas:
         if cuenta.numchild == 0:
             cuenta_id = cuenta.id
             asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
             for asiento in asientos:
-                if asiento.comunidad_id() == usuario_comunidad_id and asiento.anho == anho:
+                if asiento.comunidad_id() == usuario_comunidad_id and asiento.anho() == anho:
                     cuenta.debe += asiento.debe
                     cuenta.haber += asiento.haber
             cuenta.cargado = True
