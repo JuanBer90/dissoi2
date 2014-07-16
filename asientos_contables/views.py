@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from calendar import calendar
+import calendar
 from decimal import Decimal
 from time import timezone
 import datetime
@@ -50,10 +52,7 @@ def nuevo(request):
     bancos = CuentaBancaria.objects.filter(comunidad=usuario_objeto.usuario.comunidad)
     print len(bancos)
     if request.method == 'POST':
-        formulario=request.POST
-        return render_to_response('balance/nuevo_change_form.html',
-                                  {'add': True, 'bancos': bancos,'formulario':formulario, 'hoy': str(timezone_today().strftime('%d/%m/%Y'))},
-                                  context_instance=RequestContext(request))
+
         addOther=request.POST.get('_addanother','').encode('utf8')
         save=request.POST.get('_save','')
         total_rows=int(request.POST.get('asientocontabledetalle_set-TOTAL_FORMS',0))
@@ -61,7 +60,7 @@ def nuevo(request):
         fecha=datetime.datetime.strptime(fecha, "%d/%m/%Y")
         asiento = AsientoContable()
         asiento.fecha = fecha
-        asiento.comunidad = usuario.comunidad
+        asiento.comunidad = usuario_objeto.usuario.comunidad
         asiento.save()
         for i in range(total_rows):
             id_cuenta = request.POST.get('asientocontabledetalle_set-' + str(i) + '-cuenta', '')
@@ -86,8 +85,27 @@ def nuevo(request):
                               context_instance=RequestContext(request))
 
 def listar(request):
-    asientos=AsientoContable.objects.all()
-    return render_to_response('asientos/asientos_list.html', {'asientos':asientos}, context_instance=RequestContext(request))
+    q=request.GET.get('q','')
+    fecha__gte=request.GET.get('fecha__gte','1900-01-01')
+    fecha__lt=request.GET.get('fecha__lt','2050-01-01')
+    asientos=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
+                                                       asiento_contable__fecha__gt=fecha__gte,
+                                                       asiento_contable__fecha__lt=fecha__lt)
+    hoy = datetime.datetime.today()
+    ayer=hoy+datetime.timedelta(days=-1)
+    ultimos_7dias = hoy + datetime.timedelta(days=-7)
+    manana = hoy + datetime.timedelta(days=1)
+    today=timezone_today()
+    cant_dias=calendar.monthrange(today.year,1)[1]
+    ultimos_30dias_max=str(today.year)+'-'+str(today.month)+'-'+str(cant_dias)
+    ultimos_30dias_min = str(today.year) + '-' + str(today.month) + '-01'
+    este_anho_max=str(today.year+1) + '-01-01'
+    este_anho_min = str(today.year) + '-01-01'
+    return render_to_response('asientos/nuevo_asientos_list.html',
+    {'asientos':asientos,'hoy':str(hoy.date()),'ultimos_30dias_max':ultimos_30dias_max,
+     'ayer':str(ayer.date()),'ultimos_30dias_min':ultimos_30dias_min,'este_anho_max':este_anho_max,'este_anho_min':este_anho_min
+        ,'ultimo_7dias':str(ultimos_7dias.date()),'manana':str(manana.date())},
+    context_instance=RequestContext(request))
 
 def mayores(request):
     vector_cuentas = Cuenta.get_tree()
@@ -256,3 +274,5 @@ def mayor_general(request,tipo):
             seguir = False
 
     return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
+
+

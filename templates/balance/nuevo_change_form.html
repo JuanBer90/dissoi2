@@ -1,15 +1,31 @@
-<html lang="en-us"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es">
+<head>
     {% load my_tags %}
     {% load dajaxice_templatetags %}
+
+
     <title>Añadir asiento contable | Sitio de administración de Django</title>
 
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
      {% dajaxice_js_import %}
-    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+
     <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
     <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/static/admin/css/ie.css" /><![endif]-->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/overrides.css">
+{#    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">#}
+
+
 
     <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+      <script src="/static/admin/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/admin/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+
     <script type="text/javascript" src="/admin/jsi18n/"></script>
     <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet">
     <script type="text/javascript" src="/static/admin/js/core.js"></script>
@@ -27,32 +43,90 @@
     <link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
 
-    <meta name="robots" content="NONE,NOARCHIVE">
-</head>
-<body class="asientos_contables-asientocontable change-form">
-<!-- Container -->
-<div id="container">
-<!-- Header -->
-<div id="header"><div id="branding"><h1 id="site-name">Sistema contable - Congregación "Hijas de la Caridad"</h1>
-</div>
-    <div id="user-tools">
-        Bienvenido/a,
-        <strong>{{request.user.username }}</strong>.
-        <a href="/admin/password_change/">Cambiar contraseña</a> /
-        <a href="/admin/logout/">Terminar sesión</a>
-    </div>
-</div>
-<!-- END Header -->
 
-<div class="breadcrumbs">
-    <a href="/admin/">Inicio</a>
-    › <a href="/asiento/listar/">Asientos_contables</a>
-    › Añadir asiento contable
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <script type="text/javascript">
+    //<![CDATA[
+            (function($) {
+                $(document).ready(function() {
+                    $('input[type="submit"]').addClass('btn');
+                    $('[title]').tooltip();
+                });
+            }(jQuery));
+    //]]>
+    </script>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    </style>
+</head>
+
+
+<body class="asientos_contables-asientocontable change-form">
+{#<!-- Container -->#}
+<div class="container-fluid">
+
+
+    <!-- Header -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+<a class="brand" href="/admin/">Django administration</a>
+
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }}</strong> <b class="caret"></b></a>
+                            <ul class="dropdown-menu pull-right">
+
+                                <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
+
+                                <li><a href="/admin/logout/">Terminar sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- END Header -->
+
+    </div>
+    <!-- END Content -->
+
+    <footer id="footer"></footer>
 </div>
+
+
+<ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li><a href="{% url 'asientos_contables.views.listar' %}">Asientos contables</a> <span class="divider">/</span></li>
+<li>Añadir asiento contable</li>
+</ul>
+
+
+
 <!-- Content -->
 <div id="content" class="colM">
 
-<h1>Añadir asiento contable</h1>
+<div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">Añadir asiento contable</a>
+                </div>
+            </div>
+
 <div id="content-main">
 
 <form enctype="multipart/form-data" action="" name="formulario" onchange="total()" method="post" id="asientocontable_form">{% csrf_token %}
@@ -61,23 +135,26 @@
     <div class="form-row field-fecha">
         <div>
             <label class="required" for="id_fecha">Fecha:</label>
-            <input class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ hoy }}">
+            <input style="height: 30px" class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ hoy }}">
 
         </div>
     </div>
 </fieldset>
 
-<div hidden="hidden" id="error_0">
-<p class="errornote">
-    Por favor, corrija los siguientes errores.
-    </p>
-</div>
-<div class="inline-group" id="asientocontabledetalle_set-group">
+
+    <div  hidden="hidden" id="error_0" class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-minus-sign"></span>
+    <p>  Por favor, corrija los siguientes errores. </p>
+    </div>
+
+<div class="inline-group" style="border: None" id="asientocontabledetalle_set-group">
     <div class="tabular inline-related last-related">
-        <input id="id_asientocontabledetalle_set-TOTAL_FORMS" name="asientocontabledetalle_set-TOTAL_FORMS" type="hidden" value="3" autocomplete="off"><input id="id_asientocontabledetalle_set-INITIAL_FORMS" name="asientocontabledetalle_set-INITIAL_FORMS" type="hidden" value="0"><input id="id_asientocontabledetalle_set-MAX_NUM_FORMS" name="asientocontabledetalle_set-MAX_NUM_FORMS" type="hidden" value="1000" autocomplete="off">
+        <input id="id_asientocontabledetalle_set-TOTAL_FORMS" name="asientocontabledetalle_set-TOTAL_FORMS" type="hidden" value="3" autocomplete="off">
+        <input id="id_asientocontabledetalle_set-INITIAL_FORMS" name="asientocontabledetalle_set-INITIAL_FORMS" type="hidden" value="0">
+        <input id="id_asientocontabledetalle_set-MAX_NUM_FORMS" name="asientocontabledetalle_set-MAX_NUM_FORMS" type="hidden" value="1000" autocomplete="off">
         <fieldset class="module">
             <h2>Asiento contable detalles</h2>
-            <table id="myTable">
+            <table id="myTable" class="table table-striped table-bordered">
                 <thead><tr>
                     <th colspan="2" class="required" style="width: 200px">Cuenta</th>
                     <th class="required">Debe</th>
@@ -86,20 +163,20 @@
                 </tr></thead>
                 <tbody>
                 <tr class="form-row row1  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-0">
-                    <td class="original">
+                    <td class="original" style="width: 20px">
                         <input id="id_asientocontabledetalle_set-0-id" name="asientocontabledetalle_set-0-id" type="hidden">
                         <input id="id_asientocontabledetalle_set-0-asiento_contable" name="asientocontabledetalle_set-0-asiento_contable" type="hidden">
                     </td>
                     <td class="field-cuenta">
                   <span id="id_asientocontabledetalle_set-0-cuenta_wrapper">
                 <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-                 <input type="text" name="asientocontabledetalle_set-0-cuenta_text" id="id_asientocontabledetalle_set-0-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
+                 <input type="text" style="height: 30px" name="asientocontabledetalle_set-0-cuenta_text" id="id_asientocontabledetalle_set-0-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 	        <a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-0-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
 
     <input type="hidden" name="asientocontabledetalle_set-0-cuenta" id="id_asientocontabledetalle_set-0-cuenta" value=""
            data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <select id="asientocontabledetalle_set-0-banco" hidden="hidden" name="asientocontabledetalle_set-0-banco" >
+                      <select id="asientocontabledetalle_set-0-banco" style="display: none" name="asientocontabledetalle_set-0-banco" >
                             {% for banco in bancos %}
                                 <option value="{{ banco.id }}">{{ banco.cuenta_bancaria }} - {{ banco.nro_de_cuenta }}</option>
                             {% endfor %}
@@ -110,10 +187,10 @@
 
                     </td>
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-0-debe" name="asientocontabledetalle_set-0-debe" required="" min="0"  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-0-debe" style="height: 30px" name="asientocontabledetalle_set-0-debe" required="" min="0"  step="0.01" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-0-haber" name="asientocontabledetalle_set-0-haber" required="" min="0" step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-0-haber" style="height: 30px" name="asientocontabledetalle_set-0-haber" required="" min="0" step="0.01" type="number" value="0">
                     </td>
                     <td class="delete"></td>
                 </tr>
@@ -124,11 +201,11 @@
                     </td>
                     <td class="field-cuenta">
                   <span id="id_asientocontabledetalle_set-1-cuenta_wrapper">
-                    <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="asientocontabledetalle_set-1-cuenta_text" id="id_asientocontabledetalle_set-1-cuenta_text" value="" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
+                    <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input style="height: 30px" type="text" name="asientocontabledetalle_set-1-cuenta_text" id="id_asientocontabledetalle_set-1-cuenta_text" value="" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
                         <a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-1-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
                     <input type="hidden" name="asientocontabledetalle_set-1-cuenta" id="id_asientocontabledetalle_set-1-cuenta" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <select id="asientocontabledetalle_set-1-banco" hidden="hidden" name="asientocontabledetalle_set-1-banco" >
+                            <select id="asientocontabledetalle_set-1-banco" style="display: none" name="asientocontabledetalle_set-1-banco" >
                                 {% for banco in bancos %}
                                    <option value="{{ banco.id }}">{{ banco.cuenta_bancaria }} - {{ banco.nro_de_cuenta }}</option>
                           {% endfor %}
@@ -138,10 +215,10 @@
                     </span>
                     </td>
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-1-debe" name="asientocontabledetalle_set-1-debe" required="" min="0" step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-1-debe" style="height: 30px" name="asientocontabledetalle_set-1-debe" required="" min="0" step="0.01" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-1-haber" name="asientocontabledetalle_set-1-haber" required="" min="0" step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-1-haber" style="height: 30px" name="asientocontabledetalle_set-1-haber" required="" min="0" step="0.01" type="number" value="0">
                     </td>
 
                     <td class="delete"></td>
@@ -159,13 +236,13 @@
                     <td class="field-cuenta">
            <span id="id_asientocontabledetalle_set-2-cuenta_wrapper">
                 <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-                <input type="text" name="asientocontabledetalle_set-2-cuenta_text" id="id_asientocontabledetalle_set-2-cuenta_text" value="" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
+                <input type="text" name="asientocontabledetalle_set-2-cuenta_text" style="height: 30px" id="id_asientocontabledetalle_set-2-cuenta_text" value="" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 
 	<a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-2-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
 
 <input type="hidden" name="asientocontabledetalle_set-2-cuenta" id="id_asientocontabledetalle_set-2-cuenta" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select id="asientocontabledetalle_set-2-banco" name="asientocontabledetalle_set-2-banco" hidden="hidden">
+                <select id="asientocontabledetalle_set-2-banco" name="asientocontabledetalle_set-2-banco" style="display: none">
             {% for banco in bancos %}
                 <option value="{{ banco.id }}">{{ banco.cuenta_bancaria }} - {{ banco.nro_de_cuenta }}</option>
             {% endfor %}
@@ -177,10 +254,10 @@
            </span>
                     </td>
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-2-debe" min="0" name="asientocontabledetalle_set-2-debe" step="0.01"  required="" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-2-debe" style="height: 30px" min="0" name="asientocontabledetalle_set-2-debe" step="0.01"  required="" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-2-haber" min="0" name="asientocontabledetalle_set-2-haber" required=""  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-2-haber" style="height: 30px" min="0" name="asientocontabledetalle_set-2-haber" required=""  step="0.01" type="number" value="0">
                     </td>
                     <td class="delete"></td>
                 </tr>
@@ -195,14 +272,14 @@
 
                     <td class="field-cuenta">
                     <span id="id_asientocontabledetalle_set-__prefix__-cuenta_wrapper">
-                    <input type="text" name="asientocontabledetalle_set-__prefix__-cuenta_text" id="id_asientocontabledetalle_set-__prefix__-cuenta_text" value="" autocomplete="off" maxlength="255">
+                    <input type="text" name="asientocontabledetalle_set-__prefix__-cuenta_text" style="height: 30px" id="id_asientocontabledetalle_set-__prefix__-cuenta_text" value="" autocomplete="off" maxlength="255">
 
 	                <a href="/admin/lookups/add_popup/cuentas/cuenta" class="add-another addlink" id="add_id_asientocontabledetalle_set-__prefix__-cuenta" onclick="return showAddAnotherPopup(this);"> add</a>
 
                 <input type="hidden" name="asientocontabledetalle_set-__prefix__-cuenta" id="id_asientocontabledetalle_set-__prefix__-cuenta"
                        value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <select id="asientocontabledetalle_set-__prefix__-banco" hidden="hidden" name="asientocontabledetalle_set-__prefix__-banco" >
+                                        <select id="asientocontabledetalle_set-__prefix__-banco" style="display: none" name="asientocontabledetalle_set-__prefix__-banco" >
                                         {% for banco in bancos %}
                                             <option value="{{ banco.id }}">{{ banco.cuenta_bancaria }} - {{ banco.nro_de_cuenta }}</option>
                                         {% endfor %}
@@ -212,11 +289,11 @@
             </span>
                     </td>
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-__prefix__-debe" min="0" required=""
+                        <input id="id_asientocontabledetalle_set-__prefix__-debe" style="height: 30px" min="0" required=""
                                name="asientocontabledetalle_set-__prefix__-debe" step="0.01" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-__prefix__-haber" min="0" required=""
+                        <input id="id_asientocontabledetalle_set-__prefix__-haber" style="height: 30px" min="0" required=""
                                name="asientocontabledetalle_set-__prefix__-haber" step="0.01"  type="number" value="0">
                     </td>
                     <td class="delete"></td>
@@ -225,6 +302,7 @@
         </fieldset>
     </div>
 </div>
+
 <a href="/admin/lookups/add_popup/cotizaciones/cotizacion" id="cargar_cotizacion" onclick="return showAddAnotherPopup(this);"></a>
 
 <script type="text/javascript">
@@ -240,7 +318,6 @@
 
 
 
-
 <!-- TOTALES  -->
 
 <table style="width: 100%" >
@@ -248,10 +325,10 @@
     <td style="width: 375px"></td>
     <td class="readonly" style="width: 300px">
         <label><b>Total Debe:</b></label>
-        <input type="number" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
+        <input type="number" style="height: 30px" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
     <td class="readonly" style="width: 250px">
         <label><b>Total Haber:</b></label>
-        <input type="number" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
+        <input type="number" style="height: 30px" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
     <td class="readonly" style="width: 250px">
     </tfoot>
 </table>
@@ -259,14 +336,16 @@
 
 
 <!-- ERRORES -->
-<div id="error_1" hidden="hidden">
-<ul class="errorlist"><li>Error, el Debe no coincide con el Haber</li></ul>
+
+
+<div id="error_1" hidden="hidden" class="alert alert-danger" role="alert">
+<p>Error, el Debe no coincide con el Haber</p>
  </div>
-<div id="error_2" hidden="hidden">
-<ul class="errorlist"><li>Los valores deben ser mayores a Cero</li></ul>
+<div id="error_2" hidden="hidden" class="alert alert-danger" role="alert">
+<p>Los valores deben ser mayores a Cero</p>
  </div>
-<div id="error_3" hidden="hidden">
-<ul class="errorlist"><li>Debe registrar al menos una cuenta</li></ul>
+<div id="error_3" hidden="hidden" class="alert alert-danger" role="alert">
+<p>Debe registrar al menos una cuenta</p>
  </div>
 
 <script type="text/javascript">
@@ -357,10 +436,9 @@
                     var id_banco={% banco_codigo %};
                     id_banco=parseInt(id_banco)
                     if(id_banco == id_cuenta){
-
-                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').removeAttribute('hidden')
+                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').style.display='block'
                     }else{
-                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').setAttribute('hidden','hidden')
+                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').style.display='none'
                     }
                 }
             }
@@ -386,14 +464,23 @@
         return (cont == 0)
     }
 </script>
-<input type="hidden" id="cantidad_cuentas" value="0">
-<div class="submit-row">
-    <input type="button" value="Grabar" onclick="guardar()" class="default" name="_save">
-    <input type="reset" value="Limpiar">
 
-    {#<input type="submit" value="Grabar y añadir otro" name="_addanother">#}
-    {#<input type="submit" value="Grabar y continuar editando" name="_continue">#}
+<div class="row-fluid">
+        <div class="form-actions">
+
+<div class="pull-left">
+
 </div>
+<div class="pull-right">
+    <a href="/asiento/nuevo/" class="btn btn-default">Limpiar</a>
+<input type="button" value="Grabar"  onclick="guardar()" class="btn btn-primary" name="_save">
+</div>
+
+
+        </div>
+    </div>
+
+<input type="hidden" id="cantidad_cuentas" value="0">
 
 <script type="text/javascript">document.getElementById("id_fecha").focus();</script>
 <script type="text/javascript">

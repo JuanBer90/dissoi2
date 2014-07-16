@@ -18,6 +18,11 @@ def sub(value, arg):
     "Subtracts the arg from the value"
     return int(value) - int(arg)
 
+def sum(value, arg):
+    "Subtracts the arg from the value"
+    return int(value) + int(arg)
+
+
 def div(value, arg):
     "Divides the value by the arg"
     return int(value) / int(arg)
@@ -41,6 +46,7 @@ def banco_codigo(parser, token):
 register.filter('espacios', espacios)
 register.filter('mult', mult)
 register.filter('sub', sub)
+register.filter('sum', sum)
 register.filter('div', div)
 register.tag('banco_codigo',banco_codigo)
 

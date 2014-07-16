@@ -23,5 +23,6 @@ urlpatterns = patterns('',
     (r'^balance/', 'asientos_contables.views.mayores'),
     (r'^mayor/(?P<tipo>.*)', 'asientos_contables.views.mayor'),
     (r'^mayorgeneral/(?P<tipo>.*)', 'asientos_contables.views.mayor_general'),
+    (r'^presupuesto/(?P<tipo>.*)', 'presupuestos.views.presupuesto'),
 
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

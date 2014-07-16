@@ -13,7 +13,7 @@ class AsientoContable(models.Model):
     def __unicode__(self):
         return unicode(self.fecha)
     def anho(self):
-        return fecha.year()
+        return self.fecha.year
     class Meta:
         verbose_name_plural = "Asientos contables"
         
@@ -24,6 +24,7 @@ class AsientoContableDetalle(models.Model):
     debe = models.DecimalField(max_digits=22,default=0,decimal_places=2)
     haber = models.DecimalField(max_digits=22, default=0, decimal_places=2)
     cuenta_bancaria=models.ForeignKey(CuentaBancaria,null=True)
+
     def comunidad_id(self):
         asiento = AsientoContable.objects.get(id=self.asiento_contable.id)
         return asiento.comunidad.id

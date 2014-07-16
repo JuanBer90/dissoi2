@@ -22,6 +22,7 @@ class Presupuesto(models.Model):
     mes = models.SmallIntegerField(choices=MESES)
     cuenta = models.ForeignKey(Cuenta)
     monto = models.DecimalField(max_digits=22, default=0, decimal_places=2)
+
     
 
     
