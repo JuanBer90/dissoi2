@@ -3,6 +3,7 @@
 {% load url from future %}
 {% load my_tags %}
 {% block extrahead %}
+    <title>Presupuesto</title>
         {% bootstrap_stylesheet_tag %}
     {% bootstrap_stylesheet_tag "responsive" %}
     {% bootstrap_javascript_tag %}
@@ -11,35 +12,44 @@
 
 {% endblock %}
 {% block content %}
-
-
+<body onload="calcular()">
     <ul class="nav nav-tabs" role="tablist">
    <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'IN' %}">Ingresos</a></li>
         <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'EG' %}">Egresos</a></li>
   </ul>
 
         <center><h1>Presupuesto</h1></center>
-    <form action="" method="post">{% csrf_token %}
-    <input type="submit" class="btn btn-primary" value="Guardar">
+    <form action="" method="post" onchange="calcular()">{% csrf_token %}
+
     <center>
-        <table class="table table-bordered" style="overflow-x: scroll">
+    <div class="pre-scrollable" style=" max-height: 700px; overflow-y:scroll;" >
+        <table class="table table-bordered table-condensed" id="myTable">
       <tr>
 
           <th>Cuenta</th>
           {% for i, mes in MESES %}
-          <th>{{ mes }}</th>
+          <th id="col{{ forloop.counter }}" onclick="colorear2({{ forloop.counter }})">{{ mes }}</th>
 
           {% endfor %}
       </tr>
 
-        {% for cuentas in cuentas_list %}
-        <tr>
-            {% for fila in cuentas %}
-                {% if fila != cuentas.0 %}
-                    {% if fila == cuentas.1 %}
-                    <td>{{ fila }}</td>
+        {% for presupuesto in presupuestos_list %}
+        <tr >
+            {% for fila in presupuesto %}
+                {% if fila != presupuesto.0 and fila != presupuesto.14 and fila != presupuesto.15 %}
+                    {% if fila == presupuesto.1 %}
+                    <td id="row{{ presupuesto.0 }}" onclick="colorear({{ presupuesto.0 }})"><p style="width: 250px">
+                        {% if presupuesto.15 %}
+                          <b>{{ presupuesto.14 }}-{{ fila }}</b>
+                         {% else %}
+                            {{ presupuesto.14 }}-{{ fila }}
+                          {% endif %}
+                    </p><input type="hidden" id="{{ presupuesto.0 }}" value="{{ presupuesto.0 }}">
+                    <input type="hidden" id="{{ presupuesto.14 }}" value="{{ presupuesto.14 }}">
+                    </td>
+
                     {% else %}
-                         <td><input name="cuenta-{{cuentas.0 }}-{{ forloop.counter|sub:2 }}" style="width: 80px; text-align: right"
+                         <td><input {% if presupuesto.15 %} readonly {% endif %} name="cuenta-{{presupuesto.0 }}-{{ forloop.counter|sub:2 }}" style="width: 80px; text-align: right"
                                     type="number" step="0.01" value="{{ fila }}" min="0" ></td>
                     {% endif %}
                 {% endif %}
@@ -48,8 +58,164 @@
         {% endfor %}
 
     </table>
+    </div>
        </center>
+    <div class="row-fluid">
+        <div class="form-actions">
+
+<div class="pull-left">
+
+</div>
+<div class="pull-right">
+<input type="submit" value="Grabar y continuar editando" class="btn" name="_continue">
+<input type="submit" value="Grabar" class="btn btn-primary default" name="_save">
+</div>
+
+        </div>
+    </div>
 </form>
+ <script>
+ function calcular(){
+
+     var table=document.getElementById('myTable')
+     var i= 2,longitud=table.rows.length;
+     //CARGA LOS VALORES EN LOS PADRES INMEDIATOS
+     while(i <=longitud){
+             var row=table.rows[i]
+            if(row){
+             var readonly=(row.cells[1].getElementsByTagName('input')[0].getAttribute('readonly') == '')? true :false;
+             var readonly_anterior=(table.rows[i-1].cells[1].getElementsByTagName('input')[0].getAttribute('readonly') == '')? true :false;
+             if(readonly_anterior && ! readonly){
+                 var hermanos=encontrar_hermanos(i)
+                //alert('i: '+ i.toString()+'  hermanos:'+hermanos.toString())
+                sumar_al_padre(hermanos)
+             }
+            }
+            i++;
+
+       }
+    //EN ESTA PARTE SE CARGAN TODOS LOS PADRES  
+    encontrar_ultimos_readonly(longitud,table)
+
+
+
+ }
+function encontrar_hermanos(index){
+    var table=document.getElementById('myTable')
+    var cod= table.rows[index].cells[0].getElementsByTagName('input')[1].value
+
+    var new_padre= cod.slice(0, cod.length -1);
+    //alert('cod: '+cod.toString()+' padre: '+new_padre)
+    var seguir=true;
+    var indice=1;
+    var hermanos=[]
+    while(seguir){
+        var hermano=document.getElementById(new_padre+indice.toString())
+        if (hermano != null){
+            hermanos.push(hermano.value)
+        }else{
+            seguir=false
+        }
+        indice++;
+    }
+    return hermanos
+}
+ function sumar_al_padre(hermanos){
+     if(hermanos.length >0){
+         var padre=hermanos[0].slice(0, hermanos[0].length -1);
+         padre=padre.slice(0, padre.length -1);
+         var row_padre=(document.getElementById(padre).parentNode).parentNode
+         for (var j=1;j<=12;j++){
+             row_padre.cells[j].getElementsByTagName('input')[0].value=0.00
+         }
+
+         for(var i=0;i<hermanos.length;i++){
+             var row_hermano=(document.getElementById(hermanos[i]).parentNode).parentNode
+             for (var j=1;j<=12;j++){
+                 var padre_value= row_padre.cells[j].getElementsByTagName('input')[0]
+                 var hermano_value=row_hermano.cells[j].getElementsByTagName('input')[0]
+                 padre_value.value=parseFloat(padre_value.value)+parseFloat(hermano_value.value)
+             }
+         }
+     }
+ }
+
+ function get_padre(cod){
+    if(cod){
+    var codigo=cod.split('.')
+    var padre=[]
+    for(var i=0;i<codigo.length-1;i++){
+        padre.push(codigo[i])
+    }
+    var new_padre='';
+    for(var i=0;i<padre.length;i++){
+        new_padre+=padre.toString()+'.'
+    }
+    return new_padre
+    }else{
+        return cod
+    }
+ }
+ function encontrar_ultimos_readonly(longitud,table){
+     var i=2
+  while(i <=longitud){
+             var row=table.rows[i]
+            if(row){
+                 var readonly=(row.cells[1].getElementsByTagName('input')[0].getAttribute('readonly') == '')? true :false;
+                 var readonly_anterior=(table.rows[i-1].cells[1].getElementsByTagName('input')[0].getAttribute('readonly') == '')? true :false;
+
+                if(readonly_anterior && !readonly){
+                     var ii=i
+                    //se le pasa el indice del ultimo readonly
+                     var hermanos=encontrar_hermanos(i-1)
+                     sumar_al_padre(hermanos)
+                }
+            }
+            i++;
+
+     }
+ }
+
+
+function colorear(index){
+    var row=document.getElementById('row'+index.toString())
+    var rowIndex = row.parentNode.rowIndex;
+    var table=document.getElementById('myTable')
+    var rowCont=table.rows[0].cells.length
+    var tiene=( table.rows[rowIndex].cells[0].getAttribute('style')== null)? false:true;
+
+     if(tiene){
+          for(var i=0;i<rowCont;i++){
+       table.rows[rowIndex].cells[i].removeAttribute('style')
+        }
+     }else{
+         for(var i=0;i<rowCont;i++){
+       table.rows[rowIndex].cells[i].style.background='lightblue'
+        }
+     }
+
+
+}
+ function colorear2(index){
+    var table=document.getElementById('myTable')
+    var rowCont=table.rows.length
+    var tiene=( table.rows[0].cells[index].getAttribute('style')== null)? false:true;
+
+     if(tiene){
+          for(var i=0;i<rowCont;i++){
+       table.rows[i].cells[index].removeAttribute('style')
+        }
+     }else{
+         for(var i=0;i<rowCont;i++){
+       table.rows[i].cells[index].style.background='lightgreen'
+        }
+     }
+
+
+}
+
+ </script>
 
 
 {% endblock %}
+</body>
