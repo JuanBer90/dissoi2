@@ -13,6 +13,7 @@ class Cuenta(MP_Node):
     cuenta = models.CharField(max_length=200)
     tipo = models.CharField(max_length=2, choices=TIPOS_DE_CUENTA)
     codigo = models.CharField(max_length=30)
+    codigo_ordenado = models.BigIntegerField(editable=False)
     
     debe = 0
     haber = 0
@@ -36,6 +37,17 @@ class Cuenta(MP_Node):
         else:
             return True
  
-
+    def codigo_conversion(self):
+        if self.codigo is not None:
+            codigo_vector = self.codigo.split(".")
+            codigo_cadena = ""
+            for codigo_parte in codigo_vector:
+                if len(codigo_parte) == 1:
+                    codigo_parte += "0"
+                codigo_cadena += codigo_parte
+            while len(codigo_cadena) <= 12:
+                codigo_cadena += "00"
+            return int(codigo_cadena)
+        else:
+            return None
         
-# Create your models here.
