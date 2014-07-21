@@ -2,14 +2,14 @@
 <title>Escoja asiento contable a modificar | Sitio de administración de Django</title>
 <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
 
-  
+
   <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
-  
-  
+
+
     <script type="text/javascript" src="/admin/jsi18n/"></script>
-  
-  
-  
+
+
+
 
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/static/admin/css/ie.css" /><![endif]-->
 
@@ -40,7 +40,7 @@
 <!-- Container -->
 <div id="container">
 
-    
+
     <!-- Header -->
     <div id="header">
         <div id="branding">
@@ -52,10 +52,6 @@
         <div id="user-tools">
             Bienvenido/a,
             <strong>admin</strong>.
-
-
-
-
                 <a href="/admin/password_change/">Cambiar contraseña</a> /
 
                 <a href="/admin/logout/">Terminar sesión</a>
@@ -72,35 +68,29 @@
 › Asientos contables
 </div>
 
-    
-
-    
-        
-    
-
     <!-- Content -->
     <div id="content" class="flex">
-        
+
         <h1>Escoja asiento contable a modificar</h1>
-        
+
   <div id="content-main">
-    
-      
+
+
         <ul class="object-tools">
-          
+
             <li>
-              
+
               <a href="/asiento/nuevo/" class="addlink">
                 Añadir asiento contable
               </a>
             </li>
-          
+
         </ul>
-      
-    
-    
+
+
+
     <div class="module filtered" id="changelist">
-      
+
 
 <div id="toolbar"><form id="changelist-search" action="" method="get">
 <div><!-- DIV needed for valid HTML -->
@@ -114,10 +104,10 @@
 <script type="text/javascript">document.getElementById("searchbar").focus();</script>
 
 
-        
+
           <div id="changelist-filter">
             <h2>Filtro</h2>
-            
+
 <h3> Por fecha </h3>
 <ul>
 
@@ -139,50 +129,50 @@
 </ul>
 
           </div>
-        
-      
+
+
 
       <form id="changelist-form" action="" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="h7gEpq9YIRlND6eofzB8YCpYHNak3Mnv">
-      
-      
-          
+
+
+
 <div class="actions">
     <label>Acción: <select name="action">
 <option value="" selected="selected">---------</option>
 <option value="delete_selected">Eliminar Asientos contables seleccionado/s</option>
 </select></label><input class="select-across" name="select_across" type="hidden" value="0">
     <button type="submit" class="button" title="Ejecutar la acción seleccionada" name="index" value="0">Ir</button>
-    
+
         <script type="text/javascript">var _actions_icnt="8";</script>
         <span class="action-counter" style="display: inline;">seleccionados 0 de 8</span>
-        
-    
+
+
 </div>
 
-          
+
 
 
 <div class="results">
-<table id="result_list">
+<table id="result_list" class="table-striped">
 <thead>
 <tr>
 
 <th scope="col" class="action-checkbox-column">
-   
+
    <div class="text"><span><input type="checkbox" id="action-toggle" style="display: inline-block;"></span></div>
    <div class="clear"></div>
 </th>
 <th scope="col" class="sortable column-fecha">
-   
-     
-   
+
+
+
    <div class="text"><a href="?o=1">Fecha</a></div>
    <div class="clear"></div>
 </th>
 <th scope="col" class="sortable column-comunidad">
-   
-     
-   
+
+
+
    <div class="text"><a href="?o=2">Comunidad</a></div>
    <div class="clear"></div>
 </th>
@@ -204,9 +194,9 @@
 </div>
 
 
-          
-      
-      
+
+
+
 
 <p class="paginator">
 
@@ -219,7 +209,7 @@
     </div>
   </div>
 
-        
+
         <br class="clear">
     </div>
     <!-- END Content -->

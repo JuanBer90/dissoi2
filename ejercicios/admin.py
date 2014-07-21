@@ -7,7 +7,7 @@ class EjercicioAdmin(admin.ModelAdmin):
     #def save_related(self, request,form, formsets, change):
     def save_model(self, request, ejercicio, form, change):
         ejercicio.save()
-        cuentas = Cuenta.objects.filter(numchild=0,tipo="IN").order_by('codigo')
+        cuentas = Cuenta.objects.filter(numchild=0,tipo='IN').order_by('codigo')
         for cuenta in cuentas:
             for i in range(1,13):           
                 presupuesto = Presupuesto()

@@ -17,17 +17,32 @@
         <script src="myOwn.js"></script>
 
     <center>
-    <h1>Cuentas</h1>
-    <input type="text">
-    <table>
-      <tr><th>Cuenta</th><th>Tipo</th><th>Nivel</th><th>Debe</th><th>Haber</th><th>Diferencia</th>
-    {% for arbol in arbol_list %}
-        <tr><td style="width: 300px">{{ arbol.cuenta.cuenta }}</td><td style="width: 50px">{{ arbol.cuenta.tipo|tipo_cuenta }}</td>
-            <td>{{ arbol.cuenta.depth }}</td>   <td style="width: 100px">{{ arbol.debe }}</td>
-            <td style="width: 100px">{{ arbol.haber }}</td><td style="width: 100px">{{ arbol.debe|sub:arbol.haber }}</td>
+    <h1>{{ titulo }}</h1>
 
+    <table class="table table-bordered table-striped">
+        <tr><th class="navbar-inner"></th>
+            <th colspan="2" class="navbar-inner"><center>SUMA</center></th>
+            <th colspan="2" class="navbar-inner"><center>SALDO</center></th>
+            <th colspan="2" class="navbar-inner"><center>PATRIMONIALES</center></th>
+        <th colspan="2" class="navbar-inner"><center>RESULTADO</center></th>
         </tr>
+      <tr>
+        <th style="width: 250px">Cuenta</th><th>Debe</th><th>Haber</th><th>Deudor</th><th>Acreedor</th>
+          <th>Activo</th><th>Pasivo</th><th>Perdidas</th><th>Ganancias</th>
+    </tr>
+        {% for cuenta in cuentas %}
+            <tr>
+            {% for valor in cuenta %}
+
+                <td {% if forloop.counter != 1 %} style="text-align: right" {% endif %}>{{ valor }}</td>
+             {% endfor %}
+            </tr>
         {% endfor %}
+    <tr>
+            {% for tot in total %}
+                <th style="text-align: right">{{ tot }}</th>
+               {% endfor %}
+            </tr>
         </table>
 
         </center>

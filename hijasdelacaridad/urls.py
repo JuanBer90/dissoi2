@@ -20,8 +20,20 @@ urlpatterns = patterns('',
     #ASIENTOS
     (r'^asiento/nuevo/', 'asientos_contables.views.nuevo'),
     (r'^asiento/listar/', 'asientos_contables.views.listar'),
-    (r'^balance/', 'asientos_contables.views.mayores'),
-    (r'^mayor/(?P<tipo>.*)', 'asientos_contables.views.mayor'),
+    (r'^cuentas/mayor/', 'asientos_contables.views.mayores'),
+    #(r'^mayor/(?P<tipo>.*)', 'asientos_contables.views.mayor'),
     (r'^mayorgeneral/(?P<tipo>.*)', 'asientos_contables.views.mayor_general'),
+    (r'^presupuesto/(?P<tipo>.*)', 'presupuestos.views.presupuesto'),
+    (r'^ejecucion_presupuestaria/(?P<tipo>.*)', 'presupuestos.views.ejecucion_presupuestaria'),
+    (r'^balance/comunidad/(?P<id>.*)', 'cuentas.views.balance_comunidad'),
+    (r'^balance/consolidado/', 'cuentas.views.balance_general'),
+    (r'^balance/pais/(?P<id>.*)', 'cuentas.views.balance_pais'),
+    (r'^balance/', 'cuentas.views.ver_balance'),
+    (r'^prueba/', 'cuentas.views.prueba'),
+    (r'^mayor/detalle/comunidad/(?P<id>\d+)/(?P<tipo>.*)', 'asientos_contables.views.mayor_detallado_comunidad'),
+    (r'^mayor/detalle/pais/(?P<id>\d+)/(?P<tipo>.*)', 'asientos_contables.views.mayor_detallado_pais'),
+    (r'^mayor/detalle/consolidado/(?P<tipo>.*)', 'asientos_contables.views.mayor_detallado_consolidado'),
+    (r'^mayor/', 'asientos_contables.views.ver_mayor'),
 
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

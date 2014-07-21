@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from calendar import calendar
+import calendar
 from decimal import Decimal
 from time import timezone
 import datetime
 from twisted.test.test_amp import BadNoAnswerCommandProtocol
 from django import forms
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -13,10 +16,11 @@ from ajax_select.fields import AutoCompleteField
 from django.template.defaultfilters import date
 from django.views.generic.dates import timezone_today
 from asientos_contables.models import AsientoContable, AsientoContableDetalle
+from comunidades.models import Comunidad, Pais
 from cotizaciones.models import Cotizacion
 from cuentas.models import Cuenta
-from cuentas.views import CuentasBalance
 from cuentas_bancarias.models import CuentaBancaria
+from hijasdelacaridad.globales import execute_all_query
 from usuarios.models import Usuario
 from ejercicios.models import Ejercicio
 
@@ -50,10 +54,7 @@ def nuevo(request):
     bancos = CuentaBancaria.objects.filter(comunidad=usuario_objeto.usuario.comunidad)
     print len(bancos)
     if request.method == 'POST':
-        formulario=request.POST
-        return render_to_response('balance/nuevo_change_form.html',
-                                  {'add': True, 'bancos': bancos,'formulario':formulario, 'hoy': str(timezone_today().strftime('%d/%m/%Y'))},
-                                  context_instance=RequestContext(request))
+
         addOther=request.POST.get('_addanother','').encode('utf8')
         save=request.POST.get('_save','')
         total_rows=int(request.POST.get('asientocontabledetalle_set-TOTAL_FORMS',0))
@@ -61,12 +62,13 @@ def nuevo(request):
         fecha=datetime.datetime.strptime(fecha, "%d/%m/%Y")
         asiento = AsientoContable()
         asiento.fecha = fecha
-        asiento.comunidad = usuario.comunidad
+        asiento.comunidad = usuario_objeto.usuario.comunidad
         asiento.save()
         for i in range(total_rows):
             id_cuenta = request.POST.get('asientocontabledetalle_set-' + str(i) + '-cuenta', '')
             debe = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-debe', 0.00))
             haber = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-haber', 0.00))
+            obs = request.POST.get('asientocontabledetalle_set-' + str(i) + '-observacion', '')
             if id_cuenta != '':
                 id_cuenta=int(id_cuenta)
                 cuenta=Cuenta.objects.get(pk=id_cuenta)
@@ -75,6 +77,7 @@ def nuevo(request):
                 asiento_detalle.debe=debe
                 asiento_detalle.haber=haber
                 asiento_detalle.asiento_contable=asiento
+                asiento_detalle.observacion=obs
                 if cuenta.codigo == '1.2.5.2':
                     banco_id = request.POST.get('asientocontabledetalle_set-' + str(i) + '-banco', 0)
                     asiento_detalle.cuenta_bancaria_id=banco_id
@@ -86,8 +89,27 @@ def nuevo(request):
                               context_instance=RequestContext(request))
 
 def listar(request):
-    asientos=AsientoContable.objects.all()
-    return render_to_response('asientos/asientos_list.html', {'asientos':asientos}, context_instance=RequestContext(request))
+    q=request.GET.get('q','')
+    fecha__gte=request.GET.get('fecha__gte','1900-01-01')
+    fecha__lt=request.GET.get('fecha__lt','2050-01-01')
+    asientos=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
+                                                       asiento_contable__fecha__gt=fecha__gte,
+                                                       asiento_contable__fecha__lt=fecha__lt)
+    hoy = datetime.datetime.today()
+    ayer=hoy+datetime.timedelta(days=-1)
+    ultimos_7dias = hoy + datetime.timedelta(days=-7)
+    manana = hoy + datetime.timedelta(days=1)
+    today=timezone_today()
+    cant_dias=calendar.monthrange(today.year,1)[1]
+    ultimos_30dias_max=str(today.year)+'-'+str(today.month)+'-'+str(cant_dias)
+    ultimos_30dias_min = str(today.year) + '-' + str(today.month) + '-01'
+    este_anho_max=str(today.year+1) + '-01-01'
+    este_anho_min = str(today.year) + '-01-01'
+    return render_to_response('asientos/nuevo_asientos_list.html',
+    {'asientos':asientos,'hoy':str(hoy.date()),'ultimos_30dias_max':ultimos_30dias_max,
+     'ayer':str(ayer.date()),'ultimos_30dias_min':ultimos_30dias_min,'este_anho_max':este_anho_max,'este_anho_min':este_anho_min
+        ,'ultimo_7dias':str(ultimos_7dias.date()),'manana':str(manana.date())},
+    context_instance=RequestContext(request))
 
 def mayores(request):
     vector_cuentas = Cuenta.get_tree()
@@ -200,7 +222,10 @@ def mayor(request,tipo):
 
     return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
 
-def mayor_general(request,tipo):
+def mayor_general(request,tipo='AC'):
+    tipos=['AC','PA','PN','IN','EG']
+    if not tipos.__contains__(tipo):
+        tipo='AC'
     vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo')
     usuario_id = request.user.id
     usuario_objeto = User.objects.get(id=usuario_id)
@@ -214,13 +239,14 @@ def mayor_general(request,tipo):
             cuenta_id = cuenta.id
             asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
             for asiento in asientos:
-                if asiento.anho == anho:
+                if asiento.anho() == anho:
                     cuenta.debe += asiento.debe_en_dolares()
                     cuenta.haber += asiento.haber_en_dolares()
+                    print 'debe: '+str(asiento.debe)+'   asfdasdf '+str(asiento.debe_en_dolares())
             cuenta.cargado = True
             cuenta.debe = round(cuenta.debe,2)
             cuenta.haber = round(cuenta.haber,2)
-
+            print 'debe: '+str(cuenta.debe)
 
     seguir = True
     longitud = len(vector_cuentas)
@@ -254,5 +280,128 @@ def mayor_general(request,tipo):
                 contador += 1
         if contador == longitud:
             seguir = False
+    return render_to_response('balance/mayor_general.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
 
-    return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
+def mayor_detallado_comunidad(request,id,tipo='AC'):
+    tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
+    if not tipos.__contains__(tipo):
+        tipo = 'AC'
+    if id == '':
+        id_comunidad=request.user.usuario.comunidad.id
+    ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+    query = " select distinct c.id,c.cuenta from cuentas_cuenta c " \
+            " join asientos_contables_asientocontabledetalle ad on ad.cuenta_id = c.id " \
+            " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id " \
+            " where a.comunidad_id=" + str(id) + " and tipo='" + tipo + "'  and extract( year from a.fecha) ="+str(ejercicio_anho)
+    cuentas_list = execute_all_query(query)
+    asientos=AsientoContableDetalle.objects.filter(cuenta__tipo=tipo,asiento_contable__fecha__year=ejercicio_anho,asiento_contable__comunidad_id=id).order_by('cuenta__codigo')
+    cuentas=[]
+    for id_cuenta,cuenta in cuentas_list:
+        debe=haber=0
+        for asiento in asientos:
+            if id_cuenta ==  asiento.cuenta_id:
+                debe+=asiento.debe
+                haber+=asiento.haber
+        cuentas.append([id_cuenta,cuenta,debe-haber,asiento.cuenta.codigo])
+    url='/mayor/detalle/comunidad/'+str(id)+'/'
+    return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'cuentas':cuentas, 'tipo': tipo},
+                              context_instance=RequestContext(request))
+
+def mayor_detallado_pais(request,id,tipo='AC'):
+    tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
+    if not tipos.__contains__(tipo):
+        tipo = 'AC'
+    if id == '':
+        id = request.user.usuario.comunidad_id
+        pais = Comunidad.objects.get(pk=id).pais
+    else:
+        pais = Pais.objects.get(pk=id)
+    ejercicio_anho=Ejercicio.objects.get(actual=True).anho
+    query = " select distinct c.id,c.cuenta from cuentas_cuenta c " \
+            " join asientos_contables_asientocontabledetalle ad on ad.cuenta_id = c.id " \
+            " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id " \
+            " join comunidades_comunidad co on co.id = a.comunidad_id " \
+            " where co.pais_id=" + str(id) + " and tipo='" + tipo + "' and extract( year from a.fecha) ="+str(ejercicio_anho)
+
+
+    cuentas_list = execute_all_query(query)
+    query_asiento="select ad.* from  asientos_contables_asientocontabledetalle ad "\
+    " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id "\
+    " join cuentas_cuenta c on c.id = ad.cuenta_id "\
+    " join comunidades_comunidad co on co.id = a.comunidad_id "\
+    " where c.tipo = '"+tipo+"' and co.pais_id = "+str(id)+" and extract( year from a.fecha) ="+str(ejercicio_anho)+" "\
+    " order by c.codigo"
+    print query_asiento
+
+    asientos = AsientoContableDetalle.objects.raw(query_asiento)
+
+    cuentas=[]
+    for id_cuenta,cuenta in cuentas_list:
+        debe=haber=0
+        for asiento in asientos:
+            if id_cuenta ==  asiento.cuenta_id:
+                debe+=asiento.debe
+                haber+=asiento.haber
+        cuentas.append([id_cuenta,cuenta,debe-haber,asiento.cuenta.codigo])
+    url = '/mayor/detalle/pais/' + str(id) + '/'
+    return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'cuentas':cuentas, 'tipo': tipo},
+                              context_instance=RequestContext(request))
+
+
+def mayor_detallado_consolidado(request,tipo='AC'):
+    tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
+    if not tipos.__contains__(tipo):
+        tipo = 'AC'
+    ejercicio_anho=Ejercicio.objects.get(actual=True).anho
+    query_asiento="select distinct * from (select ad.* from  asientos_contables_asientocontabledetalle ad "\
+    " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id "\
+    " join cuentas_cuenta c on c.id = ad.cuenta_id "\
+    " join cotizaciones_cotizacion cot on cot.fecha=a.fecha where c.tipo = '"+str(tipo)+"'" \
+    " and extract( year from a.fecha) = "+str(ejercicio_anho)+" order by c.codigo) as T"
+
+
+    asientos = AsientoContableDetalle.objects.raw(query_asiento)
+
+    query_cuentas = " select distinct c.id,c.cuenta from cuentas_cuenta c " \
+            " join asientos_contables_asientocontabledetalle ad on ad.cuenta_id = c.id " \
+            " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id " \
+            " where tipo='" + tipo + "' and extract( year from a.fecha) =" + str(ejercicio_anho)
+    cuentas_list=execute_all_query(query_cuentas)
+    cuentas = []
+    for id_cuenta, cuenta in cuentas_list:
+        debe = haber = 0
+        for asiento in asientos:
+            if id_cuenta == asiento.cuenta_id:
+                debe += asiento.debe_en_dolares()
+                haber += asiento.haber_en_dolares()
+        cuentas.append([id_cuenta, cuenta, debe - haber, asiento.cuenta.codigo])
+
+    url = '/mayor/detalle/consolidado/'
+    return render_to_response('balance/mayor_detallado.html',
+                              {'asientos': asientos, 'url': url, 'cuentas': cuentas, 'tipo': tipo,'consolidado':'true'},
+                              context_instance=RequestContext(request))
+
+
+def ver_mayor(request):
+    comunidades=Comunidad.objects.all()
+    paises=Pais.objects.all()
+    if request.method == 'POST':
+        tipo=request.POST.get('tipo','')
+        print tipo
+        if tipo == 'pais':
+            id_pais=int(request.POST.get('pais',0))
+            if id_pais == 0:
+                messages.error(request, 'Debe Seleccionar un pais!')
+            else:
+                return HttpResponseRedirect('/mayor/detalle/pais/'+str(id_pais)+'/AC')
+        elif tipo == 'comunidad':
+            id_comunidad = int(request.POST.get('comunidad', 0))
+            if id_comunidad == 0:
+                messages.error(request, 'Debe Seleccionar una comunidad!')
+            else:
+                return HttpResponseRedirect('/mayor/detalle/comunidad/' + str(id_comunidad)+'/AC')
+        else:
+            return HttpResponseRedirect('/mayor/detalle/consolidado/')
+    return render_to_response('balance/ver_mayor.html',
+                              {'comunidades':comunidades,'paises':paises},
+                              context_instance=RequestContext(request))
