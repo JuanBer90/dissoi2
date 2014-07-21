@@ -1,28 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13cbfa3d-0d78-4c03-9382-f0138837c340" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/balance/ejecucion_presupuestaria.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/home.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index_old.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/balance/mayor_detallado.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/balance/mayor_general.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/balance/ver_balance.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/balance/ver_mayor.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asientos_contables/ajax.py" afterPath="$PROJECT_DIR$/asientos_contables/ajax.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/balance.html" afterPath="$PROJECT_DIR$/templates/balance/balance.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base.html" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base_site.html" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base_site.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index.html" afterPath="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/index.html" afterPath="$PROJECT_DIR$/templates/admin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/mayores.html" afterPath="$PROJECT_DIR$/templates/balance/mayores.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asientos_contables/models.py" afterPath="$PROJECT_DIR$/asientos_contables/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" afterPath="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/presupuesto.html" afterPath="$PROJECT_DIR$/templates/balance/presupuesto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hijasdelacaridad/urls.py" afterPath="$PROJECT_DIR$/hijasdelacaridad/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asientos_contables/views.py" afterPath="$PROJECT_DIR$/asientos_contables/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cuentas/views.py" afterPath="$PROJECT_DIR$/cuentas/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presupuestos/views.py" afterPath="$PROJECT_DIR$/presupuestos/views.py" />
+    <list default="true" id="13cbfa3d-0d78-4c03-9382-f0138837c340" name="Default" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/balance/asiento_nuevo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hijasdelacaridad.iws" />
@@ -99,10 +79,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cuentas/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+            <state line="17" column="13" selection-start="425" selection-end="425" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="globales.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hijasdelacaridad/globales.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="373">
               <folding />
             </state>
           </provider>
@@ -608,7 +597,11 @@
       <created>1405551470748</created>
       <updated>1405551470748</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;">
+      <created>1405963124832</created>
+      <updated>1405963124833</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -616,7 +609,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60301507" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -786,11 +779,6 @@
             <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/globales.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="548" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ejercicios/admin.py">
@@ -1027,7 +1015,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cuentas/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+        <state line="17" column="13" selection-start="425" selection-end="425" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/globales.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="373">
           <folding />
         </state>
       </provider>
