@@ -14,23 +14,23 @@
 
     <center>
     <ul class="nav nav-tabs" role="tablist">
-  <li {% if tipo == 'AC' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'AC' %}">Activo</a></li>
-  <li {% if tipo == 'PA' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'PA' %}">Pasivo</a></li>
-   <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'IN' %}">Ingresos</a></li>
-        <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'EG' %}">Egresos</a></li>
-  <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'PN' %}">Patrimonio Neto</a></li>
+  <li {% if tipo == 'AC' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor_general' 'AC' %}">Activo</a></li>
+  <li {% if tipo == 'PA' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor_general' 'PA' %}">Pasivo</a></li>
+   <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor_general' 'IN' %}">Ingresos</a></li>
+        <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor_general' 'EG' %}">Egresos</a></li>
+  <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor_general' 'PN' %}">Patrimonio Neto</a></li>
 </ul>
 
     <h1>Cuentas</h1>
-    <table class="table-striped">
+    <table>
       <tr><th style="width: 500px">Cuenta</th><th>Tipo</th><th>Debe</th><th>Haber</th><th>Saldo</th>
     {% for cuenta in vector_cuentas %}
         <tr><td style="width: 300px">
-            <p style="font-size: 15px">
+            <p style="{{ cuenta.depth|espacios }} font-size: 15px">
                {% if cuenta.have_child  %}
-               <b>{{ cuenta.codigo }} - {{ cuenta.cuenta }}</b>
+               <b> {{ cuenta.cuenta }}</b>
                {% else %}
-               {{ cuenta.codigo }} - {{ cuenta.cuenta }}
+                {{ cuenta.cuenta }}
                 {% endif %}
             </p>
             </td>

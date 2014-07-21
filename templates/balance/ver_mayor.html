@@ -1,0 +1,110 @@
+{% extends 'admin/base_site.html' %}
+{% block extrahead %}
+    {% load my_tags %}
+
+    <title>Ver Balance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
+
+    <!-- Le styles, placed after extrastyle to correctly override default styling -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/overrides.css">
+
+    <!-- <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" /> -->
+    <script type="text/javascript">
+        //<![CDATA[
+        window.__admin_media_prefix__ = "/static/admin/";
+        //]]>
+    </script>
+    <script src="/static/admin/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/admin/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+    <script>
+    function select(tipo){
+        alert(tipo)
+        if(tipo == 'pais'){
+            document.getElementById('btn_pais').style.display='block'
+            document.getElementById('btn_comunidad').style.display='none'
+         }else{
+             document.getElementById('btn_pais').style.display='none'
+            document.getElementById('btn_comunidad').style.display='block'
+        }
+
+    }
+    function aux(tipo){
+        if(tipo == 'pais'){
+            document.getElementById('btn_pais').style.display='block'
+            document.getElementById('btn_comunidad').style.display='none'
+        }else{
+            document.getElementById('btn_pais').style.display='none'
+            document.getElementById('btn_comunidad').style.display='block'
+        }
+    }
+    function submit(){
+        alert('asdf')
+        document.formulario.submit()
+    }
+    </script>
+    <center><h1>Ver Mayor</h1></center>
+    <form action="" name="formulario"  method="post">{% csrf_token %}
+        <center>
+      <table class="table" style="width: 400px">
+          <tr><td style="width: 30px">
+                <input type="radio" name="tipo" id="comunidad" onclick="aux('comunidad')" checked value="comunidad"></td><th> Comunidad</th>
+              <td>
+              <center>
+                  <select name="comunidad">
+                    <option value="0">Seleccionar..</option>
+                      {% for comunidad in comunidades %}
+                      <option value="{{ comunidad.id }}">{{ comunidad.comunidad }}</option>
+                      {% endfor %}
+                  </select>
+              </center>
+              </td>
+          <td>
+          <input type="submit" class="btn-primary btn"  id="btn_comunidad" value="Ok" style="width: 50px">
+      </td>
+          </tr><tr>
+                <td><input type="radio" name="tipo" id="pais" onclick="aux('pais')" value="pais"></td><th style="width: 100px">Pais</th>
+          <td style="width: 300px">
+              <center>
+                  <select name="pais">
+                    <option value="0">Seleccionar..</option>
+                      {% for pais in paises %}
+                      <option value="{{ pais.id }}">{{ pais.pais }}</option>
+                      {% endfor %}
+                  </select>
+              </center>
+              </td>
+      <td>
+          <input type="submit" class="btn-primary btn" id="btn_pais" value="Ok" style="width: 50px; display: none">
+      </td>
+          </tr><tr>
+                <td><input type="radio" name="tipo" id="general" value="general" onclick="submit()"></td><th>Consolidado</th><td></td><td></td>
+          </tr>
+
+    </table>
+</center>
+
+
+    </form>
+
+
+
+
+
+
+
+{% endblock %}

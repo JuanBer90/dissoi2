@@ -12,27 +12,25 @@
 
 {% endblock %}
 {% block content %}
+
 <body onload="calcular()">
     <ul class="nav nav-tabs" role="tablist">
    <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'IN' %}">Ingresos</a></li>
         <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'EG' %}">Egresos</a></li>
   </ul>
 
-        <center><h1>Presupuesto</h1></center>
+            <center><h1>Presupuesto</h1></center>
     <form action="" method="post" onchange="calcular()">{% csrf_token %}
 
     <center>
-    <div class="pre-scrollable" style=" max-height: 700px; overflow-y:scroll;" >
+    <div class="pre-scrollable" style=" max-height: 450px; overflow-y:scroll;" >
         <table class="table table-bordered table-condensed" id="myTable">
       <tr>
-
           <th>Cuenta</th>
           {% for i, mes in MESES %}
           <th id="col{{ forloop.counter }}" onclick="colorear2({{ forloop.counter }})">{{ mes }}</th>
-
           {% endfor %}
       </tr>
-
         {% for presupuesto in presupuestos_list %}
         <tr >
             {% for fila in presupuesto %}
@@ -94,7 +92,7 @@
             i++;
 
        }
-    //EN ESTA PARTE SE CARGAN TODOS LOS PADRES  
+    //EN ESTA PARTE SE CARGAN TODOS LOS PADRES
     encontrar_ultimos_readonly(longitud,table)
 
 

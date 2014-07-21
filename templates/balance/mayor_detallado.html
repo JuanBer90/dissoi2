@@ -1,0 +1,72 @@
+{% extends 'admin/base_site.html' %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+{% load my_tags %}
+{% block extrahead %}
+        {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    {% bootstrap_javascript_tag %}
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+
+{% endblock %}
+{% block content %}
+
+    <center>
+    <ul class="nav nav-tabs" role="tablist">
+  <li {% if tipo == 'AC' %} class="active" {% endif %}><a href="{{ url }}AC">Activo</a></li>
+  <li {% if tipo == 'PA' %} class="active" {% endif %}><a href="{{ url }}PA">Pasivo</a></li>
+   <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{{ url }}IN">Ingresos</a></li>
+        <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{{ url }}EG">Egresos</a></li>
+  <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{{ url }}PN">Patrimonio Neto</a></li>
+</ul>
+
+    {% for id,cuenta,saldo,codigo in cuentas %}
+        <p> <span style="font-size: 22px"><b>{{ codigo }} - {{ cuenta }}   -   Saldo:</b> {{ saldo }}  </span>   </p>
+      <table class="table-bordered table-striped">
+
+       <tr><th class="navbar-inner "><p style="font-size: 17px">Fecha</p></th><th class="navbar-inner">
+           <p style="font-size: 17px">Debe</p></th><th class="navbar-inner"><p style="font-size: 17px">Haber</p></th>
+           <th class="navbar-inner " style="width: 200px">Descripci&oacute;n</th></tr>
+        {% for c in asientos %}
+            {% if id == c.cuenta_id %}
+            <tr><td style="width: 300px"><p style="font-size: 17px; ">
+                {{ c.asiento_contable.fecha }}</p>
+                </td>
+                <td style="width: 100px; text-align: right"><p style="font-size: 17px; margin-right: 10px">
+                    {% if consolidado == 'true' %}
+                        {{ c.debe_en_dolares }}
+                        {% else %}
+                        {{ c.debe }}
+                        {% endif %}</p></td>
+                <td style="width: 100px; text-align: right"><p style="font-size: 17px; margin-right: 10px">
+                      {% if consolidado == 'true' %}
+                        {{ c.haber_en_dolares }}
+                        {% else %}
+                        {{ c.haber }}
+                        {% endif %}
+               </p></td><td><p style="margin-right: 10px">
+                    {% if c.observacion == None %}
+                    Sin Observaci&oacute;n
+                    {% else %}
+                    {{ c.observacion }}
+
+                        {% endif %}
+                </p>
+               </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        </table>
+        <br><br>
+    {% endfor %}
+
+
+
+    </center>
+{% endblock %}
+<style>
+.p{
+    font-size: 15px;
+}
+</style>

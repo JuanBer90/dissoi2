@@ -9,6 +9,7 @@ from cotizaciones.models import Cotizacion
 class AsientoContable(models.Model):
     fecha = models.DateField(default=datetime.date.today())
     comunidad = models.ForeignKey(Comunidad)
+    observacion=models.CharField(max_length=100,null=True)
 
     def __unicode__(self):
         return unicode(self.fecha)
@@ -24,6 +25,7 @@ class AsientoContableDetalle(models.Model):
     debe = models.DecimalField(max_digits=22,default=0,decimal_places=2)
     haber = models.DecimalField(max_digits=22, default=0, decimal_places=2)
     cuenta_bancaria=models.ForeignKey(CuentaBancaria,null=True)
+    observacion = models.CharField(max_length=100, null=True)
 
     def comunidad_id(self):
         asiento = AsientoContable.objects.get(id=self.asiento_contable.id)
@@ -37,10 +39,10 @@ class AsientoContableDetalle(models.Model):
     def anho(self):
         return self.fecha().year
     def cotizacion_del_dia(self):
-        cotizacion = Cotizacion.objects.get(pais=self.pais_id(),fecha=self.fecha())
+        cotizacion = Cotizacion.objects.filter(pais=self.pais_id(),fecha=self.fecha())[0]
         return cotizacion.monto
     def haber_en_dolares(self):
-        return self.haber/self.cotizacion_del_dia()
+        return round(self.haber/self.cotizacion_del_dia(),2)
     def debe_en_dolares(self):
-        return self.debe/self.cotizacion_del_dia()
+        return round(self.debe/self.cotizacion_del_dia(),2)
 

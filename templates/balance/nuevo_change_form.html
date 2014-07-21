@@ -159,6 +159,7 @@
                     <th colspan="2" class="required" style="width: 200px">Cuenta</th>
                     <th class="required">Debe</th>
                     <th class="required">Haber</th>
+                    <th >Descripci&oacute;n</th>
                     <th>¿Eliminar?</th>
                 </tr></thead>
                 <tbody>
@@ -192,6 +193,9 @@
                     <td class="field-haber">
                         <input id="id_asientocontabledetalle_set-0-haber" style="height: 30px" name="asientocontabledetalle_set-0-haber" required="" min="0" step="0.01" type="number" value="0">
                     </td>
+                 <td class="field-observacion">
+                        <input style="height: 30px" name="asientocontabledetalle_set-0-observacion" maxlength="100" type="text" value="">
+                    </td>
                     <td class="delete"></td>
                 </tr>
                 <tr class="form-row row2  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-1">
@@ -219,6 +223,9 @@
                     </td>
                     <td class="field-haber">
                         <input id="id_asientocontabledetalle_set-1-haber" style="height: 30px" name="asientocontabledetalle_set-1-haber" required="" min="0" step="0.01" type="number" value="0">
+                    </td>
+                <td class="field-observacion">
+                        <input style="height: 30px" name="asientocontabledetalle_set-0-observacion" maxlength="100" type="text" value="">
                     </td>
 
                     <td class="delete"></td>
@@ -259,6 +266,9 @@
                     <td class="field-haber">
                         <input id="id_asientocontabledetalle_set-2-haber" style="height: 30px" min="0" name="asientocontabledetalle_set-2-haber" required=""  step="0.01" type="number" value="0">
                     </td>
+                <td class="field-observacion">
+                        <input style="height: 30px" name="asientocontabledetalle_set-0-observacion" maxlength="100" type="text" value="">
+                    </td>
                     <td class="delete"></td>
                 </tr>
 
@@ -295,6 +305,9 @@
                     <td class="field-haber">
                         <input id="id_asientocontabledetalle_set-__prefix__-haber" style="height: 30px" min="0" required=""
                                name="asientocontabledetalle_set-__prefix__-haber" step="0.01"  type="number" value="0">
+                    </td>
+                <td class="field-observacion">
+                        <input style="height: 30px" name="asientocontabledetalle_set-__prefix__-observacion" maxlength="100" type="text" value="">
                     </td>
                     <td class="delete"></td>
                 </tr>
@@ -353,13 +366,13 @@
     function my_callback(data){
         var debe= document.getElementById('id_asientocontabledetalle_set-'+ data.i.toString()+'-debe')
         var haber=document.getElementById('id_asientocontabledetalle_set-'+ data.i.toString()+'-haber')
-        if(data.tipo == 'EG'){
+        if(data.tipo == 'IN'){
             debe.value=0
             debe.readOnly=true;
             debe.style.background='#C0C0C0'
             haber.style.background='white'
             haber.readOnly=false;
-        }else if(data.tipo == 'IN'){
+        }else if(data.tipo == 'EG'){
             haber.readOnly=true;
             haber.style.background='#C0C0C0'
             haber.value=0

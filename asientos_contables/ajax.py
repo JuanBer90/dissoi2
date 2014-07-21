@@ -4,6 +4,7 @@ from django.template.defaultfilters import time
 from django.utils import simplejson
 from dajaxice.decorators import dajaxice_register
 from django.views.generic.dates import timezone_today
+from comunidades.models import Pais, Comunidad
 from cotizaciones.models import Cotizacion
 from cuentas.models import Cuenta
 

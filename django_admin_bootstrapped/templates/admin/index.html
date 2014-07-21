@@ -8,93 +8,158 @@
 {% block bodyclass %}dashboard{% endblock %}
 
 {% block breadcrumbs %}
-<ul class="breadcrumb">
-<li>{% trans 'Home' %}</li>
-</ul>
+    <ul class="breadcrumb">
+        <li>{% trans 'Home' %}</li>
+    </ul>
 {% endblock %}
-
-{% block object-tools %}
-<ul class="nav">
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Applications" %} <b class="caret"></b></a>
-        <ul class="dropdown-menu" role="menu">
-            {% for app in app_list %}
-            <li class="dropdown-submenu">
-                <a href="#">{% render_with_template_if_exist app.name|lower|add:"/admin_app_name.html" app.name %}</a>
-                <ul class="dropdown-menu">
-                {% for model in app.models %}
-                    <li>
-                        {% if model.admin_url %}
-                            <a href="{{ model.admin_url }}">{{ model.name }}</a>
-                        {% else %}
-                            {{ model.name }}
-                        {% endif %}
-                    </li>
-                {% endfor %}
-                </ul>
-            </li>
-            {% endfor %}
-        </ul>
-    </li>
-</ul>
-{% endblock %}
-
 
 {% block content %}
-<div class="row-fluid">
-    <div id="content-main" class="span12">
+    <div class="row-fluid">
+        <div id="content-main" class="span12">
 
-        <div class="tabbable">
-            {% for app in app_list %}
-                {% include "admin/bootstrapped_extra/app_name.html" %}
-                {% render_with_template_if_exist app.name|lower|add:"/admin_app_description.html" "" %}
-                <table summary="{% blocktrans with name=app.name %}Models available in the {{ name }} application.{% endblocktrans %}" class="table table-striped table-bordered">
-                {% for model in app.models %}
+            <div class="tabbable">
+                <center>
+                <table>
                     <tr>
-                        <th scope="row">
-                            {% if model.admin_url %}
-                            <a href="{{ model.admin_url }}">{{ model.name }}</a>
-                            {% else %}
-                            {{ model.name }}
-                            {% endif %}
+                    <td>
+                    <h2 id='Asientos' class="Asientos contables"><a href="/admin/">Configuraciones</a></h2>
+                    <table summary="Models available in the Asientos contables application." class="table table-striped table-bordered" style="width: 500px">
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/cuentas/cuenta">Cuentas</a>
+                                <div class="pull-right">
+                                    <a href="/admin/cuentas/cuenta/add" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
 
-                            {% if model.add_url or model.admin_url%}
-                            <div class="pull-right">
-                                {% if model.add_url %}
-                                <a href="{{ model.add_url }}" class="btn btn-mini addlink"><i class="icon-plus"></i> {% trans 'Add' %}</a>
-                                {% endif %}
-                                {% if model.admin_url %}
-                                <a href="{{ model.admin_url }}" class="btn btn-mini changelink"><i class="icon-edit"></i> {% trans 'Change' %}</a>
-                                {% endif %}
-                            </div>
-                            {% endif %}
-                        </th>
+                                    <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/auth/user">Usuarios</a>
+                                <div class="pull-right">
+                                    <a href="/admin/auth/user/add" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+
+                                    <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/comunidades/comunidad">Comunidades</a>
+                                <div class="pull-right">
+                                    <a href="/admin/comunidades/comunidad/add" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+
+                                    <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/comunidades/pais">Paises</a>
+                                <div class="pull-right">
+                                    <a href="/admin/comunidades/pais/add" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+
+                                    <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->
+                                </div>
+                            </th>
+                        </tr>
+                    </table>
+
+                    </td>
+                    <td style="width: 100px"></td>
+                    <td>
+
+
+                    <h2 id='Asientos' class="Asientos contables"><a href="/admin/">Contabilidad</a></h2>
+                    <table summary="Models available in the Asientos contables application." class="table table-striped table-bordered" style="width: 500px">
+                        <tr>
+                            <th scope="row">
+                                <a href="{% url 'asientos_contables.views.listar' %}">Asientos contables</a>
+                                <div class="pull-right">
+                                    <a href="/asiento/nuevo/" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+
+                                    <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->
+                                </div>
+                            </th>
+                        </tr>
+                         <tr>
+                            <th scope="row">
+                                <a href="/mayor/AC">Mayor</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/cuentas_bancarias/cuentabancaria/">Cuentas Bancarias</a>
+                                <div class="pull-right">
+                                    <a href="/admin/cuentas_bancarias/cuentabancaria/add/" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+
+                                    <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/cotizaciones/cotizacion/">Cotizaciones</a>
+                                <div class="pull-right">
+                                    <a href="/admin/cotizaciones/cotizacion/add/" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="{% url 'cuentas.views.balance_comunidad' request.user.usuario.comunidad_id %}">Balance</a>
+                            </th>
+                        </tr>
+                    </table>
+
+
+
+                    </td>
                     </tr>
-                {% endfor %}                
-                </table>
-            {% empty %}
-                <p>{% trans "You don't have permission to edit anything." %}</p>
-            {% endfor %}
-
-            <h2 id='Asientos' class="Asientos contables"><a href="/admin/">Asientos contables</a></h2>              
-                <table summary="Models available in the Asientos contables application." class="table table-striped table-bordered">               
                     <tr>
-                        <th scope="row">                           
-                            <a href="{% url 'asientos_contables.views.listar' %}">Asientos contables</a>                                                    
-                            <div class="pull-right">                               
-                                <a href="/asiento/nuevo/" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>                                                              
-                                <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->                               
-                            </div>                           
-                        </th>
-                    </tr>                               
+                        <td colspan="2">
+                                                <h2 id='Asientos' class="Asientos contables"><a href="/admin/">Conciliacion</a></h2>
+                    <table summary="Models available in the Asientos contables application." class="table table-striped table-bordered" style="width: 500px">
+                        <tr>
+                            <th scope="row">
+                                <a href="{% url 'asientos_contables.views.mayor_general' 'AC' %}">Mayor</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/presupuesto/">Presupuesto</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/ejecucion_presupuestaria/">Ejecucion Presupuestaria</a>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/ejercicios/ejercicio/">Ejercicio</a>
+                                 <div class="pull-right">
+                                    <a href="/admin/ejercicios/ejercicio/add/" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="{% url 'cuentas.views.ver_balance' %}">Balance</a>
+                            </th>
+                        </tr>
+                    </table>
+
+                        </td>
+                    </tr>
+
                 </table>
-
-
-
-            </table>
+                    </center>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block sidebar %}
