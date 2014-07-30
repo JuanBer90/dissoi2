@@ -44,10 +44,27 @@ class Cuenta(MP_Node):
             for codigo_parte in codigo_vector:
                 if len(codigo_parte) == 1:
                     codigo_parte += "0"
-                codigo_cadena += codigo_parte
+                    codigo_cadena += codigo_parte
+                else:
+                    codigo_cadena=codigo_cadena[0:len(codigo_cadena)-1]+codigo_parte+'0'
             while len(codigo_cadena) <= 12:
                 codigo_cadena += "00"
             return int(codigo_cadena)
         else:
             return None
-        
+
+    def cargar_tipo(self):
+        if self.codigo is not None:
+            if self.codigo[0] == '1':
+                return 'AC'
+            if self.codigo[0] == '2':
+                return 'PA'
+            if self.codigo[0] == '3':
+                return 'PN'
+            if self.codigo[0] == '4':
+                return 'IN'
+            if self.codigo[0] == '5':
+                return 'EG'
+            return ''
+        else:
+            return ''

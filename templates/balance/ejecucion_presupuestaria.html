@@ -11,7 +11,58 @@
 
 {% endblock %}
 {% block content %}
+<script>
+function columna(index){
+    var dato=2*index-1
+    var table=document.getElementById('myTable')
+    var rowCont=table.rows.length
 
+    var tiene=( table.rows[0].cells[index].getAttribute('style')== null)? false:true;
+
+     if(tiene){
+          table.rows[0].cells[index].removeAttribute('style')
+         table.rows[1].cells[dato-1].removeAttribute('style')
+         table.rows[1].cells[dato].removeAttribute('style')
+
+          for(var i=2;i<rowCont;i++){
+        table.rows[i].cells[dato].style.removeProperty('background')
+              table.rows[i].cells[dato+1].style.removeProperty('background')
+
+        }
+     }else{
+         table.rows[0].cells[index].style.background='lightgreen'
+         table.rows[1].cells[dato-1].style.background='lightgreen'
+         table.rows[1].cells[dato].style.background='lightgreen'
+         for(var i=2;i<rowCont;i++){
+       table.rows[i].cells[dato].style.background='lightgreen'
+        table.rows[i].cells[dato+1].style.background='lightgreen'
+        }
+     }
+
+}
+function fila(index){
+
+    var row=document.getElementById('row'+index.toString())
+    var rowIndex = row.parentNode.rowIndex;
+
+    var table=document.getElementById('myTable')
+    var rowCont=table.rows[0].cells.length
+    var tiene=( table.rows[rowIndex].cells[0].style.getPropertyValue('background')== null)? false:true;
+
+     if(tiene){
+          for(var i=0;i<rowCont*2;i++){
+       table.rows[rowIndex].cells[i].style.removeProperty('background')
+
+        }
+     }else{
+         for(var i=0;i<rowCont*2;i++){
+       table.rows[rowIndex].cells[i].style.background='lightblue'
+        }
+     }
+
+
+}
+</script>
     <center>
     <ul class="nav nav-tabs" role="tablist">
    <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.ejecucion_presupuestaria' 'IN' %}">Ingresos</a></li>
@@ -19,41 +70,46 @@
 </ul>
 
     <h1>Ejecucion Presupuestaria</h1>
-<div class="pre-scrollable" style=" max-height: 650px; overflow-y:scroll;" >
-    <table class="table table-bordered table-striped">
-      <tr><th style="width: 500px;" rowspan="2" class="navbar-inner"><p style="font-size: 15px">Cuenta</p></th>
+<div class="pre-scrollable" style=" max-height: 500px; overflow-y:scroll;" >
+    <table class="table table-bordered table-striped" id="myTable">
+      <tr><th style=" text-align: center;" rowspan="2" class="navbar-inner"><p style="font-size: 25px; margin-top: 30px">Cuenta</p></th>
            {% for i,mes in meses %}
-            <th colspan="2"  id="col{{ forloop.counter }}" onclick="colorear2({{ forloop.counter }})" class="navbar-inner"><p style="font-size: 15px; text-align: center">{{ mes }}</p></th>
+            <th colspan="2"  id="col{{ forloop.counter }}" onclick="columna({{ forloop.counter }})" class="navbar-inner"><p style="font-size: 15px; text-align: center">{{ mes }}</p></th>
             {% endfor %}
-     </tr>
+
+      </tr>
       <tr>
           {% for mes in meses %}
         <th class="navbar-inner"><p style="font-size: 15px">Ejecutado</p></th>
-        <th class="navbar-inner"><p style="font-size: 15px">Presupuestado</p></th>
+        <th class="navbar-inner" style="height: 20px"><p style="font-size: 15px">Presupuestado</p></th>
           {% endfor %}
       </tr>
     {% for datos in vector_cuentas %}
         <tr>
+        <td id="row{{ forloop.counter }}" onclick="fila({{ forloop.counter }})">
             {% for dato in datos %}
                 {% if forloop.counter == 2 %}
-
-                <td id="row{{ datos.0 }}" onclick="colorear({{ dato.0 }})" style="width: 250px;">{{ dato }} </td>
-                {% elif forloop.counter > 2 and forloop.counter < 15 %}
+                {% if datos.27 %}
+                   <b>{{ datos.26 }} - {{ dato }}</b>
+                {% else %}
+                    {{ datos.26 }} - {{ dato }}
+                 {% endif%}
+                </td>
+                {% elif forloop.counter > 2  and forloop.counter < 27 %}
             <td  style="text-align: right" >{{ dato }}</td>
-                    <td {% if forloop.counter > 2  %} style="text-align: right" {% endif %}>{{ dato }} </td>
                 {% endif %}
              {% endfor %}
         </tr>
     {% endfor %}
     </table>
 </div>
-
-    </center>
+  </center>
 {% endblock %}
 
 <script>
 
 function colorear(index){
+
     var row=document.getElementById('row'+index.toString())
     var rowIndex = row.parentNode.rowIndex;
     var table=document.getElementById('myTable')
@@ -73,6 +129,7 @@ function colorear(index){
 
 }
  function colorear2(index){
+     alert('hola2')
     var table=document.getElementById('myTable')
     var rowCont=table.rows.length
     var tiene=( table.rows[0].cells[index].getAttribute('style')== null)? false:true;

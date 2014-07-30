@@ -9,9 +9,6 @@ from django.shortcuts import render, render_to_response
 
 # Create your views here.
 from django.template.context import RequestContext
-from django.template.defaultfilters import random
-from django.utils.formats import number_format
-from asientos_contables.models import AsientoContableDetalle
 from cuentas.models import Cuenta
 from ejercicios.models import Ejercicio
 from hijasdelacaridad.globales import execute_all_query
@@ -21,15 +18,13 @@ from presupuestos.models import Presupuesto, MESES
 def presupuesto(request,tipo):
     if tipo != 'IN' and tipo !='EG':
         tipo='IN'
-    cuentas=Cuenta.objects.filter(tipo=tipo).order_by('codigo','numchild')
+    cuentas=Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
     ejercicio=Ejercicio.objects.get(actual=True)
     query="select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p"\
     " join ejercicios_ejercicio e on e.id=p.ejercicio_id join cuentas_cuenta c on c.id=p.cuenta_id "\
-    " where e.anho = "+str(ejercicio.anho)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.order_by"
-    print query
+    " where e.anho = "+str(ejercicio.anho)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.codigo_ordenado"
     presupuestos=execute_all_query(query)
-    for p in presupuestos:
-        print p[4]
+
     presupuestos_list=[]
 
     cuentas_list=[]
@@ -56,10 +51,14 @@ def presupuesto(request,tipo):
             aux.append(True)
             cuentas_list.append(aux)
 
+
     if request.method == 'POST':
+
         for c in presupuestos_list:
             for k in range(1,13):
                 monto=request.POST.get('cuenta-'+str(c[0])+'-'+str(k))
+                cambiar = request.POST.get('cambiar-' + str(c[0])+'-'+str(k),'')
+                print 'cambiaar: ' + str(cambiar)+'  monto: '+str(monto)
                 p=Presupuesto.objects.get(cuenta_id=c[0],mes=k,ejercicio_id=ejercicio.id)
                 p.monto=monto
                 p.save()
@@ -81,54 +80,115 @@ def esta_en_presupuesto_list(id,presupuesto_list=[]):
             return p
     return None
 
+
 def ejecucion_presupuestaria(request,tipo):
-    tipos = ['IN', 'EG']
-    if not tipos.__contains__(tipo):
+    if tipo != 'IN' and tipo != 'EG':
         tipo = 'IN'
-    vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('depth','codigo')
+    ejercicio=Ejercicio.objects.get(actual=True)
+    query_ejecutados="select c.id,c.cuenta, (extract(month from fecha) :: int) as mes, "\
+    " (case when c.tipo like 'IN' then sum(haber)-sum(debe) else sum(debe)-sum(haber) end) as saldo, "\
+    "  c.codigo from  asientos_contables_asientocontabledetalle ad "\
+    " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id "\
+    " join cuentas_cuenta c on c.id=ad.cuenta_id join ejercicios_ejercicio e on e.anho=extract(year from a.fecha) "\
+    " where e.actual is true and c.tipo = '"+str(tipo)+"' group by extract(month from a.fecha),c.cuenta,c.id,c.codigo, "\
+    " c.codigo_ordenado,c.tipo order by c.codigo_ordenado"
+    ejecutados=execute_all_query(query_ejecutados)
 
-    #Optimizar la consulta
-    cuentas_list2=[]
-    for cuenta in vector_cuentas:
-        aux=[cuenta.cuenta]
-        for i in range(0,12):
-            aux.append(randrange(101))
-        cuentas_list2.append(aux)
-    cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo', 'numchild')
-    ejercicio = Ejercicio.objects.get(actual=True)
-    query = "select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p" \
+    query_presupuestados = "select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p" \
             " join ejercicios_ejercicio e on e.id=p.ejercicio_id join cuentas_cuenta c on c.id=p.cuenta_id " \
-            " where e.anho = " + str(
-        ejercicio.anho) + " and c.tipo like '" + tipo + "' group by c.id, c.cuenta,c.codigo,p.mes order by c.order_by"
-    print query
-    presupuestos = execute_all_query(query)
-    for p in presupuestos:
-        print p[4]
-    presupuestos_list = []
+            " where e.anho = " + str(ejercicio.anho) + " and c.tipo like '" + tipo + "' group by c.id, c.cuenta,c.codigo,p.mes" \
+            " order by c.codigo_ordenado, mes"
+    presupuestados = execute_all_query(query_presupuestados)
 
-    cuentas_list = []
-    i = 0
 
-    while i < len(presupuestos):
-        aux = [presupuestos[i][0], presupuestos[i][1]]
+
+    presupuestados_list=[]
+    i=0
+    while i < len(presupuestados):
+        aux = [presupuestados[i][0], presupuestados[i][1]]
         for j in range(i, i + 12):
-            aux.append(str(presupuestos[j][3]))
-        aux.append(presupuestos[i][4])
-        presupuestos_list.append(aux)
+            aux.append(str(presupuestados[j][3]))
+        aux.append(presupuestados[i][4])
+        presupuestados_list.append(aux)
         i += 12
+    i=0
 
+    ejecutados_list=[]
+    while i<len(ejecutados):
+        aux=[ejecutados[i][0],ejecutados[i][1]]
+        for j in range(1,13):
+            existe=get_monto_from_ejecutados(ejecutados[i][0],j,ejecutados)
+            aux.append(existe)
+        aux.append(ejecutados[i][4])
+        ejecutados_list.append(aux)
+        i+=1
+    total_list=join_lists(presupuestados_list,ejecutados_list)
+
+
+    cuentas=Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
+    cuentas_list = []
     for c in cuentas:
-        existe = esta_en_presupuesto_list(c.id, presupuestos_list)
-        if existe != None:
-            existe.append(False)
-            cuentas_list.append(existe)
-        else:
-            aux = [c.id, c.cuenta]
-            for ii in range(1, 13):
+        existe=existe_en_lista(c.id,lista=total_list)
+        if existe == None:
+            aux=[c.id,c.cuenta]
+            for i in range(2,26):
                 aux.append('0.00')
             aux.append(c.codigo)
             aux.append(True)
+            aux.append('no')
             cuentas_list.append(aux)
+        else:
+            existe.append(False)
+            existe.append('si')
+            cuentas_list.append(existe)
+    sumar_padre(cuentas_list)
 
-    return render_to_response('balance/ejecucion_presupuestaria.html', {'vector_cuentas2':cuentas_list2,'vector_cuentas':cuentas_list,'tipo':tipo,'meses':MESES},
+
+    return render_to_response('balance/ejecucion_presupuestaria.html', {'vector_cuentas':cuentas_list,'tipo':tipo,'meses':MESES},
                               context_instance=RequestContext(request))
+
+def get_monto_from_ejecutados(id,mes,ejecutados=[]):
+    for i in range(len(ejecutados)):
+        if ejecutados[i][0] == id and ejecutados[i][2] == mes:
+            return ejecutados[i][3]
+    return 0.00
+
+def existe_en_lista(id,lista=[]):
+    for i in range(len(lista)):
+        if lista[i][0] == id:
+            return lista[i]
+    return None
+
+def join_lists(presupuestados,ejecutados):
+    lista=[]
+    for i in range(len(presupuestados)):
+        aux=[presupuestados[i][0],presupuestados[i][1]]
+        for j in range(2,len(presupuestados[0])-1):
+            valor=get_valor(ejecutados,presupuestados[i][0],j)
+            aux.append(valor)
+            aux.append(presupuestados[i][j])
+        aux.append(presupuestados[i][len(presupuestados[0])-1])
+        lista.append(aux)
+    return lista
+
+
+def get_valor(ejecutados,id,pos):
+    for i in range(len(ejecutados)):
+        if ejecutados[i][0] == id:
+            return  ejecutados[i][pos]
+    return '0.00'
+
+def sumar_padre(cuentas):
+    for cuenta in cuentas:
+            if cuenta[28] == 'si':
+                codigo = cuenta[26].split(".")
+                sumar(cuentas,cuenta,(".").join(codigo[0:len(codigo)-1]))
+
+def sumar(cuentas,cuenta,padre):
+    for c in cuentas:
+        if c[26] == padre:
+            for i in range(2, 26):
+                c[i] = round(float(c[i]) + float(cuenta[i]), 2)
+            if len(c[26])>1:
+                codigo = c[26].split(".")
+                sumar(cuentas,cuenta,(".").join(codigo[0:len(codigo) - 1]))

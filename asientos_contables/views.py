@@ -64,11 +64,13 @@ def nuevo(request):
         asiento.fecha = fecha
         asiento.comunidad = usuario_objeto.usuario.comunidad
         asiento.save()
-        for i in range(total_rows):
+
+        for i in range(0,total_rows):
             id_cuenta = request.POST.get('asientocontabledetalle_set-' + str(i) + '-cuenta', '')
             debe = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-debe', 0.00))
             haber = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-haber', 0.00))
             obs = request.POST.get('asientocontabledetalle_set-' + str(i) + '-observacion', '')
+            print 'obs: '+obs
             if id_cuenta != '':
                 id_cuenta=int(id_cuenta)
                 cuenta=Cuenta.objects.get(pk=id_cuenta)
@@ -82,7 +84,7 @@ def nuevo(request):
                     banco_id = request.POST.get('asientocontabledetalle_set-' + str(i) + '-banco', 0)
                     asiento_detalle.cuenta_bancaria_id=banco_id
                 asiento_detalle.save()
-                print 'id_cuenta: '+str(id_cuenta)+'  debe: '+str(debe)+'  haber:  '+str(haber)
+                print 'id_cuenta: '+str(id_cuenta)+'  debe: '+str(debe)+'  haber:  '+str(haber)+'  obs: '+str(obs)
                 if save == 'Grabar':
                     return HttpResponseRedirect('/asiento/listar/')
     return render_to_response('balance/nuevo_change_form.html', {'add':True,'bancos':bancos,'hoy':str(timezone_today().strftime('%d/%m/%Y'))},
@@ -382,7 +384,7 @@ def mayor_detallado_consolidado(request,tipo='AC'):
                               context_instance=RequestContext(request))
 
 
-def ver_mayor(request):
+def ver_mayor_detalle(request):
     comunidades=Comunidad.objects.all()
     paises=Pais.objects.all()
     if request.method == 'POST':

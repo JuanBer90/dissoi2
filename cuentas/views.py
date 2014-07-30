@@ -3,7 +3,7 @@
 from string import split
 from zope.interface.tests.test_declarations import test_that_we_dont_inherit_provides_optimizations
 from django.contrib import messages
-from django.db import connection
+from django.db import connection, models
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
@@ -137,17 +137,5 @@ def select_all(query):
     return cursor.fetchall()
 
 def prueba(request):
-    cuentas=Cuenta.objects.all().order_by('codigo')
-    for cuenta in cuentas:
-        str=cuenta.codigo.split('.')
-        aux=[]
-        for s in str:
-            if len(s) > 1:
-                str2=s.split()
-                aux.append(str2[0])
-                aux.append(str2[1])
-            else:
-                aux.append(s)
-        print aux
-
+    
     return render(request, 'admin/index.html')

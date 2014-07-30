@@ -42,7 +42,13 @@ class AsientoContableDetalle(models.Model):
         cotizacion = Cotizacion.objects.filter(pais=self.pais_id(),fecha=self.fecha())[0]
         return cotizacion.monto
     def haber_en_dolares(self):
-        return round(self.haber/self.cotizacion_del_dia(),2)
+        if self.cotizacion_del_dia() > 0:
+            return round(self.haber/self.cotizacion_del_dia(),2)
+        else:
+            return 0
     def debe_en_dolares(self):
-        return round(self.debe/self.cotizacion_del_dia(),2)
+        if self.cotizacion_del_dia() > 0:
+            return round(self.debe/self.cotizacion_del_dia(),2)
+        else:
+            return 0
 

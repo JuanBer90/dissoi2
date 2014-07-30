@@ -4,6 +4,7 @@
 {% load my_tags %}
 {% block extrahead %}
     <title>Presupuesto</title>
+
         {% bootstrap_stylesheet_tag %}
     {% bootstrap_stylesheet_tag "responsive" %}
     {% bootstrap_javascript_tag %}
@@ -23,7 +24,10 @@
     <form action="" method="post" onchange="calcular()">{% csrf_token %}
 
     <center>
-    <div class="pre-scrollable" style=" max-height: 450px; overflow-y:scroll;" >
+
+    <img id="loading" src="{{ STATIC_URL }}/img/loadgif_92x92.gif" style="position: fixed; display: none; left: 50%;top: 50%">
+
+    <div class="pre-scrollable" style=" max-height: 500px; overflow-y:scroll;" >
         <table class="table table-bordered table-condensed" id="myTable">
       <tr>
           <th>Cuenta</th>
@@ -47,15 +51,19 @@
                     </td>
 
                     {% else %}
-                         <td><input {% if presupuesto.15 %} readonly {% endif %} name="cuenta-{{presupuesto.0 }}-{{ forloop.counter|sub:2 }}" style="width: 80px; text-align: right"
-                                    type="number" step="0.01" value="{{ fila }}" min="0" ></td>
+                         <td><input {% if presupuesto.15 %} readonly {% else %} onchange="cambiar_valor({{ presupuesto.0 }},{{ forloop.counter|sub:2 }})" {% endif %} name="cuenta-{{presupuesto.0 }}-{{ forloop.counter|sub:2 }}" style="width: 80px; text-align: right"
+                                    type="number" step="0.01" value="{{ fila }}" min="0" >
+                         <input type="hidden" style="width: 50px" id="cambiar-{{ presupuesto.0 }}-{{ forloop.counter|sub:2 }}" value="" nombre="cambiar-{{ presupuesto.0 }}-{{ forloop.counter |sub:2}}">
+                         </td>
                     {% endif %}
                 {% endif %}
             {% endfor %}
         </tr>
+
         {% endfor %}
 
     </table>
+
     </div>
        </center>
     <div class="row-fluid">
@@ -65,14 +73,20 @@
 
 </div>
 <div class="pull-right">
-<input type="submit" value="Grabar y continuar editando" class="btn" name="_continue">
-<input type="submit" value="Grabar" class="btn btn-primary default" name="_save">
+<input type="submit" onclick="fin()" value="Grabar y continuar editando" class="btn" name="_continue">
+<input type="submit" onclick="fin()" value="Grabar" class="btn btn-primary default" name="_save">
 </div>
 
         </div>
     </div>
 </form>
  <script>
+ function fin(){
+     document.getElementById('loading').style.display='block'
+ }
+ function cambiar_valor(id,loop){
+    document.getElementById('cambiar-'+id.toString()+'-'+loop.toString()).value='true'
+ }
  function calcular(){
 
      var table=document.getElementById('myTable')

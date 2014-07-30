@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13cbfa3d-0d78-4c03-9382-f0138837c340" name="Default" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/balance/asiento_nuevo.html" />
+    <list default="true" id="13cbfa3d-0d78-4c03-9382-f0138837c340" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cotizaciones/admin.py" afterPath="$PROJECT_DIR$/cotizaciones/admin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/ejecucion_presupuestaria.html" afterPath="$PROJECT_DIR$/templates/balance/ejecucion_presupuestaria.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cotizaciones/forms.py" afterPath="$PROJECT_DIR$/cotizaciones/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asientos_contables/models.py" afterPath="$PROJECT_DIR$/asientos_contables/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cotizaciones/models.py" afterPath="$PROJECT_DIR$/cotizaciones/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cuentas/models.py" afterPath="$PROJECT_DIR$/cuentas/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" afterPath="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/balance/presupuesto.html" afterPath="$PROJECT_DIR$/templates/balance/presupuesto.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hijasdelacaridad/settings.py" afterPath="$PROJECT_DIR$/hijasdelacaridad/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hijasdelacaridad/urls.py" afterPath="$PROJECT_DIR$/hijasdelacaridad/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asientos_contables/views.py" afterPath="$PROJECT_DIR$/asientos_contables/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cuentas/views.py" afterPath="$PROJECT_DIR$/cuentas/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presupuestos/views.py" afterPath="$PROJECT_DIR$/presupuestos/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hijasdelacaridad.iws" />
@@ -27,17 +39,89 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/presupuestos/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="158" column="27" selection-start="6157" selection-end="6157" vertical-scroll-proportion="0.0" vertical-offset="2370" max-vertical-offset="3000">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajax.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/asientos_contables/ajax.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="45" selection-start="547" selection-end="547" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="495">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/asientos_contables/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="56" selection-start="3089" selection-end="3089" vertical-scroll-proportion="-10.3125" vertical-offset="510" max-vertical-offset="5865">
+            <state line="244" column="52" selection-start="10072" selection-end="10072" vertical-scroll-proportion="0.0" vertical-offset="3660" max-vertical-offset="6225">
               <folding>
-                <marker date="1405961918379" expanded="true" signature="11932:12279" placeholder="select disti..cuentas_cuenta..." />
-                <marker date="1405961918379" expanded="true" signature="13460:13876" placeholder="select disti..cuentas_cuenta..." />
-                <marker date="1405961918379" expanded="true" signature="13963:14374" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
-                <marker date="1405961918379" expanded="true" signature="15255:15662" placeholder="select disti..*..." />
-                <marker date="1405961918379" expanded="true" signature="15279:15341" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
-                <marker date="1405961918379" expanded="true" signature="15754:16065" placeholder="select disti..cuentas_cuenta..." />
+                <marker date="1406035068218" expanded="true" signature="11984:12331" placeholder="select disti..cuentas_cuenta..." />
+                <marker date="1406035068218" expanded="true" signature="13512:13928" placeholder="select disti..cuentas_cuenta..." />
+                <marker date="1406035068218" expanded="true" signature="14015:14426" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
+                <marker date="1406035068218" expanded="true" signature="15307:15714" placeholder="select disti..*..." />
+                <marker date="1406035068218" expanded="true" signature="15331:15393" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
+                <marker date="1406035068218" expanded="true" signature="15806:16117" placeholder="select disti..cuentas_cuenta..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/asientos_contables/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="0" selection-start="1821" selection-end="1821" vertical-scroll-proportion="0.0" vertical-offset="735" max-vertical-offset="900">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wsgi.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hijasdelacaridad/wsgi.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="0" selection-start="413" selection-end="413" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="315">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hijasdelacaridad/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="130" column="77" selection-start="3819" selection-end="3881" vertical-scroll-proportion="0.0" vertical-offset="1950" max-vertical-offset="2115">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cuentas/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="0" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hijasdelacaridad/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="21" selection-start="1684" selection-end="1684" vertical-scroll-proportion="0.7427536" vertical-offset="40" max-vertical-offset="615">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="asiento_nuevo.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/balance/asiento_nuevo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="699" column="84" selection-start="30544" selection-end="30616" vertical-scroll-proportion="0.0" vertical-offset="10391" max-vertical-offset="12165">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -45,53 +129,7 @@
       <file leaf-file-name="nuevo_change_form.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/balance/nuevo_change_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="24" selection-start="6649" selection-end="6649" vertical-scroll-proportion="-2.9464285" vertical-offset="2250" max-vertical-offset="8370">
-              <folding>
-                <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#2;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#4;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#2;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#4;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cuentas/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="167" selection-end="202" vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="2370">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cuentas/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="13" selection-start="425" selection-end="425" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="globales.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hijasdelacaridad/globales.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="373">
+            <state line="11" column="0" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="8370">
               <folding />
             </state>
           </provider>
@@ -110,7 +148,6 @@
         <option value="JuanBer90" />
       </list>
     </option>
-    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -127,7 +164,6 @@
         <option value="$PROJECT_DIR$/asientos_contables/__init__.py" />
         <option value="$PROJECT_DIR$/hijasdelacaridad/__init__.py" />
         <option value="$PROJECT_DIR$/hijasdelacaridad/ajax.py" />
-        <option value="$PROJECT_DIR$/hijasdelacaridad/settings.py" />
         <option value="$PROJECT_DIR$/templates/balance/asiento_nuevo.html" />
         <option value="$PROJECT_DIR$/templates/asientos/asientos_list.html" />
         <option value="$PROJECT_DIR$/templates/asientos/nuevo_asientos_list.html" />
@@ -146,28 +182,32 @@
         <option value="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base.html" />
         <option value="$PROJECT_DIR$/asientos_contables/ajax.py" />
         <option value="$PROJECT_DIR$/templates/balance/ver_balance.html" />
-        <option value="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index.html" />
         <option value="$PROJECT_DIR$/templates/balance/mayores.html" />
         <option value="$PROJECT_DIR$/templates/balance/balance.html" />
-        <option value="$PROJECT_DIR$/cuentas/views.py" />
-        <option value="$PROJECT_DIR$/presupuestos/views.py" />
-        <option value="$PROJECT_DIR$/templates/balance/presupuesto.html" />
-        <option value="$PROJECT_DIR$/templates/balance/ejecucion_presupuestaria.html" />
         <option value="$PROJECT_DIR$/templates/balance/ver_mayor.html" />
         <option value="$PROJECT_DIR$/cuentas/admin.py" />
-        <option value="$PROJECT_DIR$/cuentas/models.py" />
-        <option value="$PROJECT_DIR$/hijasdelacaridad/urls.py" />
-        <option value="$PROJECT_DIR$/asientos_contables/models.py" />
         <option value="$PROJECT_DIR$/templates/balance/mayor_detallado.html" />
+        <option value="$PROJECT_DIR$/hijasdelacaridad/hola.py" />
         <option value="$PROJECT_DIR$/templates/balance/nuevo_change_form.html" />
+        <option value="$PROJECT_DIR$/cuentas/models.py" />
+        <option value="$PROJECT_DIR$/templates/balance/presupuesto.html" />
+        <option value="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index.html" />
         <option value="$PROJECT_DIR$/asientos_contables/views.py" />
+        <option value="$PROJECT_DIR$/hijasdelacaridad/urls.py" />
+        <option value="$PROJECT_DIR$/cuentas/views.py" />
+        <option value="$PROJECT_DIR$/cotizaciones/models.py" />
+        <option value="$PROJECT_DIR$/cotizaciones/admin.py" />
+        <option value="$PROJECT_DIR$/cotizaciones/forms.py" />
+        <option value="$PROJECT_DIR$/presupuestos/views.py" />
+        <option value="$PROJECT_DIR$/templates/balance/ejecucion_presupuestaria.html" />
+        <option value="$PROJECT_DIR$/hijasdelacaridad/settings.py" />
+        <option value="$PROJECT_DIR$/asientos_contables/models.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-3" />
-    <option name="width" value="1372" />
-    <option name="height" value="745" />
+    <option name="width" value="1366" />
+    <option name="height" value="743" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -204,104 +244,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="balance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="presupuestos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cuentas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hijasdelacaridad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dissoi2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="asientos_contables" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -312,7 +254,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ProjectX" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
@@ -338,11 +280,11 @@
       <recent name="$PROJECT_DIR$/templates/asientos" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/django_admin_bootstrapped/static/img" />
       <recent name="$PROJECT_DIR$/templates/admin" />
       <recent name="$PROJECT_DIR$/django_admin_bootstrapped/templates/admin" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/hijasdelacaridad" />
     </key>
   </component>
   <component name="RunManager" selected="Django server.hijasdelacaridad">
@@ -430,7 +372,27 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hijasdelacaridad" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -456,27 +418,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="hijasdelacaridad" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -601,34 +543,42 @@
       <created>1405963124832</created>
       <updated>1405963124833</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;">
+      <created>1405963174513</created>
+      <updated>1405963174513</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;">
+      <created>1405963667700</created>
+      <updated>1405963667700</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="0" width="1372" height="745" extended-state="6" />
+    <frame x="0" y="0" width="1366" height="743" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60301507" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32612312" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2545317" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3919598" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3919598" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6426282" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327787" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60301507" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -641,17 +591,17 @@
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3919598" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60301507" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24320242" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39363486" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21827795" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.590985" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -671,65 +621,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;hijasdelacaridad/settings.py&#10;&#9;hijasdelacaridad/settings.pyc&#10;&#9;hijasdelacaridad/urls.py&#10;&#9;hijasdelacaridad/urls.pyc&#10;" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/dajaxice/templatetags/dajaxice_templatetags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presupuestos/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="351" />
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/db/models/sql/datastructures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="8" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.7154471" vertical-offset="501" max-vertical-offset="1020" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bootstrap/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="34020" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1630" selection-end="1630" vertical-scroll-proportion="0.0" vertical-offset="735" max-vertical-offset="2115">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/admin/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="369" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/change_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="0" selection-start="0" selection-end="3060" vertical-scroll-proportion="0.59539473" vertical-offset="673" max-vertical-offset="1305">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/asientos/asientos_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="4" selection-start="4012" selection-end="4014" vertical-scroll-proportion="0.0" vertical-offset="2193" max-vertical-offset="3420" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/asientos/nuevo_asientos_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="278" column="50" selection-start="8499" selection-end="8499" vertical-scroll-proportion="0.60596025" vertical-offset="3987" max-vertical-offset="4995" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ejercicios/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/django/db/models/manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="209" column="8" selection-start="7612" selection-end="7612" vertical-scroll-proportion="0.33243242" vertical-offset="2922" max-vertical-offset="4245" />
@@ -740,11 +636,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="348" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/presupuestos/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="19" selection-start="234" selection-end="234" vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="510" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ejercicios/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="0" selection-start="131" selection-end="131" vertical-scroll-proportion="0.25862068" vertical-offset="0" max-vertical-offset="348" />
@@ -752,19 +643,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cuentas/templatetags/my_tags.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="37" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="855">
-          <folding />
-        </state>
+        <state line="45" column="37" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="855" />
       </provider>
     </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/messages/context_processors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="4" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/asiento_nuevo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="56" vertical-scroll-proportion="485.58334" vertical-offset="11654" max-vertical-offset="12165" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/templatetags/bootstrapped_goodies_tags.py">
@@ -774,11 +658,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bootstrap_toolkit/templatetags/bootstrap_toolkit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="4" selection-start="5464" selection-end="5464" vertical-scroll-proportion="0.33211678" vertical-offset="2848" max-vertical-offset="5700">
-          <folding>
-            <element signature="e#0#9#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="202" column="4" selection-start="5464" selection-end="5464" vertical-scroll-proportion="0.33211678" vertical-offset="2848" max-vertical-offset="5700" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ejercicios/admin.py">
@@ -788,9 +668,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/balance/mayor_general.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="110" selection-start="1152" selection-end="1152" vertical-scroll-proportion="-5.1666665" vertical-offset="176" max-vertical-offset="840">
-          <folding />
-        </state>
+        <state line="20" column="110" selection-start="1152" selection-end="1152" vertical-scroll-proportion="-5.1666665" vertical-offset="176" max-vertical-offset="840" />
       </provider>
     </entry>
     <entry file="file:///usr/lib/python2.7/random.py">
@@ -810,23 +688,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index_old.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.08442777" vertical-offset="630" max-vertical-offset="1590">
-          <folding />
-        </state>
+        <state line="45" column="0" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.08442777" vertical-offset="630" max-vertical-offset="1590" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="16" selection-start="803" selection-end="803" vertical-scroll-proportion="-0.9418386" vertical-offset="847" max-vertical-offset="1380">
-          <folding />
-        </state>
+        <state line="23" column="16" selection-start="803" selection-end="803" vertical-scroll-proportion="-0.9418386" vertical-offset="847" max-vertical-offset="1380" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="18" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.9412916" vertical-offset="59" max-vertical-offset="1275">
-          <folding />
-        </state>
+        <state line="36" column="18" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.9412916" vertical-offset="59" max-vertical-offset="1275" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/base_site.html">
@@ -836,9 +708,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="80" selection-start="3666" selection-end="3666" vertical-scroll-proportion="0.53846157" vertical-offset="926" max-vertical-offset="2685">
-          <folding />
-        </state>
+        <state line="79" column="80" selection-start="3666" selection-end="3666" vertical-scroll-proportion="0.53846157" vertical-offset="926" max-vertical-offset="2685" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/base_site.html">
@@ -846,16 +716,9 @@
         <state line="9" column="36" selection-start="404" selection-end="404" vertical-scroll-proportion="0.2631579" vertical-offset="0" max-vertical-offset="513" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/asientos_contables/ajax.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="884" selection-end="884" vertical-scroll-proportion="0.76407504" vertical-offset="0" max-vertical-offset="375" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/balance/ver_balance.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="0" selection-start="3877" selection-end="3877" vertical-scroll-proportion="1.4970238" vertical-offset="997" max-vertical-offset="1740">
-          <folding />
-        </state>
+        <state line="100" column="0" selection-start="3877" selection-end="3877" vertical-scroll-proportion="1.4970238" vertical-offset="997" max-vertical-offset="1740" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/bootstrap3/templates/admin/app_index.html">
@@ -863,18 +726,9 @@
         <state line="0" column="25" selection-start="25" selection-end="25" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="420" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="79" selection-start="2305" selection-end="2305" vertical-scroll-proportion="0.33333334" vertical-offset="626" max-vertical-offset="2580">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/balance/mayores.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="31" selection-start="1207" selection-end="1207" vertical-scroll-proportion="0.1444653" vertical-offset="283" max-vertical-offset="840">
-          <folding />
-        </state>
+        <state line="24" column="31" selection-start="1207" selection-end="1207" vertical-scroll-proportion="0.1444653" vertical-offset="283" max-vertical-offset="840" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/asientos_contables/__init__.py">
@@ -884,145 +738,172 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/balance/balance.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="44" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.0" vertical-offset="279" max-vertical-offset="825">
-          <folding />
-        </state>
+        <state line="42" column="44" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.0" vertical-offset="279" max-vertical-offset="825" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharm30/system/python_stubs/-1247972723/__builtin__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3316" column="8" selection-start="113888" selection-end="113888" vertical-scroll-proportion="0.0" vertical-offset="49636" max-vertical-offset="76140">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/ejecucion_presupuestaria.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="27" selection-start="2085" selection-end="2085" vertical-scroll-proportion="0.8522167" vertical-offset="472" max-vertical-offset="1470">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#th#1;n#tr#0;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#th#0;n#tr#1;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#th#1;n#tr#1;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#2;n#tr#2;n#table#0;n#div#0;n#center#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/presupuesto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="213" column="0" selection-start="6348" selection-end="7378" vertical-scroll-proportion="0.57894737" vertical-offset="3052" max-vertical-offset="3360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presupuestos/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="47" selection-start="2810" selection-end="2810" vertical-scroll-proportion="0.6037152" vertical-offset="915" max-vertical-offset="2100">
-          <folding>
-            <element signature="e#42#70#0" expanded="true" />
-            <marker date="1405937380822" expanded="true" signature="-1:-1" placeholder="select c.id,..presupuestos_presupuesto..." />
-            <marker date="1405937380822" expanded="true" signature="-1:-1" placeholder="select c.id,..presupuestos_presupuesto..." />
-          </folding>
-        </state>
+        <state line="3316" column="8" selection-start="113888" selection-end="113888" vertical-scroll-proportion="0.0" vertical-offset="49636" max-vertical-offset="76140" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/balance/ver_mayor.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="0" selection-start="3850" selection-end="3850" vertical-scroll-proportion="-11.208333" vertical-offset="1171" max-vertical-offset="1740">
+        <state line="96" column="0" selection-start="3850" selection-end="3850" vertical-scroll-proportion="-11.208333" vertical-offset="1171" max-vertical-offset="1740" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/balance/mayor_detallado.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="20" selection-start="2641" selection-end="2641" vertical-scroll-proportion="-18.708334" vertical-offset="361" max-vertical-offset="1155" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/globales.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="29" selection-start="63" selection-end="63" vertical-scroll-proportion="0.08042896" vertical-offset="0" max-vertical-offset="373" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presupuestos/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="6" selection-start="383" selection-end="383" vertical-scroll-proportion="0.4473684" vertical-offset="0" max-vertical-offset="570" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/balance/presupuesto.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="131" column="0" selection-start="5093" selection-end="5093" vertical-scroll-proportion="0.017612524" vertical-offset="1956" max-vertical-offset="3570" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_admin_bootstrapped/templates/admin/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="61" selection-start="3703" selection-end="3703" vertical-scroll-proportion="-0.625" vertical-offset="1095" max-vertical-offset="2580" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/db/models/fields/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="942" column="8" selection-start="36413" selection-end="36413" vertical-scroll-proportion="0.0477707" vertical-offset="13740" max-vertical-offset="21075" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cuentas/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="4" selection-start="8367" selection-end="8367" vertical-scroll-proportion="0.63917524" vertical-offset="1899" max-vertical-offset="2190" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/forms/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="471" column="6" selection-start="19728" selection-end="19728" vertical-scroll-proportion="0.91071427" vertical-offset="6534" max-vertical-offset="18330" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cotizaciones/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="330" selection-end="330" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cotizaciones/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="7" selection-start="382" selection-end="382" vertical-scroll-proportion="0.28947368" vertical-offset="0" max-vertical-offset="570" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cotizaciones/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="35" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cuentas/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1125" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/balance/ejecucion_presupuestaria.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="65" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.9096386" vertical-offset="253" max-vertical-offset="2325" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presupuestos/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="158" column="27" selection-start="6157" selection-end="6157" vertical-scroll-proportion="0.0" vertical-offset="1888" max-vertical-offset="2925">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="413" selection-end="413" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/utils/functional.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="242" column="0" selection-start="8135" selection-end="8135" vertical-scroll-proportion="0.027372263" vertical-offset="3525" max-vertical-offset="6450" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/conf/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="24" selection-start="691" selection-end="691" vertical-scroll-proportion="0.19160584" vertical-offset="90" max-vertical-offset="2895" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/dajaxice/templatetags/dajaxice_templatetags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="42" selection-start="221" selection-end="221" vertical-scroll-proportion="0.1149635" vertical-offset="42" max-vertical-offset="615" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/balance/nuevo_change_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="8370">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asientos_contables/ajax.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="45" selection-start="547" selection-end="547" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/balance/asiento_nuevo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="699" column="84" selection-start="30544" selection-end="30616" vertical-scroll-proportion="0.0" vertical-offset="10391" max-vertical-offset="12165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="130" column="77" selection-start="3819" selection-end="3881" vertical-scroll-proportion="0.0" vertical-offset="1542" max-vertical-offset="2115">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cuentas/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+        <state line="17" column="0" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asientos_contables/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="244" column="52" selection-start="10072" selection-end="10072" vertical-scroll-proportion="0.0" vertical-offset="3285" max-vertical-offset="5895">
+          <folding>
+            <marker date="1406035068218" expanded="true" signature="11984:12331" placeholder="select disti..cuentas_cuenta..." />
+            <marker date="1406035068218" expanded="true" signature="13512:13928" placeholder="select disti..cuentas_cuenta..." />
+            <marker date="1406035068218" expanded="true" signature="14015:14426" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
+            <marker date="1406035068218" expanded="true" signature="15307:15714" placeholder="select disti..*..." />
+            <marker date="1406035068218" expanded="true" signature="15331:15393" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
+            <marker date="1406035068218" expanded="true" signature="15806:16117" placeholder="select disti..cuentas_cuenta..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/asientos_contables/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="61" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.0" vertical-offset="43" max-vertical-offset="735">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/mayor_detallado.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="20" selection-start="2641" selection-end="2641" vertical-scroll-proportion="-18.708334" vertical-offset="361" max-vertical-offset="1155">
+        <state line="49" column="0" selection-start="1821" selection-end="1821" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="825">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hijasdelacaridad/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="46" selection-start="1710" selection-end="1710" vertical-scroll-proportion="0.7105263" vertical-offset="45" max-vertical-offset="615">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/balance/nuevo_change_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="24" selection-start="6649" selection-end="6649" vertical-scroll-proportion="-2.9464285" vertical-offset="2250" max-vertical-offset="8370">
-          <folding>
-            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#2;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#4;n#tr#2;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#span#0;n#td#1;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#2;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#4;n#tr#3;n#tbody#0;n#table#0;n#fieldset#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/asientos_contables/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="56" selection-start="3089" selection-end="3089" vertical-scroll-proportion="-10.3125" vertical-offset="510" max-vertical-offset="5865">
-          <folding>
-            <marker date="1405961918379" expanded="true" signature="11932:12279" placeholder="select disti..cuentas_cuenta..." />
-            <marker date="1405961918379" expanded="true" signature="13460:13876" placeholder="select disti..cuentas_cuenta..." />
-            <marker date="1405961918379" expanded="true" signature="13963:14374" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
-            <marker date="1405961918379" expanded="true" signature="15255:15662" placeholder="select disti..*..." />
-            <marker date="1405961918379" expanded="true" signature="15279:15341" placeholder="select ad.* ..asientos_contables_asientocontabledetalle..." />
-            <marker date="1405961918379" expanded="true" signature="15754:16065" placeholder="select disti..cuentas_cuenta..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cuentas/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="167" selection-end="202" vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="2370">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cuentas/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="13" selection-start="425" selection-end="425" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hijasdelacaridad/globales.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="373">
+        <state line="34" column="21" selection-start="1684" selection-end="1684" vertical-scroll-proportion="0.7427536" vertical-offset="40" max-vertical-offset="615">
           <folding />
         </state>
       </provider>
