@@ -8,13 +8,18 @@ from comunidades.models import Pais, Comunidad
 from cotizaciones.models import Cotizacion
 from cuentas.models import Cuenta
 
-
-
 @dajaxice_register
 def args_example(request, id,i):
     id=int(id)
     cuenta=Cuenta.objects.get(pk=id)
-    return simplejson.dumps({'tipo':cuenta.tipo,'id':str(id),'i':i})
+    return simplejson.dumps({'debe':str(cuenta.permiso_debe),'haber':str(cuenta.permiso_haber),'id':str(id),'i':i})
+
+@dajaxice_register
+def permisos(request, id):
+    id=int(id)
+    cuenta=Cuenta.objects.get(pk=id)
+    return simplejson.dumps({'permiso_debe':str(cuenta.permiso_debe),
+                             'permiso_haber':str(cuenta.permiso_haber),'id':str(cuenta.id)})
 
 @dajaxice_register
 def existe_cambio(request,fecha):
@@ -25,3 +30,4 @@ def existe_cambio(request,fecha):
     if (cantidad == 0):
          existe='false'
     return simplejson.dumps({'existe':existe})
+

@@ -87,7 +87,12 @@ def nuevo(request):
                 print 'id_cuenta: '+str(id_cuenta)+'  debe: '+str(debe)+'  haber:  '+str(haber)+'  obs: '+str(obs)
                 if save == 'Grabar':
                     return HttpResponseRedirect('/asiento/listar/')
-    return render_to_response('balance/nuevo_change_form.html', {'add':True,'bancos':bancos,'hoy':str(timezone_today().strftime('%d/%m/%Y'))},
+    if request.user.is_superuser:
+        return render_to_response('balance/admin_change_form.html',
+                                  {'add': True, 'bancos': bancos, 'hoy': str(timezone_today().strftime('%d/%m/%Y'))},
+                                  context_instance=RequestContext(request))
+    else:
+        return render_to_response('balance/nuevo_change_form.html', {'add':True,'bancos':bancos,'hoy':str(timezone_today().strftime('%d/%m/%Y'))},
                               context_instance=RequestContext(request))
 
 def listar(request):
@@ -240,11 +245,14 @@ def mayor_general(request,tipo='AC'):
         if cuenta.numchild == 0:
             cuenta_id = cuenta.id
             asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
+
             for asiento in asientos:
                 if asiento.anho() == anho:
+                    print 'debe: ' + str(asiento.cotizacion_del_dia())
+                     #+ '   asfdasdf ' + str(asiento.debe_en_dolares())
                     cuenta.debe += asiento.debe_en_dolares()
                     cuenta.haber += asiento.haber_en_dolares()
-                    print 'debe: '+str(asiento.debe)+'   asfdasdf '+str(asiento.debe_en_dolares())
+
             cuenta.cargado = True
             cuenta.debe = round(cuenta.debe,2)
             cuenta.haber = round(cuenta.haber,2)
@@ -285,6 +293,7 @@ def mayor_general(request,tipo='AC'):
     return render_to_response('balance/mayor_general.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
 
 def mayor_detallado_comunidad(request,id,tipo='AC'):
+    print 'asdfadsfasdfaasdfasdfasdfasdfasdfa'
     tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
     if not tipos.__contains__(tipo):
         tipo = 'AC'
@@ -305,7 +314,7 @@ def mayor_detallado_comunidad(request,id,tipo='AC'):
                 debe+=asiento.debe
                 haber+=asiento.haber
         cuentas.append([id_cuenta,cuenta,debe-haber,asiento.cuenta.codigo])
-    url='/mayor/detalle/comunidad/'+str(id)+'/'
+    url='/mayor_detalle_comunidad/'+str(id)+'/'
     return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'cuentas':cuentas, 'tipo': tipo},
                               context_instance=RequestContext(request))
 
@@ -345,7 +354,7 @@ def mayor_detallado_pais(request,id,tipo='AC'):
                 debe+=asiento.debe
                 haber+=asiento.haber
         cuentas.append([id_cuenta,cuenta,debe-haber,asiento.cuenta.codigo])
-    url = '/mayor/detalle/pais/' + str(id) + '/'
+    url = '/mayor_detalle_pais/' + str(id) + '/'
     return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'cuentas':cuentas, 'tipo': tipo},
                               context_instance=RequestContext(request))
 
@@ -377,8 +386,9 @@ def mayor_detallado_consolidado(request,tipo='AC'):
                 debe += asiento.debe_en_dolares()
                 haber += asiento.haber_en_dolares()
         cuentas.append([id_cuenta, cuenta, debe - haber, asiento.cuenta.codigo])
-
-    url = '/mayor/detalle/consolidado/'
+    print query_cuentas
+    print cuentas
+    url = '/mayor_detalle_consolidado/'
     return render_to_response('balance/mayor_detallado.html',
                               {'asientos': asientos, 'url': url, 'cuentas': cuentas, 'tipo': tipo,'consolidado':'true'},
                               context_instance=RequestContext(request))
@@ -395,15 +405,15 @@ def ver_mayor_detalle(request):
             if id_pais == 0:
                 messages.error(request, 'Debe Seleccionar un pais!')
             else:
-                return HttpResponseRedirect('/mayor/detalle/pais/'+str(id_pais)+'/AC')
+                return HttpResponseRedirect('/mayor_detalle_pais/'+str(id_pais)+'/AC')
         elif tipo == 'comunidad':
             id_comunidad = int(request.POST.get('comunidad', 0))
             if id_comunidad == 0:
                 messages.error(request, 'Debe Seleccionar una comunidad!')
             else:
-                return HttpResponseRedirect('/mayor/detalle/comunidad/' + str(id_comunidad)+'/AC')
+                return HttpResponseRedirect('/mayor_detalle_comunidad/' + str(id_comunidad)+'/AC')
         else:
-            return HttpResponseRedirect('/mayor/detalle/consolidado/')
+            return HttpResponseRedirect('/mayor_detalle_consolidado/')
     return render_to_response('balance/ver_mayor.html',
                               {'comunidades':comunidades,'paises':paises},
                               context_instance=RequestContext(request))

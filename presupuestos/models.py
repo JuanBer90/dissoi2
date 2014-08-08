@@ -1,4 +1,5 @@
 from django.db import models
+from comunidades.models import Comunidad
 from ejercicios.models import Ejercicio
 from cuentas.models import Cuenta
 
@@ -20,11 +21,9 @@ MESES = (
 class Presupuesto(models.Model):
     ejercicio = models.ForeignKey(Ejercicio)
     mes = models.SmallIntegerField(choices=MESES)
+    comunidad=models.ForeignKey(Comunidad)
     cuenta = models.ForeignKey(Cuenta)
     monto = models.DecimalField(max_digits=22, default=0, decimal_places=2)
 
-    
-
-    
     
 # Create your models here.

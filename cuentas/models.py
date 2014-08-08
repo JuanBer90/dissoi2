@@ -14,10 +14,13 @@ class Cuenta(MP_Node):
     tipo = models.CharField(max_length=2, choices=TIPOS_DE_CUENTA)
     codigo = models.CharField(max_length=30)
     codigo_ordenado = models.BigIntegerField(editable=False)
+    permiso_debe=models.BooleanField(default=False)
+    permiso_haber = models.BooleanField(default=False)
     
     debe = 0
     haber = 0
     cargado = False
+
     
     node_order_by = ['cuenta']
 

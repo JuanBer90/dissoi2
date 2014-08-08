@@ -1,3 +1,4 @@
+from _testcapi import traceback_print
 from django.db import models
 from comunidades.models import Comunidad, Pais
 from cuentas.models import Cuenta
@@ -24,8 +25,9 @@ class AsientoContableDetalle(models.Model):
     cuenta = models.ForeignKey(Cuenta)
     debe = models.DecimalField(max_digits=22,default=0,decimal_places=2)
     haber = models.DecimalField(max_digits=22, default=0, decimal_places=2)
-    cuenta_bancaria=models.ForeignKey(CuentaBancaria,null=True)
+    cuenta_bancaria=models.ForeignKey(CuentaBancaria,null=True,blank=True)
     observacion = models.CharField(max_length=100, null=True)
+
 
     def comunidad_id(self):
         asiento = AsientoContable.objects.get(id=self.asiento_contable.id)
@@ -39,16 +41,26 @@ class AsientoContableDetalle(models.Model):
     def anho(self):
         return self.fecha().year
     def cotizacion_del_dia(self):
-        cotizacion = Cotizacion.objects.filter(pais=self.pais_id(),fecha=self.fecha())[0]
-        return cotizacion.monto
+        if Cotizacion.objects.filter(pais=self.pais_id(),fecha=self.fecha()).exists():
+            cotizacion=Cotizacion.objects.filter(pais=self.pais_id(), fecha=self.fecha())[0]
+            return cotizacion.monto
+        else:
+            return 0
     def haber_en_dolares(self):
         if self.cotizacion_del_dia() > 0:
             return round(self.haber/self.cotizacion_del_dia(),2)
         else:
-            return 0
+            #si en el dia no existe una cotizacion se retorna 1 para que se pueda realizar la operacion
+            return 1
     def debe_en_dolares(self):
         if self.cotizacion_del_dia() > 0:
             return round(self.debe/self.cotizacion_del_dia(),2)
         else:
-            return 0
+            #si en el dia no existe una cotizacion se retorna 1 para que se pueda realizar la operacion
+            return 1
 
+    def saldo(self):
+        return self.debe - self.haber
+
+    def saldo_en_dolares(self):
+        return self.debe_en_dolares() - self.haber_en_dolares()

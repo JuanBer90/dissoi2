@@ -27,6 +27,13 @@ def div(value, arg):
     "Divides the value by the arg"
     return int(value) / int(arg)
 
+def saldo_anterior(value, index):
+    saldo=value[index].saldo()
+    while index > 0 and value[index-1].cuenta_id == value[index].cuenta_id:
+         saldo+=value[index-1].saldo()
+         index -= 1
+    return saldo
+
 def espacios(value):
     string="text-indent: "
     total=0
@@ -42,11 +49,10 @@ class BancoId(Node):
 def banco_codigo(parser, token):
     return BancoId()
 
-
+register.filter('saldo_anterior', saldo_anterior)
 register.filter('espacios', espacios)
 register.filter('mult', mult)
 register.filter('sub', sub)
 register.filter('sum', sum)
 register.filter('div', div)
 register.tag('banco_codigo',banco_codigo)
-

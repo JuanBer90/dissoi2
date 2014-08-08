@@ -11,4 +11,6 @@ class CuentaBancaria(models.Model):
     class Meta:
         verbose_name_plural = "Cuentas bancarias"
 
+    def __unicode__(self):
+        return self.cuenta_bancaria+' - '+self.nro_de_cuenta
 # Create your models here.

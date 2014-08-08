@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from string import split
-from zope.interface.tests.test_declarations import test_that_we_dont_inherit_provides_optimizations
+
 from django.contrib import messages
 from django.db import connection, models
 from django.db.models.query_utils import Q
@@ -128,7 +128,6 @@ def balance_general(request):
             for j in range(0, len(cuentas)):
                 suma += cuentas[j][i]
             total.append(suma)
-
     return render(request, 'balance/balance.html', {'TIPOS_DE_CUENTA': TIPOS_DE_CUENTA,'total':total,'cuentas':cuentas,'titulo':'Balance Consolidado'})
 
 def select_all(query):
@@ -139,3 +138,27 @@ def select_all(query):
 def prueba(request):
     
     return render(request, 'admin/index.html')
+
+def asignar_permiso(request,tipo):
+    if not ['AC','PA','PN','IN','EG'].__contains__(tipo):
+        tipo='AC'
+    cuentas=Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
+    if request.method == 'POST':
+        for cuenta in cuentas:
+            permiso_debe=request.POST.get('debe-'+str(cuenta.id),False)
+            permiso_haber=request.POST.get('haber-'+str(cuenta.id),False)
+            print 'debe: '+str(permiso_debe)+'    haber: '+str(permiso_haber)
+            if permiso_debe != False:
+                cuenta.permiso_debe=True
+            else:
+                cuenta.permiso_debe=False
+            if permiso_haber != False:
+                cuenta.permiso_haber=True
+            else:
+                cuenta.permiso_haber=False
+            cuenta.save()
+        save_=request.POST.get('_save','')
+        if save_ != '':
+            return HttpResponseRedirect('/admin')
+    return render_to_response('balance/cuentas_permiso.html', {'vector_cuentas': cuentas, 'tipo': tipo},
+                              context_instance=RequestContext(request))
