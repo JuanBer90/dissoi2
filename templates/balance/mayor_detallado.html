@@ -26,8 +26,11 @@
       <table class="table-bordered table-striped">
 
        <tr><th class="navbar-inner "><p style="font-size: 17px">Fecha</p></th><th class="navbar-inner">
-           <p style="font-size: 17px">Debe</p></th><th class="navbar-inner"><p style="font-size: 17px">Haber</p></th>
-           <th class="navbar-inner " style="width: 200px">Descripci&oacute;n</th></tr>
+           <p style="font-size: 17px">Debe</p></th>
+           <th class="navbar-inner"><p style="font-size: 17px">Haber</p></th>
+           <th class="navbar-inner"><p style="font-size: 17px">Saldo</p></th>
+           <th class="navbar-inner " style="width: 200px">Concepto</th></tr>
+
         {% for c in asientos %}
             {% if id == c.cuenta_id %}
             <tr><td style="width: 300px"><p style="font-size: 17px; ">
@@ -39,13 +42,33 @@
                         {% else %}
                         {{ c.debe }}
                         {% endif %}</p></td>
-                <td style="width: 100px; text-align: right"><p style="font-size: 17px; margin-right: 10px">
+                <td style="width: 100px; text-align: right">
+                    <p style="font-size: 17px; margin-right: 10px">
                       {% if consolidado == 'true' %}
                         {{ c.haber_en_dolares }}
                         {% else %}
                         {{ c.haber }}
                         {% endif %}
-               </p></td><td><p style="margin-right: 10px">
+               </p></td>
+                <td style="width: 100px; text-align: right">
+
+                      {% if consolidado == 'true' %}
+
+                            <p style="font-size: 17px; margin-right: 10px; ">
+                         {{ c.saldo_en_dolares }}
+                        {% else %}
+                                 <p style="font-size: 17px; margin-right: 10px;" >
+
+                          {% if forloop.counter0 > 0 %}
+                              {{ asientos|saldo_anterior:forloop.counter0 }}
+                            {% else %}
+                              {{ c.saldo }}
+                          {% endif %}
+
+                        {% endif %}
+               </p>
+                </td>
+                <td><p style="margin-right: 10px">
                     {% if c.observacion == None %}
                     Sin Observaci&oacute;n
                     {% else %}

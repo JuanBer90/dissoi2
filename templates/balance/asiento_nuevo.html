@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es"><head>
     {% load my_tags %}
     {% load dajaxice_templatetags %}
-    <title>Django administration | Sitio de administración de Django</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
@@ -75,7 +75,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 
-<a class="brand" href="/admin/">Django administration</a>
+<a class="brand" href="/admin/">Hijas de la Caridad</a>
 
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav">
@@ -89,117 +89,6 @@
                                 <li><a href="/admin/logout/">Terminar sesión</a></li>
                             </ul>
                         </li>
-                        
-                        <li class="divider-vertical"></li>
-                        
-                        
-                        
-                        <li class="dropdown" id="recent-actions-module">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acciones recientes <b class="caret"></b></a>
-                            
-                            
-                            <ul class="dropdown-menu pull-right">
-                                
-                                <li class="addlink">
-                                    <a href="/admin/cotizaciones/cotizacion/4/">
-                                        <i class="icon-plus"></i>
-                                        Cotizacion object
-                                        
-                                        <span class="mini quiet">(Cotizacion)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="addlink">
-                                    <a href="/admin/cotizaciones/cotizacion/3/">
-                                        <i class="icon-plus"></i>
-                                        Cotizacion object
-                                        
-                                        <span class="mini quiet">(Cotizacion)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="addlink">
-                                    <a href="/admin/cotizaciones/cotizacion/2/">
-                                        <i class="icon-plus"></i>
-                                        Cotizacion object
-                                        
-                                        <span class="mini quiet">(Cotizacion)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="addlink">
-                                    <a href="/admin/cotizaciones/cotizacion/1/">
-                                        <i class="icon-plus"></i>
-                                        Cotizacion object
-                                        
-                                        <span class="mini quiet">(Cotizacion)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="changelink">
-                                    <a href="/admin/cuentas/cuenta/49/">
-                                        <i class="icon-edit"></i>
-                                        Deudas
-                                        
-                                        <span class="mini quiet">(Cuenta)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="changelink">
-                                    <a href="/admin/comunidades/pais/2/">
-                                        <i class="icon-edit"></i>
-                                        Argentina
-                                        
-                                        <span class="mini quiet">(Pais)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="addlink">
-                                    <a href="/admin/comunidades/pais/2/">
-                                        <i class="icon-plus"></i>
-                                        Argentina
-                                        
-                                        <span class="mini quiet">(Pais)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="addlink">
-                                    <a href="/admin/asientos_contables/asientocontable/26/">
-                                        <i class="icon-plus"></i>
-                                        2014-07-10
-                                        
-                                        <span class="mini quiet">(Asiento contable)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-                                <li class="addlink">
-                                    <a href="/admin/cuentas/cuenta/50/">
-                                        <i class="icon-plus"></i>
-                                        Bancos
-                                        
-                                        <span class="mini quiet">(Cuenta)</span>
-                                        
-                                    </a>
-                                </li>
-                                
-
-                            </ul>
-                        </li>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -309,12 +198,8 @@
      
        
          <th class="required">Haber
-         
          </th>
-       
-     
 
-     
      <th>¿Eliminar?</th>
      </tr></thead>
 
@@ -340,7 +225,7 @@
     <input type="hidden" name="asientocontabledetalle_set-0-cuenta" id="id_asientocontabledetalle_set-0-cuenta" value=""
            data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <select id="asientocontabledetalle_set-0-banco" hidden="hidden" name="asientocontabledetalle_set-0-banco" >
+                      <select id="asientocontabledetalle_set-0-banco" style="display: none" name="asientocontabledetalle_set-0-banco" >
                             {% for banco in bancos %}
                                 <option value="{{ banco.id }}">{{ banco.cuenta_bancaria }} - {{ banco.nro_de_cuenta }}</option>
                             {% endfor %}
@@ -352,10 +237,10 @@
                     </td>
             
  <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-0-debe" style="height: 30px" min="0" name="asientocontabledetalle_set-0-debe" step="0.01"  required="" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-0-debe" style="height: 30px; text-align: right" min="0" name="asientocontabledetalle_set-0-debe" step="0.01"  required="" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-0-haber" style="height: 30px" min="0" name="asientocontabledetalle_set-0-haber" required=""  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-0-haber" style="height: 30px; text-align: right" min="0" name="asientocontabledetalle_set-0-haber" required=""  step="0.01" type="number" value="0">
                     </td>
           
 
@@ -400,10 +285,10 @@
                     </td>
 
              <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-1-debe" min="0" style="height: 30px" name="asientocontabledetalle_set-1-debe" step="0.01"  required="" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-1-debe" min="0" style="height: 30px; text-align: right" name="asientocontabledetalle_set-1-debe" step="0.01"  required="" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-1-haber" min="0" style="height: 30px" name="asientocontabledetalle_set-1-haber" required=""  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-1-haber" min="0" style="height: 30px; text-align: right" name="asientocontabledetalle_set-1-haber" required=""  step="0.01" type="number" value="0">
                     </td>
             
 
@@ -450,10 +335,10 @@
 
             
               <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-2-debe" style="height: 30px" min="0" name="asientocontabledetalle_set-2-debe" step="0.01"  required="" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-2-debe" style="height: 30px; text-align: right" min="0" name="asientocontabledetalle_set-2-debe" step="0.01"  required="" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-2-haber" style="height: 30px" min="0" name="asientocontabledetalle_set-2-haber" required=""  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-2-haber" style="height: 30px; text-align: right" min="0" name="asientocontabledetalle_set-2-haber" required=""  step="0.01" type="number" value="0">
                     </td>
           
 
@@ -581,17 +466,8 @@
 })(jQuery);
 </script>
 
-            
-            
-
-            
-
-            
                <script type="text/javascript">document.getElementById("id_fecha").focus();</script>
-            
 
-            
-            
 <script type="text/javascript">
 (function($) {
     var field;
@@ -725,9 +601,9 @@
                     id_banco=parseInt(id_banco)
                     if(id_banco == id_cuenta){
 
-                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').removeAttribute('hidden')
+                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').style.display='block'
                     }else{
-                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').setAttribute('hidden','hidden')
+                        document.getElementById('asientocontabledetalle_set-'+ i.toString()+'-banco').style.display='none'
                     }
                 }
             }

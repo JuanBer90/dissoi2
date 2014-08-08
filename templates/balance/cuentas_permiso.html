@@ -1,0 +1,82 @@
+{% extends 'admin/base_site.html' %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+{% load my_tags %}
+{% block extrahead %}
+        {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    {% bootstrap_javascript_tag %}
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+
+{% endblock %}
+{% block content %}
+
+    <center>
+    <ul class="nav nav-tabs" role="tablist">
+  <li {% if tipo == 'AC' %} class="active" {% endif %}><a href="{% url 'cuentas.views.asignar_permiso' 'AC' %}">Activo</a></li>
+  <li {% if tipo == 'PA' %} class="active" {% endif %}><a href="{% url 'cuentas.views.asignar_permiso' 'PA' %}">Pasivo</a></li>
+   <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'cuentas.views.asignar_permiso' 'IN' %}">Ingresos</a></li>
+        <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'cuentas.views.asignar_permiso' 'EG' %}">Egresos</a></li>
+  <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{% url 'cuentas.views.asignar_permiso' 'PN' %}">Patrimonio Neto</a></li>
+</ul>
+
+    <h1>Asignar Permiso</h1>
+<form method="post">{% csrf_token %}
+    <table class="table-bordered table-striped" style="width: 600px">
+      <tr><th style="width: 500px" rowspan="2" class="navbar-inner">Cuenta</th>
+          <th class="navbar-inner" colspan="2" style="width: 60px">Permiso </th></tr>
+    <tr>
+        <th class="navbar-inner">Debe <input type="checkbox" onclick="checkear_debe(this)"></th>
+        <th class="navbar-inner">Haber <input type="checkbox" onclick="checkear_haber(this)"></th>
+      </tr>
+    {% for cuenta in vector_cuentas %}
+        <tr><td style="width: 300px">
+               {% if cuenta.have_child  %}
+               <b>{{ cuenta.codigo }} - {{ cuenta.cuenta }}</b>
+               {% else %}
+               {{ cuenta.codigo }} - {{ cuenta.cuenta }}
+                {% endif %}
+            </p>
+            </td>
+            <td style="width: 150px; text-align: center">
+                <input type="checkbox" {% if cuenta.permiso_debe %} checked {% endif %} id="debe-{{ cuenta.id }}" name="debe-{{ cuenta.id }}"{% if cuenta.have_child %} disabled {% endif %}>
+            </td>
+        <td style="width: 150px; text-align: center">
+            <input type="checkbox" {% if cuenta.permiso_haber %} checked {% endif %} id="haber-{{ cuenta.id }}" name="haber-{{ cuenta.id }}" {% if cuenta.have_child %} disabled {% endif %}>
+
+        </td>
+
+        </tr>
+    {% endfor %}
+    </table>
+    <br>
+<div class="row-fluid">
+        <div class="form-actions">
+
+    <div class="pull-right">
+<input type="submit" onclick="fin()" value="Grabar y continuar editando" class="btn" name="_continue">
+<input type="submit" onclick="fin()" value="Grabar" class="btn btn-primary default" name="_save">
+</div>
+ </div>
+ </div>
+
+</form>
+    </center>
+    <script>
+    function checkear_debe(check_all){
+        {% for cuenta in vector_cuentas %}
+            {% if not cuenta.have_child %}
+            document.getElementById('debe-{{ cuenta.id }}').checked=check_all.checked;
+            {% endif %}
+        {% endfor %}
+    }
+    function checkear_haber(check_all){
+        {% for cuenta in vector_cuentas %}
+            {% if not cuenta.have_child %}
+            document.getElementById('haber-{{ cuenta.id }}').checked=check_all.checked;
+            {% endif %}
+        {% endfor %}
+    }
+</script>
+{% endblock %}

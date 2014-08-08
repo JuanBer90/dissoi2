@@ -69,20 +69,22 @@ function fila(index){
         <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.ejecucion_presupuestaria' 'EG' %}">Egresos</a></li>
 </ul>
 
-    <h1>Ejecucion Presupuestaria</h1>
+    <h1>Ejecucion Presupuestaria {{ comunidad }}</h1>
 <div class="pre-scrollable" style=" max-height: 500px; overflow-y:scroll;" >
     <table class="table table-bordered table-striped" id="myTable">
       <tr><th style=" text-align: center;" rowspan="2" class="navbar-inner"><p style="font-size: 25px; margin-top: 30px">Cuenta</p></th>
            {% for i,mes in meses %}
             <th colspan="2"  id="col{{ forloop.counter }}" onclick="columna({{ forloop.counter }})" class="navbar-inner"><p style="font-size: 15px; text-align: center">{{ mes }}</p></th>
             {% endfor %}
-
+            <th colspan="2"  id="col{{ forloop.counter }}" onclick="columna({{ forloop.counter }})" class="navbar-inner"><p style="font-size: 15px; text-align: center">Totales</p></th>
       </tr>
       <tr>
           {% for mes in meses %}
         <th class="navbar-inner"><p style="font-size: 15px">Ejecutado</p></th>
         <th class="navbar-inner" style="height: 20px"><p style="font-size: 15px">Presupuestado</p></th>
           {% endfor %}
+      <th class="navbar-inner">Total Ejecutado</th>
+          <th class="navbar-inner">Total presupuestado</th>
       </tr>
     {% for datos in vector_cuentas %}
         <tr>
@@ -99,8 +101,12 @@ function fila(index){
             <td  style="text-align: right" >{{ dato }}</td>
                 {% endif %}
              {% endfor %}
+        <td style="text-align: right">0.00</td>
+        <td style="text-align: right">0.00</td>
         </tr>
     {% endfor %}
+
+
     </table>
 </div>
   </center>

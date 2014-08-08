@@ -1,0 +1,193 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es">
+<head>
+    {% load my_tags %}
+    {% load dajaxice_templatetags %}
+
+
+    <title>Cerrar Ejercicio</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% dajaxice_js_import %}
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+    <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/static/admin/css/ie.css" /><![endif]-->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/overrides.css">
+    {#    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">#}
+
+
+
+    <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+    <script src="/static/admin/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/admin/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet">
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+    </style>
+</head>
+
+
+<body >
+{#<!-- Container -->#}
+<div class="container-fluid">
+
+
+    <!-- Header -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" href="/admin/">Hijas de la Caridad</a>
+
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }}</strong> <b class="caret"></b></a>
+                            <ul class="dropdown-menu pull-right">
+
+                                <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
+
+                                <li><a href="/admin/logout/">Terminar sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- END Header -->
+
+</div>
+<!-- END Content -->
+
+<footer id="footer"></footer>
+</div>
+
+
+<ul class="breadcrumb">
+    <li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+    <li>Cerrar Ejercicio</li>
+</ul>
+
+
+
+<!-- Content -->
+<div id="content" class="colM">
+
+    <div class="row-fluid">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand">Cerrar Ejercicio</a>
+            </div>
+        </div>
+        {% if ejercicio.anho != None %}
+        <div id="content-main">
+            <center>
+            <form enctype="multipart/form-data" action="" name="formulario" method="post" id="formulario">{% csrf_token %}
+                <h1>¿Esta seguro/a que desea cerrar el ejercicio {{ ejercicio.anho }} ?</h1>
+                <br><br>
+                <a href="/admin" style="height: 30px;width: 50px;" class="btn btn-default">No</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button  style="height: 40px;width: 70px" class="btn btn-primary btn-lg"
+                         data-toggle="modal" data-target="#myModal">Si</button>
+            {% else %}
+            <center>
+                <h1>No existe un ejercicio actual </h1>
+            </center>
+            {% endif %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Nuevo Ejercicio</h4>
+      </div>
+      <div class="modal-body">
+        ¿Desea crear el siguiente ejercicio?
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-default" onclick="salir()" data-dismiss="modal">No</button>
+        <button type="submit" class="btn btn-primary"  data-dismiss="modal" onclick="ejercicio('Si')">Si</button>
+          <input hidden="hidden" value="No" id="crear_ejercicio" name="crear_ejercicio">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="asiento_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Nuevo Ejercicio</h4>
+      </div>
+      <div class="modal-body">
+        ¿Desea crear autom&aacute;ticamente el asiento de apertura?
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-default" onclick="apertura('No')" data-dismiss="modal">No</button>
+        <button type="button" onclick="apertura('Si')" class="btn btn-primary">Si</button>
+          <input hidden="hidden" value="No" id="crear_asiento" name="crear_asiento">
+      </div>
+    </div>
+  </div>
+</div>
+            <button id="btn_modal" style="height: 40px;width: 70px;
+            display: none" class="btn btn-primary btn-lg"
+                         data-toggle="modal" data-target="#asiento_modal">Si</button>
+
+ </form>
+                </center>
+        </div>
+<script>
+    function ejercicio(valor){
+        document.getElementById('crear_ejercicio').value = valor
+        if (valor == 'Si'){
+            document.getElementById('btn_modal').click()
+        }
+
+//         formulario.submit()
+    }
+    function apertura(valor){
+        document.getElementById('crear_asiento').value = valor
+
+       formulario.submit()
+
+    }
+    function salir(){
+        formulario.submit()
+    }
+</script>
+    </div>
+</div>
+</body>
+</html>

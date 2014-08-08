@@ -81,7 +81,7 @@
                     <span class="icon-bar"></span>
                 </a>
 
-<a class="brand" href="/admin/">Django administration</a>
+<a class="brand" href="/admin/">Hijas de la Caridad</a>
 
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav">
@@ -159,7 +159,7 @@
                     <th colspan="2" class="required" style="width: 200px">Cuenta</th>
                     <th class="required">Debe</th>
                     <th class="required">Haber</th>
-                    <th >Concepto</th>
+                    <th >Descripci&oacute;n</th>
                     <th>¿Eliminar?</th>
                 </tr></thead>
                 <tbody>
@@ -366,25 +366,24 @@
     function my_callback(data){
         var debe= document.getElementById('id_asientocontabledetalle_set-'+ data.i.toString()+'-debe')
         var haber=document.getElementById('id_asientocontabledetalle_set-'+ data.i.toString()+'-haber')
-        if(data.debe == 'False'){
+        if(data.tipo == 'IN'){
             debe.value=0
             debe.readOnly=true;
             debe.style.background='#C0C0C0'
-        }
-        if(data.haber == 'False'){
+            haber.style.background='white'
+            haber.readOnly=false;
+        }else if(data.tipo == 'EG'){
             haber.readOnly=true;
             haber.style.background='#C0C0C0'
             haber.value=0
-        }
-        if(data.debe == 'True'){
             debe.readOnly=false;
             debe.style.background='white'
+        }else{
+            debe.readOnly=false;
+            haber.readOnly=false;
+            haber.style.background='white'
+            debe.style.background='white'
         }
-        if(data.haber == 'True'){
-        haber.readOnly=false;
-        haber.style.background='white'
-        }
-
     }
 
     function total(){
@@ -445,6 +444,7 @@
             if(cuenta_element != null){
                 var id_cuenta=cuenta_element.value
                 if (id_cuenta != ""){
+
                     Dajaxice.asientos_contables.args_example(my_callback, {'id':id_cuenta,'i': i.toString()})
                     id_cuenta=parseInt(id_cuenta)
                     var id_banco={% banco_codigo %};
