@@ -6,14 +6,12 @@
   
   <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
   
-  
+   {% load bootstrap_pagination %}
+   {% load bootstrap_toolkit %}
     
     <script type="text/javascript" src="/admin/jsi18n/"></script>
   
-  
-
-
-    <!-- Le styles, placed after extrastyle to correctly override default styling -->
+     <!-- Le styles, placed after extrastyle to correctly override default styling -->
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
       body {
@@ -93,13 +91,13 @@
                     <span class="icon-bar"></span>
                 </a>
                 
-<a class="brand" href="/admin/">Django administration</a>
+<a class="brand" href="/admin/">Hijas de la Caridad</a>
 
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav">
                         
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>admin</strong> <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }}</strong> <b class="caret"></b></a>
                             <ul class="dropdown-menu pull-right">
                                 
                                 <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
@@ -143,9 +141,15 @@
         
         
         <li>
-        <a href="/asiento/nuevo/" class="btn btn-primary">
+        {% if not request.user.is_superuser %}
+        <a href="{% url 'asientos_contables.views.nuevo' %}" class="btn btn-primary">
             <i class="icon-plus icon-white"></i> Añadir asiento contable
         </a>
+        {% else %}
+         <a href="{% url 'asientos_contables.views.sel_comunidad_asiento' %}" class="btn btn-primary">
+            <i class="icon-plus icon-white"></i> Añadir asiento contable
+        </a>
+        {% endif %}
         </li>
         
         
@@ -169,16 +173,14 @@
 
     <div class="pull-right">
         
+<form class="navbar-search" id="changelist-search" action="" method="get">{% csrf_token %}
 
-<form class="navbar-search" id="changelist-search" action="" method="get">
 <div><!-- DIV needed for valid HTML -->
 <input type="text" class="search-query" placeholder="Buscar" style="height: 30px" size="40" name="q" value="" id="searchbar">
 </div>
 </form>
 <script type="text/javascript">document.getElementById("searchbar").focus();</script>
-
-
-        
+       
         <ul class="nav pull-right">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filtro <b class="caret"></b></a>
@@ -275,7 +277,7 @@
 <tr class="row1">
     <td class="action-checkbox">
     <input class="action-select" name="_selected_action" type="checkbox" value="9"></td>
-    <th class="nowrap"><a href="/admin/asientos_contables/asientocontable/{{ asiento.id }}/">{{asiento.fecha }}</a></th>
+    <th class="nowrap"><a href="{% url 'asientos_contables.views.editar' asiento.id %}">{{asiento.fecha }}</a></th>
     <td class="nowrap">{{ asiento.asiento_contable.comunidad.comunidad }}</td></tr>
 
 {% endfor %}
@@ -300,16 +302,14 @@
                 </div>
             </div>
         </div>
+
         
     </div>
+ 
 
 </div>
 
-    
-
-
-
-
+{{ lines|pagination }}
 
 
 

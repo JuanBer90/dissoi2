@@ -64,6 +64,17 @@
                                 </div>
                             </th>
                         </tr>
+                        
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/auth/permission">Permisos</a>
+                                <div class="pull-right">
+                                    <a href="/admin/auth/permission/add" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+
+                                    <!--a href="/admin/asientos_contables/asientocontable/" class="btn btn-mini changelink"><i class="icon-edit"></i> Modificar</a-->
+                                </div>
+                            </th>
+                        </tr>
                     </table>
 
                     </td>
@@ -116,14 +127,6 @@
                         </tr>
                         <tr>
                             <th scope="row">
-                                <a href="/admin/cotizaciones/cotizacion/">Cotizaciones</a>
-                                <div class="pull-right">
-                                    <a href="/admin/cotizaciones/cotizacion/add/" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th scope="row">
                                 <a href="{% url 'cuentas.views.balance_comunidad' request.user.usuario.comunidad_id %}">Balance</a>
                             </th>
                         </tr>
@@ -135,6 +138,14 @@
                         <td colspan="2">
                                                 <h2 id='Asientos' class="Asientos contables"><a href="/admin/">Consolidado</a></h2>
                     <table summary="Models available in the Asientos contables application." class="table table-striped table-bordered" style="width: 500px">
+                        <tr>
+                            <th scope="row">
+                                <a href="{% url 'asientos_contables.views.listar' %}">Asientos contables</a>
+                                <div class="pull-right">
+                                    <a href="{% url 'asientos_contables.views.sel_comunidad_asiento' %}" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+                                </div>
+                            </th>
+                        </tr>
                         <tr>
                             <th scope="row">
                                 <a href="{% url 'asientos_contables.views.mayor_general' 'AC' %}">Mayor</a>
@@ -172,6 +183,14 @@
                         <tr>
                             <th scope="row">
                                 <a href="{% url 'cuentas.views.asignar_permiso' 'AC' %}">Asignar Permisos a Cuentas</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="/admin/cotizaciones/cotizacion/">Cotizaciones</a>
+                                <div class="pull-right">
+                                    <a href="/admin/cotizaciones/cotizacion/add/" class="btn btn-mini addlink"><i class="icon-plus"></i> Añadir</a>
+                                </div>
                             </th>
                         </tr>
                         <tr>

@@ -8,6 +8,7 @@ from django.conf import settings
 from ajax_select import urls as ajax_select_urls
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 
+
 dajaxice_autodiscover()
 admin.autodiscover()
 
@@ -16,9 +17,11 @@ urlpatterns = patterns('',
     (r'^admin/lookups/', include(ajax_select_urls)),
     (r'^admin/', include(admin.site.urls)),
     (dajaxice_config.dajaxice_url, include('dajaxice.urls')),
-
     #ASIENTOS
-    (r'^asiento/nuevo/', 'asientos_contables.views.nuevo'),
+    (r'^asiento/comunidad/$', 'asientos_contables.views.sel_comunidad_asiento'),
+    (r'^asiento/nuevo/$', 'asientos_contables.views.nuevo'),
+    (r'^asiento/nuevo/(?P<id_comunidad>\d+)/$', 'asientos_contables.views.nuevo'),
+    (r'^asiento/editar/(?P<id>\d+)/$', 'asientos_contables.views.editar'),
     (r'^asiento/listar/', 'asientos_contables.views.listar'),
     (r'^cuentas/mayor/', 'asientos_contables.views.mayores'),
     (r'^mayor/(?P<tipo>.*)', 'asientos_contables.views.mayor'),

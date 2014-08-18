@@ -67,8 +67,10 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'ejercicios',
     'presupuestos',
+    'bootstrap_pagination',
 
 )
+AJAX_SELECT_BOOTSTRAP = True
 #AJAX LOOKUPT CHANNELS
 AJAX_LOOKUP_CHANNELS = {
     # simplest way, automatically construct a search channel by passing a dict
@@ -77,7 +79,8 @@ AJAX_LOOKUP_CHANNELS = {
     # Custom channels are specified with a tuple
     # channel: ( module.where_lookup_is, ClassNameOfLookup )
     #'person': ('example.lookups', 'PersonLookup'),
-    'cuenta': ('cuentas.lookups', 'CuentaLookup')
+    'cuenta': ('cuentas.lookups', 'CuentaLookup'),
+    'comunidad': ('comunidades.lookups', 'ComunidadLookup')
 }
 
 MIDDLEWARE_CLASSES = (

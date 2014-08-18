@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from django.contrib.admin.models import LogEntry,LogEntryManager
+from django.contrib.contenttypes.models import ContentType
 from calendar import calendar
 import calendar
 from decimal import Decimal
@@ -9,7 +11,7 @@ from twisted.test.test_amp import BadNoAnswerCommandProtocol
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from ajax_select.fields import AutoCompleteField
@@ -23,15 +25,20 @@ from cuentas_bancarias.models import CuentaBancaria
 from hijasdelacaridad.globales import execute_all_query
 from usuarios.models import Usuario
 from ejercicios.models import Ejercicio
+from django.views import generic
+from django.shortcuts import get_object_or_404
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
+from django.core.paginator import Paginator
+
+ITEMS_PER_PAGE=100
 
 
 class SearchForm(forms.Form):
-
     q = AutoCompleteField(
             'cliche',
             required=True,
             help_text="",
-            label="Favori",
+            label="",
             attrs={'size': 100}
             )
 
@@ -46,31 +53,46 @@ def search_form(request):
     dd['form'] = form
     return render_to_response('search_form.html', dd, context_instance=RequestContext(request))
 
+ 
 
-# Create your views here.
-def nuevo(request):
-    usuario_id = request.user.id
-    usuario_objeto = User.objects.get(id=usuario_id)
-    bancos = CuentaBancaria.objects.filter(comunidad=usuario_objeto.usuario.comunidad)
-    print len(bancos)
+
+
+def sel_comunidad_asiento(request):
+       
     if request.method == 'POST':
+        id_comunidad=request.POST.get('comunidad_set-0-comunidad','')
+        return HttpResponseRedirect('/asiento/nuevo/'+str(id_comunidad))
+    return render_to_response('balance/sel_comunidad_asiento.html',{},
+                                  context_instance=RequestContext(request))
 
-        addOther=request.POST.get('_addanother','').encode('utf8')
+def nuevo(request,id_comunidad=''): 
+  
+    if id_comunidad == '' and not request.user.is_superuser:
+        id_comunidad = request.user.usuario.comunidad_id
+    else:
+        if not request.user.has_perm('can_add_asiento_contable') or id_comunidad == '':
+            return HttpResponseRedirect('/admin')
+    bancos = CuentaBancaria.objects.filter(comunidad_id=id_comunidad)
+    
+    if request.method == 'POST':
+        addOther = request.POST.get('_addanother', '').encode('utf8')
         save=request.POST.get('_save','')
-        total_rows=int(request.POST.get('asientocontabledetalle_set-TOTAL_FORMS',0))
+        total_rows=int(request.POST.get('cantidad_rows',0))
+        print 'asdf: '+str(total_rows)
         fecha=request.POST.get('fecha','')
         fecha=datetime.datetime.strptime(fecha, "%d/%m/%Y")
         asiento = AsientoContable()
         asiento.fecha = fecha
-        asiento.comunidad = usuario_objeto.usuario.comunidad
+        asiento.comunidad_id = id_comunidad
         asiento.save()
 
+        
+        fields=""
         for i in range(0,total_rows):
             id_cuenta = request.POST.get('asientocontabledetalle_set-' + str(i) + '-cuenta', '')
             debe = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-debe', 0.00))
             haber = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-haber', 0.00))
             obs = request.POST.get('asientocontabledetalle_set-' + str(i) + '-observacion', '')
-            print 'obs: '+obs
             if id_cuenta != '':
                 id_cuenta=int(id_cuenta)
                 cuenta=Cuenta.objects.get(pk=id_cuenta)
@@ -84,24 +106,142 @@ def nuevo(request):
                     banco_id = request.POST.get('asientocontabledetalle_set-' + str(i) + '-banco', 0)
                     asiento_detalle.cuenta_bancaria_id=banco_id
                 asiento_detalle.save()
-                print 'id_cuenta: '+str(id_cuenta)+'  debe: '+str(debe)+'  haber:  '+str(haber)+'  obs: '+str(obs)
-                if save == 'Grabar':
-                    return HttpResponseRedirect('/asiento/listar/')
+                fields+='id:'+str(id_cuenta)+'-'+str(debe)+'-'+str(haber)+"\n"
+        LogEntry.objects.log_action(
+            user_id=request.user.id,
+            content_type_id=ContentType.objects.get_for_model(AsientoContable).pk,
+            object_id=asiento.id,
+            object_repr=unicode(fields),
+            action_flag=ADDITION)
+    cuentas=Cuenta.objects.all()
+    filas=[]
+    for i in range(0,50):
+         filas.append(i)
     if request.user.is_superuser:
         return render_to_response('balance/admin_change_form.html',
-                                  {'add': True, 'bancos': bancos, 'hoy': str(timezone_today().strftime('%d/%m/%Y'))},
+                                  {'add': True, 'filas':filas,'bancos': bancos, 'hoy': str(timezone_today().strftime('%d/%m/%Y'))},
                                   context_instance=RequestContext(request))
     else:
-        return render_to_response('balance/nuevo_change_form.html', {'add':True,'bancos':bancos,'hoy':str(timezone_today().strftime('%d/%m/%Y'))},
+        return render_to_response('balance/nuevo_change_form.html', {'add':True,'filas':filas,'bancos':bancos,'hoy':str(timezone_today().strftime('%d/%m/%Y'))},
                               context_instance=RequestContext(request))
 
+
+def editar(request,id):
+    asiento=AsientoContable.objects.get(pk=id)
+    asientos_detalles=AsientoContableDetalle.objects.filter(asiento_contable_id=id)
+    if not request.user.is_superuser:
+        id_comunidad = request.user.usuario.comunidad_id
+    else:
+        id_comunidad=asiento.comunidad_id
+    usuario_id = request.user.id
+    usuario_objeto = User.objects.get(id=usuario_id)
+    bancos = CuentaBancaria.objects.filter(comunidad=usuario_objeto.usuario.comunidad)
+    
+    if request.method == 'POST':
+        addOther=request.POST.get('_addanother','').encode('utf8')
+        save=request.POST.get('_save','')
+        total_rows=int(request.POST.get('cantidad_rows',0))
+        fecha=request.POST.get('fecha','')
+        fecha=datetime.datetime.strptime(fecha, "%d/%m/%Y")
+        asiento.fecha = fecha
+        asiento.save()
+
+        for a in asientos_detalles:
+           a.delete()
+        fields=""
+        for i in range(total_rows):            
+            id_cuenta = request.POST.get('asientocontabledetalle_set-' + str(i) + '-cuenta', '')
+            debe = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-debe', 0.00))
+            haber = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-haber', 0.00))
+            obs = request.POST.get('asientocontabledetalle_set-' + str(i) + '-observacion', '')
+            print 'id_cuenta: '+str(id_cuenta)+'  debe: '+str(debe)+'  haber:  '+str(haber)+'  obs: '+str(obs)
+            
+            if id_cuenta != '':
+                id_cuenta=int(id_cuenta)
+                cuenta=Cuenta.objects.get(pk=id_cuenta)
+                asiento_detalle=AsientoContableDetalle()
+                asiento_detalle.cuenta_id=id_cuenta
+                asiento_detalle.debe=debe
+                asiento_detalle.haber=haber
+                asiento_detalle.asiento_contable=asiento
+                asiento_detalle.observacion=obs
+                if cuenta.codigo == '1.2.5.2':
+                    banco_id = request.POST.get('asientocontabledetalle_set-' + str(i) + '-banco', 0)
+                    asiento_detalle.cuenta_bancaria_id=banco_id
+                asiento_detalle.save()
+                fields+='id:'+str(id_cuenta)+'-'+str(debe)+'-'+str(haber)+"\n"
+        LogEntry.objects.log_action(
+            user_id=request.user.id,
+            content_type_id=ContentType.objects.get_for_model(AsientoContable).pk,
+            object_id=asiento.id,
+            object_repr=unicode(fields),
+            action_flag=CHANGE)
+
+        return HttpResponseRedirect('/asiento/editar/'+str(id))
+        if save == 'Grabar':
+                return HttpResponseRedirect('/asiento/listar/')
+    filas=[]
+    for i in range(len(asientos_detalles),50):
+         filas.append(i)
+    asiento.fecha=str(asiento.fecha.strftime('%d/%m/%Y'))
+    if request.user.is_superuser:
+        return render_to_response('balance/admin_edit_asiento.html',{'filas':filas,'bancos': bancos,
+              'asiento':asiento, 'asientos_detalles':asientos_detalles}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('balance/edit_change_form.html', {'asiento':asiento,'filas':filas,
+           'asientos_detalles':asientos_detalles,'bancos':bancos}, context_instance=RequestContext(request))
+
 def listar(request):
+    
     q=request.GET.get('q','')
     fecha__gte=request.GET.get('fecha__gte','1900-01-01')
     fecha__lt=request.GET.get('fecha__lt','2050-01-01')
-    asientos=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
-                                                       asiento_contable__fecha__gt=fecha__gte,
-                                                       asiento_contable__fecha__lt=fecha__lt)
+    usuario=request.user
+    
+    
+    
+    if usuario.is_superuser:
+           objeto_total=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
+                                                          asiento_contable__fecha__gt=fecha__gte,
+                                                       asiento_contable__fecha__lt=fecha__lt).count()
+    else:
+        objeto_total=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
+                                                          asiento_contable__fecha__gt=fecha__gte,
+                                                       asiento_contable__fecha__lt=fecha__lt,asiento_contable__comunidad_id=usuario.usuario.comunidad_id).count()
+    page=request.GET.get('page',1)
+    
+    lines=[]
+    for i in range(objeto_total):
+        lines.append(u'Line %s' % (i + 1))
+    nro_lineas=100
+    paginator = Paginator(lines, nro_lineas)
+    try:
+        page=int(page)
+    except:
+        page=1
+    if int(page)*nro_lineas>objeto_total or int(page)>0:
+        try:
+            items = paginator.page(page)
+            fin=int(page)*nro_lineas
+            ini =fin-nro_lineas
+        except PageNotAnInteger or EmptyPage:
+            fin=nro_lineas
+            ini=0
+            items = paginator.page(1)
+    else:
+        fin=nro_lineas
+        ini=0
+        items = paginator.page(1)
+        
+    if usuario.is_superuser:
+           asientos=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
+                                                          asiento_contable__fecha__gt=fecha__gte,
+                                                       asiento_contable__fecha__lt=fecha__lt)[ini:fin]
+    else:
+        asientos=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
+                                                          asiento_contable__fecha__gt=fecha__gte,
+                                                       asiento_contable__fecha__lt=fecha__lt,asiento_contable__comunidad_id=usuario.usuario.comunidad_id)
+
     hoy = datetime.datetime.today()
     ayer=hoy+datetime.timedelta(days=-1)
     ultimos_7dias = hoy + datetime.timedelta(days=-7)
@@ -112,11 +252,12 @@ def listar(request):
     ultimos_30dias_min = str(today.year) + '-' + str(today.month) + '-01'
     este_anho_max=str(today.year+1) + '-01-01'
     este_anho_min = str(today.year) + '-01-01'
+    
     return render_to_response('asientos/nuevo_asientos_list.html',
-    {'asientos':asientos,'hoy':str(hoy.date()),'ultimos_30dias_max':ultimos_30dias_max,
+    {'asientos':asientos,'hoy':str(hoy.date()),'ultimos_30dias_max':ultimos_30dias_max,'page' : page,
      'ayer':str(ayer.date()),'ultimos_30dias_min':ultimos_30dias_min,'este_anho_max':este_anho_max,'este_anho_min':este_anho_min
         ,'ultimo_7dias':str(ultimos_7dias.date()),'manana':str(manana.date())},
-    context_instance=RequestContext(request))
+    context_instance=RequestContext(request,{ 'lines': items }))
 
 def mayores(request):
     vector_cuentas = Cuenta.get_tree()
@@ -293,7 +434,6 @@ def mayor_general(request,tipo='AC'):
     return render_to_response('balance/mayor_general.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
 
 def mayor_detallado_comunidad(request,id,tipo='AC'):
-    print 'asdfadsfasdfaasdfasdfasdfasdfasdfa'
     tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
     if not tipos.__contains__(tipo):
         tipo = 'AC'
@@ -393,6 +533,30 @@ def mayor_detallado_consolidado(request,tipo='AC'):
                               {'asientos': asientos, 'url': url, 'cuentas': cuentas, 'tipo': tipo,'consolidado':'true'},
                               context_instance=RequestContext(request))
 
+
+def ver_mayor(request):
+    comunidades=Comunidad.objects.all()
+    paises=Pais.objects.all()
+    if request.method == 'POST':
+        tipo=request.POST.get('tipo','')
+        print tipo
+        if tipo == 'pais':
+            id_pais=int(request.POST.get('pais',0))
+            if id_pais == 0:
+                messages.error(request, 'Debe Seleccionar un pais!')
+            else:
+                return HttpResponseRedirect('/mayor_detalle_pais/'+str(id_pais)+'/AC')
+        elif tipo == 'comunidad':
+            id_comunidad = int(request.POST.get('comunidad', 0))
+            if id_comunidad == 0:
+                messages.error(request, 'Debe Seleccionar una comunidad!')
+            else:
+                return HttpResponseRedirect('/mayor_detalle_comunidad/' + str(id_comunidad)+'/AC')
+        else:
+            return HttpResponseRedirect('/mayor_detalle_consolidado/')
+    return render_to_response('balance/ver_mayor.html',
+                              {'comunidades':comunidades,'paises':paises},
+                              context_instance=RequestContext(request))
 
 def ver_mayor_detalle(request):
     comunidades=Comunidad.objects.all()

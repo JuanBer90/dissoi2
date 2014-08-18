@@ -20,8 +20,7 @@ class Cuenta(MP_Node):
     debe = 0
     haber = 0
     cargado = False
-
-    
+        
     node_order_by = ['cuenta']
 
     def __unicode__(self):

@@ -49,6 +49,10 @@ class BancoId(Node):
 def banco_codigo(parser, token):
     return BancoId()
 
+def to_int(value):
+    return int(value)
+
+register.filter('to_int', to_int)
 register.filter('saldo_anterior', saldo_anterior)
 register.filter('espacios', espacios)
 register.filter('mult', mult)
