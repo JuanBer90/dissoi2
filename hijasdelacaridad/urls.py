@@ -13,10 +13,30 @@ dajaxice_autodiscover()
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^admin/jsi18n', 'django.views.i18n.javascript_catalog'),
     url(r'^search_form',  view='asientos_contables.views.search_form', name='search_form'),
     (r'^admin/lookups/', include(ajax_select_urls)),
     (r'^admin/', include(admin.site.urls)),
     (dajaxice_config.dajaxice_url, include('dajaxice.urls')),
+    #REPORTES
+    (r'^reporte/$', 'asientos_contables.reports.some_view'),
+    (r'^reporte_inventario_general/$', 'asientos_contables.reports.inventario_general'),
+    (r'^reporte_inventario/(?P<id_comunidad>\d+)/$', 'asientos_contables.reports.inventario_comunidad'),
+    (r'^reporte_mayor/(?P<id_comunidad>\d+)/(?P<desde>[\w\-.]+)/(?P<hasta>[\w\-.]+)/$', 'asientos_contables.reports.mayor'),
+    (r'^reporte_mayor_detalle/(?P<id_comunidad>\d+)/(?P<desde>[\w\-.]+)/(?P<hasta>[\w\-.]+)/$', 'asientos_contables.reports.mayor_detalle'),
+    (r'^reporte/comunidad/(?P<id_comunidad>\d+)/$', 'asientos_contables.views.sel_comunidad_reporte_mayor'),
+    (r'^reporte/comunidad/(?P<id_comunidad>\d+)/(?P<tipo>.*)$', 'asientos_contables.views.sel_comunidad_reporte_mayor'),
+    
+    #INVENTARIOS
+    (r'^inventario/general/$', 'inventario.views.inventario_general'),
+    (r'^inventario/comunidad/$', 'inventario.views.seleccionar_comunidad'),
+    (r'^inventario/categoria/(?P<id_comunidad>\d+)$', 'inventario.views.inventario_comunidad'),
+    (r'^inventario/categoria/(?P<id_comunidad>\d+)/(?P<id>\d+)$', 'inventario.views.inventario_comunidad'),
+    (r'^inventario/categoria_detalle/(?P<id_comunidad>\d+)/(?P<id_categoria>\d+)$', 'inventario.views.categoria_detalle'),
+    (r'^inventario/categoria_detalle/(?P<id_comunidad>\d+)/(?P<id_categoria>\d+)/(?P<id>\d+)$', 'inventario.views.categoria_detalle'),
+    (r'^inventario/movimiento/(?P<id_detalle>\d+)/(?P<id>\d+)$', 'inventario.views.movimiento'),
+    (r'^inventario/movimiento/(?P<id_detalle>\d+)$', 'inventario.views.movimiento'),
+    (r'^inventario/movimiento_list/(?P<id_detalle>\d+)$', 'inventario.views.movimiento_list'),
     #ASIENTOS
     (r'^asiento/comunidad/$', 'asientos_contables.views.sel_comunidad_asiento'),
     (r'^asiento/nuevo/$', 'asientos_contables.views.nuevo'),
@@ -26,9 +46,12 @@ urlpatterns = patterns('',
     (r'^cuentas/mayor/', 'asientos_contables.views.mayores'),
     (r'^mayor/(?P<tipo>.*)', 'asientos_contables.views.mayor'),
     (r'^mayorgeneral/(?P<tipo>.*)', 'asientos_contables.views.mayor_general'),
+    
+    #PRESUPUESTOS
     (r'^presupuesto/(?P<tipo>.*)', 'presupuestos.views.presupuesto'),
-    (r'^presupuesto_comunidad/(?P<tipo>.*)', 'presupuestos.views.presupuesto_comunidad'),
+    (r'^presupuesto_comunidad/(?P<id>\d+)/(?P<tipo>\w+)', 'presupuestos.views.presupuesto_comunidad'),
     (r'^ver_presupuesto/', 'presupuestos.views.ver_presupuesto'),
+    
     (r'^ejecucion_presupuestaria/(?P<tipo>.*)', 'presupuestos.views.ejecucion_presupuestaria'),
     (r'^ejecucion_presupuestaria_comunidad/(?P<tipo>.*)', 'presupuestos.views.ejecucion_presupuestaria_comunidad'),
     (r'^balance/comunidad/(?P<id>.*)', 'cuentas.views.balance_comunidad'),

@@ -36,15 +36,12 @@ class AsientoContableAdminFilter(AjaxSelectAdmin):
         else:
             return False
 
-
 class AsientoContableAdmin(AsientoContableAdminFilter):
     inlines = [AsientoContableDetalleInLine,]
     list_display = ('fecha','comunidad')
     list_filter = ['fecha']
     search_fields = ['fecha']
     fieldsets = [(None, {'fields': ['fecha']}),]
-
-
 
 admin.site.register(AsientoContable, AsientoContableAdmin)
 # Register your models here.

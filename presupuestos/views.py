@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.db.models.aggregates import Count
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 from django.template.context import RequestContext
@@ -14,6 +15,7 @@ from cuentas.models import Cuenta
 from ejercicios.models import Ejercicio
 from hijasdelacaridad.globales import execute_all_query
 from presupuestos.models import Presupuesto, MESES
+from decimal import Decimal
 
 
 def ver_presupuesto(request):
@@ -27,7 +29,7 @@ def ver_presupuesto(request):
             if id_comunidad == 0:
                 messages.error(request, 'Debe Seleccionar una comunidad!')
             else:
-                return HttpResponseRedirect('/presupuesto_comunidad/' + str(id_comunidad)+'/AC')
+                return HttpResponseRedirect('/presupuesto_comunidad/' + str(id_comunidad)+'/IN')
         else:
             return HttpResponseRedirect('/presupuesto/')
     return render_to_response('balance/ver_presupuesto.html',
@@ -73,15 +75,15 @@ def presupuesto(request,tipo):
 
 
     if request.method == 'POST':
-
         for c in presupuestos_list:
             for k in range(1,13):
                 monto=request.POST.get('cuenta-'+str(c[0])+'-'+str(k))
                 cambiar = request.POST.get('cambiar-' + str(c[0])+'-'+str(k),'')
                 print 'cambiaar: ' + str(cambiar)+'  monto: '+str(monto)
-                p=Presupuesto.objects.get(cuenta_id=c[0],mes=k,ejercicio_id=ejercicio.id)
-                p.monto=monto
-                p.save()
+                if cambiar != "True":
+                    p=Presupuesto.objects.get(cuenta_id=c[0],mes=k,ejercicio_id=ejercicio.id,comunidad_id=request.user.usuario.comunidad_id)
+                    p.monto=monto
+                    p.save()
         messages.info(request, 'Grabado exitosamente!')
         save_=request.POST.get('_save','')
         continue_=request.POST.get('_continue','')
@@ -94,17 +96,27 @@ def presupuesto(request,tipo):
     return render_to_response('balance/presupuesto.html', {'presupuestos_list':cuentas_list,'tipo':tipo, 'MESES':MESES}, context_instance=RequestContext(request))
 
 
-def presupuesto_comunidad(request,tipo):
+def presupuesto_comunidad(request,id,tipo):
     if tipo != 'IN' and tipo !='EG':
         tipo='IN'
     cuentas=Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
-    if cuentas.count() == 0:
-        return HttpResponseRedirect('/')
-    comunidad=request.user.usuario.comunidad_id
+    usuario=request.user
+    if int(id)==0 and usuario.is_superuser:
+        messages.error(request, 'Debe ingresar una comunidad')
+        return HttpResponseRedirect('/admin')
+    if not usuario.is_superuser and int(id) != usuario.usuario.comunidad_id:
+        messages.error(request, 'No Pertenece a la Comunidad a la que desea Acceder!')
+        return HttpResponseRedirect('/admin')
+    #messages.error(request, 'No posee este permiso!')
+    if id == 0:
+        comunidad=request.user.usuario.comunidad
+    else:
+        comunidad=get_object_or_404(Comunidad,pk=id)
     ejercicio=Ejercicio.objects.get(actual=True)
     query="select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p"\
     " join ejercicios_ejercicio e on e.id=p.ejercicio_id join cuentas_cuenta c on c.id=p.cuenta_id "\
-    " where e.anho = "+str(ejercicio.anho)+" and p.comunidad_id = "+str(comunidad)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.codigo_ordenado"
+    " where e.anho = "+str(ejercicio.anho)+" and p.comunidad_id = "+str(comunidad.id)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.codigo_ordenado"
+    print query
     presupuestos=execute_all_query(query)
 
     presupuestos_list=[]
@@ -137,11 +149,16 @@ def presupuesto_comunidad(request,tipo):
         for c in presupuestos_list:
             for k in range(1,13):
                 monto=request.POST.get('cuenta-'+str(c[0])+'-'+str(k))
-                print ' monto: '+str(monto)+'   cuenta: '+str(c[0])+' comunidad: '+str(comunidad)+' mes:'+str(k)+' ejercicio_id: '+str(ejercicio.id)
-
-                p=Presupuesto.objects.get(cuenta_id=c[0],mes=k,ejercicio_id=ejercicio.id,comunidad=comunidad)
-                p.monto=monto
-                p.save()
+                
+                cambiar = request.POST.get('cambiar-' + str(c[0])+'-'+str(k),'')
+                if cambiar == "true":
+                    print 'cambiaar: ' + str(cambiar)+'  monto: '+str(monto)
+                    print ' monto: '+str(monto)+'   cuenta: '+str(c[0])+' comunidad: '+str(comunidad)+' mes:'+str(k)+' ejercicio_id: '+str(ejercicio.id)    
+                    p=Presupuesto.objects.get(cuenta_id=c[0],mes=k,ejercicio_id=ejercicio.id,comunidad=comunidad)
+                    print p.comunidad.comunidad
+                    p.monto=Decimal(monto)
+                    p.save()
+                    print 'guardado'
         messages.info(request, 'Grabado exitosamente!')
         save_=request.POST.get('_save','')
         continue_=request.POST.get('_continue','')
@@ -149,7 +166,7 @@ def presupuesto_comunidad(request,tipo):
             return HttpResponseRedirect('/admin/presupuestos/presupuesto/')
         if continue_ != '':
             return HttpResponseRedirect('/presupuesto/'+tipo)
-    return render_to_response('balance/presupuesto.html', {'presupuestos_list':cuentas_list,'tipo':tipo,'comunidad':request.user.usuario.comunidad.comunidad, 'MESES':MESES}, context_instance=RequestContext(request))
+    return render_to_response('balance/presupuesto.html', {'presupuestos_list':cuentas_list,'tipo':tipo,'comunidad':comunidad.comunidad, 'MESES':MESES}, context_instance=RequestContext(request))
 
 
 def esta_en_presupuesto_list(id,presupuesto_list=[]):

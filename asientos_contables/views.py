@@ -58,15 +58,47 @@ def search_form(request):
 
 
 def sel_comunidad_asiento(request):
-       
+    app_label='Asientos Contables'
+    url="/asiento/listar/"
     if request.method == 'POST':
         id_comunidad=request.POST.get('comunidad_set-0-comunidad','')
         return HttpResponseRedirect('/asiento/nuevo/'+str(id_comunidad))
-    return render_to_response('balance/sel_comunidad_asiento.html',{},
+    return render_to_response('balance/sel_comunidad.html',{'app_label':app_label,'url':url},
+                                  context_instance=RequestContext(request))
+
+def sel_comunidad_reporte_mayor(request,id_comunidad,tipo=""):
+    
+    if tipo =="detalle":
+        tipo="detalle"
+        app_label='Mayor Detallado'
+        url="/mayor_detalle_comunidad/"+str(id_comunidad)+"/AC"
+    else:
+        app_label='Mayor'
+        url="/mayor/AC"
+    
+    if request.method == 'POST':
+        desde=request.POST.get('cuenta_set-0-cuenta','')
+        hasta=request.POST.get('cuenta_set-1-cuenta','')
+        todos=request.POST.get('todos','')
+        print todos
+        if todos != "on":
+            if desde != "":
+                desde=Cuenta.objects.get(pk=desde).codigo
+            if hasta != "":
+                hasta=Cuenta.objects.get(pk=hasta).codigo
+        else:
+            desde='1'
+            hasta="6"
+       
+        if tipo == "detalle":
+            return HttpResponseRedirect('/reporte_mayor_detalle/'+str(id_comunidad)+"/"+desde+"/"+hasta)
+        return HttpResponseRedirect('/reporte_mayor/'+str(id_comunidad)+"/"+desde+"/"+hasta)
+    print url+tipo+app_label
+    return render_to_response('balance/sel_comunidad_mayor_reporte.html',{'app_label':app_label,'url':url,'tipo':tipo},
                                   context_instance=RequestContext(request))
 
 def nuevo(request,id_comunidad=''): 
-  
+    
     if id_comunidad == '' and not request.user.is_superuser:
         id_comunidad = request.user.usuario.comunidad_id
     else:
@@ -90,8 +122,8 @@ def nuevo(request,id_comunidad=''):
         fields=""
         for i in range(0,total_rows):
             id_cuenta = request.POST.get('asientocontabledetalle_set-' + str(i) + '-cuenta', '')
-            debe = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-debe', 0.00))
-            haber = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-haber', 0.00))
+            debe = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-debe', ''))
+            haber = Decimal(request.POST.get('asientocontabledetalle_set-' + str(i) + '-haber', ''))
             obs = request.POST.get('asientocontabledetalle_set-' + str(i) + '-observacion', '')
             if id_cuenta != '':
                 id_cuenta=int(id_cuenta)
@@ -367,8 +399,8 @@ def mayor(request,tipo):
                 contador += 1
         if contador == longitud:
             seguir = False
-
-    return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'tipo':tipo}, context_instance=RequestContext(request))
+    return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'id_comunidad':usuario_comunidad_id,
+                                        'tipo':tipo}, context_instance=RequestContext(request))
 
 def mayor_general(request,tipo='AC'):
     tipos=['AC','PA','PN','IN','EG']
@@ -455,7 +487,8 @@ def mayor_detallado_comunidad(request,id,tipo='AC'):
                 haber+=asiento.haber
         cuentas.append([id_cuenta,cuenta,debe-haber,asiento.cuenta.codigo])
     url='/mayor_detalle_comunidad/'+str(id)+'/'
-    return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'cuentas':cuentas, 'tipo': tipo},
+    return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'id_comunidad':id,'detalle':'detalle',
+                                                               'cuentas':cuentas, 'tipo': tipo},
                               context_instance=RequestContext(request))
 
 def mayor_detallado_pais(request,id,tipo='AC'):
@@ -581,3 +614,25 @@ def ver_mayor_detalle(request):
     return render_to_response('balance/ver_mayor.html',
                               {'comunidades':comunidades,'paises':paises},
                               context_instance=RequestContext(request))
+
+
+def convertir(str):
+   if str == "" :
+       return 0.00
+   res = str.split(".");
+   result=""
+   for i in range(len(res)):
+       result+=res[i]
+   res=result.split(",")
+   if len(res) > 1:
+       if res[0] != "":
+           result=res[0]+"."+res[1]
+       else:
+           result="0."+res[1]
+   else:
+       result=res[0]
+   print 'RESULTADDOOOOOO: '
+   print result
+   return Decimal(result)
+   
+   

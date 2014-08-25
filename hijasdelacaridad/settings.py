@@ -34,7 +34,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1:8000','localhost']
 
 
 
@@ -68,6 +68,8 @@ INSTALLED_APPS = (
     'ejercicios',
     'presupuestos',
     'bootstrap_pagination',
+    'inventario',
+    'datetimewidget',
 
 )
 AJAX_SELECT_BOOTSTRAP = True
@@ -131,7 +133,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 STATIC_ROOT = "/home/juanber/PycharmProjects/dissoi2/bootstrap_toolkit/static"
+
+ADMIN_MEDIA_PREFIX=STATIC_ROOT+"/admin/"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 

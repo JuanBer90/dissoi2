@@ -52,7 +52,10 @@ def banco_codigo(parser, token):
 def to_int(value):
     return int(value)
 
+def to_decimal(value):
+    return Decimal(value)
 register.filter('to_int', to_int)
+register.filter('to_decimal', to_decimal)
 register.filter('saldo_anterior', saldo_anterior)
 register.filter('espacios', espacios)
 register.filter('mult', mult)
