@@ -34,13 +34,13 @@
             <tr>
             {% for valor in cuenta %}
 
-                <td {% if forloop.counter != 1 %} style="text-align: right" {% endif %}>{{ valor }}</td>
+                <td {% if forloop.counter != 1 %} style="text-align: right" {% endif %}>{% if forloop.counter != 1 %}{{ valor|separar }}{% else %} {{valor }} {% endif %}</td>
              {% endfor %}
             </tr>
         {% endfor %}
     <tr>
             {% for tot in total %}
-                <th style="text-align: right">{{ tot }}</th>
+                <th style="text-align: right">{{ tot|separar }}</th>
                {% endfor %}
             </tr>
         </table>

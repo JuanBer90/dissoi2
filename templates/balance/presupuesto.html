@@ -12,21 +12,34 @@
 <script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 {% endblock %}
+
+{% block navbar %}
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">Presupuesto: {{ comunidad }} </a>
+                    
+                </div>
+            </div>
+        </div>
+        {% endblock navbar %}
+        
 {% block content %}
 
-<body onload="calcular()">
+<body onload="init()">
     <ul class="nav nav-tabs" role="tablist">
    <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'IN' %}">Ingresos</a></li>
         <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'EG' %}">Egresos</a></li>
   </ul>
 
-            <center><h1>Presupuesto: {{ comunidad }}</h1></center>
-    <form action="" method="post" onchange="calcular()">{% csrf_token %}
+            
+    <form action="" name="formulario" method="post" >{% csrf_token %}
 
     <center>
+	<script src="/static/admin/js/SeparadorDeMiles.js"></script>
 
     <img id="loading" src="{{ STATIC_URL }}/img/loadgif_92x92.gif" style="position: fixed; display: none; left: 50%;top: 50%">
-
+	
     <div class="pre-scrollable" style=" max-height: 500px; overflow-y:scroll;" >
         <table class="table table-bordered table-condensed" id="myTable">
       <tr>
@@ -52,18 +65,18 @@
                     <input type="hidden" id="{{ presupuesto.14 }}" value="{{ presupuesto.14 }}">
                     </td>
                     {% else %}
-                         <td><input {% if presupuesto.15 %} readonly {% else %} onchange="cambiar_valor({{ presupuesto.0 }},{{ forloop.counter|sub:2 }})" {% endif %}
-                                 name="cuenta-{{presupuesto.0 }}-{{ forloop.counter|sub:2 }}" style="width: 80px; text-align: right "
-                                    type="number" step="0.01" value="{{ fila }}" min="0" id="cuenta-{{ presupuesto.0 }}-{{ forloop.counter|sub:2 }}">
-                         <input type="hidden" style="width: 50px" id="cambiar-{{ presupuesto.0 }}-{{ forloop.counter|sub:2 }}" value="" nombre="cambiar-{{ presupuesto.0 }}-{{ forloop.counter |sub:2}}">
+                         <td><input {% if presupuesto.15 %} readonly {% else %} {% endif %} 
+                                 name="cuenta-{{presupuesto.0 }}-{{ forloop.counter|sub:2 }}"  style="width: 120px; text-align: right " onclick="this.select()" 
+                                 onkeyup="calcular_parientes(this,this.value.charAt(this.value.length-1),{{ presupuesto.0 }},{{ forloop.counter|sub:2 }})"
+                                 type="text" step="0.01" value="{{ fila }}" min="0" id="cuenta-{{ presupuesto.0 }}-{{ forloop.counter|sub:2 }}">
+                         <input type="hidden" style="width: 50px" name="cambiar-{{ presupuesto.0 }}-{{ forloop.counter|sub:2 }}" id="cambiar-{{ presupuesto.0 }}-{{ forloop.counter|sub:2 }}" value="" >
                          </td>
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <td><input style="width: 80px; text-align: right" type="number" value="0"
+            <td><input style="width: 80px; text-align: right" type="text" value="0"
                        readonly id="total-{{ presupuesto.0 }}"></td>
         </tr>
-
         {% endfor %}
 
     </table>
@@ -77,22 +90,50 @@
 
 </div>
 <div class="pull-right">
-<input type="submit" onclick="fin()" value="Grabar y continuar editando" class="btn" name="_continue">
-<input type="submit" onclick="fin()" value="Grabar" class="btn btn-primary default" name="_save">
+<input type="button" onclick="fin()" value="Grabar y continuar editando" class="btn" name="_continue">
+<input type="button" onclick="fin()" value="Grabar" class="btn btn-primary default" name="_save">
 </div>
 
         </div>
     </div>
 </form>
  <script>
+ 
+ 
+ function init(button) {
+
+	 inputs = document.getElementsByTagName('input');
+	 for (var index = 0; index < inputs.length; ++index) {
+	   var type=inputs[index].getAttribute('type')
+	   if(type == "text"){
+	       inputs[index].value=convertir_rever(inputs[index].value)
+	    }
+	 }
+	 calcular()
+
+	 }
+ 
  function fin(){
      document.getElementById('loading').style.display='block'
+    
+     inputs = document.getElementsByTagName('input');
+	 for (var index = 0; index < inputs.length; ++index) {
+	   var type=inputs[index].getAttribute('type')
+	   if(type == "text"){
+	       inputs[index].value=convertir(inputs[index].value)
+	    }
+	 }
+     document.formulario.submit();
  }
  function cambiar_valor(id,loop){
     document.getElementById('cambiar-'+id.toString()+'-'+loop.toString()).value='true'
  }
+ function calcular_parientes(element, value,id_presupuesto,columna){
+	 puntitos(element,value);
+	 cambiar_valor(id_presupuesto,columna)
+	 calcular();
+ }
  function calcular(){
-
      var table=document.getElementById('myTable')
      var i= 2,longitud=table.rows.length,suma=0;
      //CARGA LOS VALORES EN LOS PADRES INMEDIATOS
@@ -108,7 +149,6 @@
              }
             }
             i++;
-
        }
     //EN ESTA PARTE SE CARGAN TODOS LOS PADRES
     encontrar_ultimos_readonly(longitud,table)
@@ -116,10 +156,11 @@
      {% for presupuesto in presupuestos_list %}
          suma=0
               for(var i=1;i<=12;i++){
-               suma=parseFloat(suma)+parseFloat(document.getElementById('cuenta-{{ presupuesto.0 }}-'+ i.toString()).value)
+               suma=parseFloat(suma)+convertir(document.getElementById('cuenta-{{ presupuesto.0 }}-'+ i.toString()).value)
 
               }
-              document.getElementById('total-{{ presupuesto.0 }}').value=Math.round(suma*100)/100
+              
+              document.getElementById('total-{{ presupuesto.0 }}').value=convertir_rever(Math.round(suma*100)/100)
      {% endfor %}
  }
 function encontrar_hermanos(index){
@@ -156,7 +197,8 @@ function encontrar_hermanos(index){
              for (var j=1;j<=12;j++){
                  var padre_value= row_padre.cells[j].getElementsByTagName('input')[0]
                  var hermano_value=row_hermano.cells[j].getElementsByTagName('input')[0]
-                 padre_value.value=Math.round((parseFloat(padre_value.value)+parseFloat(hermano_value.value))*100)/100
+                 
+                 padre_value.value=convertir_rever(Math.round((convertir(padre_value.value)+convertir(hermano_value.value))*100)/100)
              }
          }
      }

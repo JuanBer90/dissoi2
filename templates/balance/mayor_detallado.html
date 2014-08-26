@@ -20,9 +20,15 @@
         <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{{ url }}EG">Egresos</a></li>
   <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{{ url }}PN">Patrimonio Neto</a></li>
 </ul>
-
+<table>
+<tr><td style="width: 90%"></td>
+<td>
+	<a href="{% url 'asientos_contables.views.sel_comunidad_reporte_mayor' id_comunidad detalle %}" class="btn btn-primary">Reporte</a>
+	</td>
+	</tr>
+</table>
     {% for id,cuenta,saldo,codigo in cuentas %}
-        <p> <span style="font-size: 22px"><b>{{ codigo }} - {{ cuenta }}   -   Saldo:</b> {{ saldo }}  </span>   </p>
+        <p> <span style="font-size: 22px"><b>{{ codigo }} - {{ cuenta }}   -   Saldo:</b> {{ saldo|separar }}  </span>   </p>
       <table class="table-bordered table-striped">
 
        <tr><th class="navbar-inner "><p style="font-size: 17px">Fecha</p></th><th class="navbar-inner">
@@ -38,16 +44,16 @@
                 </td>
                 <td style="width: 100px; text-align: right"><p style="font-size: 17px; margin-right: 10px">
                     {% if consolidado == 'true' %}
-                        {{ c.debe_en_dolares }}
+                        {{ c.debe_en_dolares|separar }}
                         {% else %}
-                        {{ c.debe }}
+                        {{ c.debe|separar }}
                         {% endif %}</p></td>
                 <td style="width: 100px; text-align: right">
                     <p style="font-size: 17px; margin-right: 10px">
                       {% if consolidado == 'true' %}
-                        {{ c.haber_en_dolares }}
+                        {{ c.haber_en_dolares|separar }}
                         {% else %}
-                        {{ c.haber }}
+                        {{ c.haber|separar }}
                         {% endif %}
                </p></td>
                 <td style="width: 100px; text-align: right">
@@ -55,14 +61,14 @@
                       {% if consolidado == 'true' %}
 
                             <p style="font-size: 17px; margin-right: 10px; ">
-                         {{ c.saldo_en_dolares }}
+                         {{ c.saldo_en_dolares|separar }}
                         {% else %}
                                  <p style="font-size: 17px; margin-right: 10px;" >
 
                           {% if forloop.counter0 > 0 %}
-                              {{ asientos|saldo_anterior:forloop.counter0 }}
+                              {{ asientos|saldo_anterior:forloop.counter0|separar }}
                             {% else %}
-                              {{ c.saldo }}
+                              {{ c.saldo|separar }}
                           {% endif %}
 
                         {% endif %}
@@ -83,8 +89,6 @@
         </table>
         <br><br>
     {% endfor %}
-
-
 
     </center>
 {% endblock %}

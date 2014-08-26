@@ -21,7 +21,15 @@
   <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor' 'PN' %}">Patrimonio Neto</a></li>
 </ul>
 
+<table><tr><td>
     <h1>Cuentas</h1>
+    </td>
+    <td style="width: 100px"></td>
+    <td>
+    <a href="/reporte/comunidad/{{ id_comunidad }}" class="btn btn-primary">Reporte</a>
+    </td>
+    </tr>
+   </table>
     <table class="table-striped">
       <tr><th style="width: 500px">Cuenta</th><th>Tipo</th><th>Debe</th><th>Haber</th><th>Saldo</th>
     {% for cuenta in vector_cuentas %}

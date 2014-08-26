@@ -1,0 +1,112 @@
+{% extends 'admin/base_site.html' %}
+{% load url from future %}
+{% load my_tags %}
+<head>
+{% block title %}Movimiento{% endblock %}
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+    <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/static/admin/css/ie.css" /><![endif]-->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/overrides.css">
+{#    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">#}
+
+
+
+    <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+      <script src="/static/admin/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/admin/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet">
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+    <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
+    <script type="text/javascript" src="/static/ajax_select/js/bootstrap.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+
+    </script><script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
+
+
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <script type="text/javascript">
+    //<![CDATA[
+            (function($) {
+                $(document).ready(function() {
+                    $('input[type="submit"]').addClass('btn');
+                    $('[title]').tooltip();
+                });
+            }(jQuery));
+    //]]>
+    </script>
+ 
+</head>
+
+
+ 
+{% block navbar %}
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">{{ detalle.descripcion }}</a>
+                </div>
+            </div>
+        </div>
+        {% endblock navbar %}
+        
+        
+        {% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li><a href="{% url 'inventario.views.inventario_comunidad' detalle.comunidad_id %}">Inventario</a> <span class="divider">/</span></li>
+<li><a href="{% url 'inventario.views.inventario_comunidad' detalle.comunidad_id detalle.categoria_id %}">{{ detalle.categoria.nombre }}</a> <span class="divider">/</span></li>
+<li><a href="{% url 'inventario.views.inventario_comunidad' detalle.comunidad_id detalle.categoria_id %}">{{ detalle.descripcion }}</a> <span class="divider">/</span></li>
+<li>Movimientos</li>
+</ul>
+            {% endblock %}
+{% block content %}
+
+<table>
+<td style="width: 86%"><td>
+<td><a class="btn btn-primary" href="{% url 'inventario.views.movimiento' detalle.id %}">Agregar Movimiento</a></li></td>
+</table>
+<form method="post" >{% csrf_token %}
+<center>
+<table class="table table-striped table-bordered" style="width: 80%">
+
+
+<thead>
+<th>Movimiento</th><th>Cantidad</th><th>Fecha</th><th>Observacion</th><th>Acci&oacute;n</th>
+</thead>
+<tbody>
+{% for movimiento in movimientos %}
+<tr>
+<td>{{ movimiento.get_movimiento_display }}</td>
+<td> {{ movimiento.cantidad }}</td>
+<td>{{ movimiento.fecha }}</td>
+<td>{{ movimiento.observacion }}</td>
+<td><a href="{% url 'inventario.views.movimiento' detalle.id movimiento.id %}">Modificar</a></td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+
+</center>
+  </form>
+  {% endblock %} 

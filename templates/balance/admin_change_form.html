@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/static/admin/css/overrides.css">
 {#    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">#}
 
-
+      <script src="/static/admin/js/SeparadorDeMiles.js"></script>
 
     <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
       <script src="/static/admin/js/jquery-1.9.1.min.js"></script>
@@ -182,10 +182,10 @@
                     </td>
                     
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-debe" required="" min="0"  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" onkeyup="SeparadorDeMiles:puntitos(this,this.value.charAt(this.value.length-1))" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-debe" required="" min="0"  step="0.01" type="text" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-haber" required="" min="0" step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" onkeyup="SeparadorDeMiles:puntitos(this,this.value.charAt(this.value.length-1))" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-haber" required="" min="0" step="0.01" type="text" value="0">
                     </td>
                  <td class="field-observacion">
                         <input style="height: 30px" name="asientocontabledetalle_set-{{ z }}-observacion" maxlength="100" type="text" value="">
@@ -225,10 +225,10 @@ $(document).ajaxComple(function() {
     <td style="width: 375px"></td>
     <td class="readonly" style="width: 300px">
         <label><b>Total Debe:</b></label>
-        <input type="number" style="height: 30px; text-align: right;" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
+        <input type="text" style="height: 30px; text-align: right;" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
     <td class="readonly" style="width: 250px">
         <label><b>Total Haber:</b></label>
-        <input type="number" style="height: 30px; text-align: right;" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
+        <input type="text" style="height: 30px; text-align: right;" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
     <td class="readonly" style="width: 250px;">
     </tfoot>
 </table>
@@ -249,9 +249,7 @@ $(document).ajaxComple(function() {
  </div>
 
 <script type="text/javascript">
-
-   
-    function total(){
+    function total2(){
         var table = document.getElementById('myTable');
         var rowCount = parseInt(table.rows.length);
         var i;
@@ -270,23 +268,71 @@ $(document).ajaxComple(function() {
             total_h.value=Math.round((aux_haber+haber)*100)/100;
         }
     }
+    
+function total(){
+    	
+        var table = document.getElementById('myTable');
+        var rowCount = parseInt(table.rows.length);
+        var i;
+        var  total_d=document.getElementById('total_d')
+        var  total_h=document.getElementById('total_h')
+        total_d.value=0.00
+        total_h.value=0.00
+        for (i=0;i<rowCount;i++){
+            var element_debe=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe')
+            var element_haber=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber')
+            var debe=(element_debe != null)?convertir(element_debe.value) : 0;
+            var haber=(element_haber != null)?convertir(element_haber.value) : 0;
+            var aux_debe=parseFloat(convertir(total_d.value));
+            var aux_haber=parseFloat(convertir(total_h.value));
+            total_d.value=convertir_rever((Math.round((aux_debe+debe)*100)/100).toString());
+            total_h.value=convertir_rever((Math.round((aux_haber+haber)*100)/100).toString());
+        }
+    }
+    function setear(){
+        var table = document.getElementById('myTable');
+        var rowCount = parseInt(table.rows.length);
+        var i;
+        var  total_d=document.getElementById('total_d')
+        var  total_h=document.getElementById('total_h')
+        total_d.value=0.00
+        total_h.value=0.00
+        for (i=0;i<rowCount;i++){
+            var element_debe=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe')
+            var element_haber=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber')
+            if(element_debe != null){
+            element_debe.value=(element_debe != null)?convertir(element_debe.value) : 0;
+            }
+           if(element_haber != null){
+            element_haber.value=(element_haber != null)?convertir(element_haber.value) : 0;
+           }
+        }
+    }
 
 
+    
     function guardar(){
-        var  total_d=parseFloat(document.getElementById('total_d').value)
-        var  total_h=parseFloat(document.getElementById('total_h').value)
+    	
+        var  total_d=convertir(document.getElementById('total_d').value)
+        var  total_h=convertir(document.getElementById('total_h').value)
+        
         if(total_d != total_h){
             document.getElementById('error_0').removeAttribute('hidden')
             document.getElementById('error_1').removeAttribute('hidden')
-        }else if (total_d == 0 || total_h == 0){
+            
+        }else if (parseInt(total_d) == 0 || parseInt(total_h) == 0){
             document.getElementById('error_0').removeAttribute('hidden')
             document.getElementById('error_2').removeAttribute('hidden')
+            
         }else if(cantidad_cuentas()){
             document.getElementById('error_0').removeAttribute('hidden')
             document.getElementById('error_3').removeAttribute('hidden')
+            
         }else{
             var fecha=document.getElementById('id_fecha').value.toString()
+            setear()
             Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
+            
 
         }
     }

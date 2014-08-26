@@ -277,7 +277,7 @@
 <tr class="row1">
     <td class="action-checkbox">
     <input class="action-select" name="_selected_action" type="checkbox" value="9"></td>
-    <th class="nowrap"><a href="{% url 'asientos_contables.views.editar' asiento.id %}">{{asiento.fecha }}</a></th>
+    <th class="nowrap"><a href="{% url 'asientos_contables.views.editar' asiento.asiento_contable.id %}">{{asiento.fecha }}</a></th>
     <td class="nowrap">{{ asiento.asiento_contable.comunidad.comunidad }}</td></tr>
 
 {% endfor %}

@@ -2,7 +2,6 @@
 <head>
     {% load my_tags %}
     {% load dajaxice_templatetags %}
-{% load l10n %}
 
 
     <title>Añadir asiento contable | Sitio de administración de Django</title>
@@ -25,7 +24,7 @@
       <script src="/static/admin/js/jquery-1.9.1.min.js"></script>
     <script src="/static/admin/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-      <script src="/static/admin/js/SeparadorDeMiles.js"></script>
+
 
     <script type="text/javascript" src="/admin/jsi18n/"></script>
     <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet">
@@ -67,7 +66,13 @@
 </head>
 
 
-<body class="asientos_contables-asientocontable change-form"  > 
+<body class="asientos_contables-asientocontable change-form" onload="iniciar()" > 
+<script type="text/javascript">
+function iniciar(){
+	total();
+	banco();
+}
+</script>
 {#<!-- Container -->#}
 <div class="container-fluid">
 
@@ -131,7 +136,7 @@
     <div class="form-row field-fecha">
         <div>
             <label class="required" for="id_fecha">Fecha:</label>
-            <input style="height: 30px" class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ hoy }}">
+            <input style="height: 30px" class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ asiento.fecha }}">
         </div>
     </div>
 </fieldset>
@@ -147,14 +152,58 @@
             <h2>Asiento contable detalles</h2>
             <table id="myTable" class="table table-striped table-bordered">
                 <thead><tr>
-                    <th class="required" style="width: 200px">Cuenta</th>
+                    <th class="required"  style="width: 200px">Cuenta</th>
                     <th class="required">Debe</th>
                     <th class="required">Haber</th>
                     <th >Concepto</th>
+                    <th>¿Eliminar?</th>
                 </tr></thead>
                 <tbody>                
+		{% for ad  in asientos_detalles %}
+		<tr class="form-row {% cycle 'row1' 'row2' %}  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-{{ forloop.counter0 }}">
+					
+                    <td class="field-cuenta">     		
+                 		<input type="text" style="height: 30px" name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" 
+                  		id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
+	        
+    					<input type="hidden" name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta" id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta" value="{{ ad.cuenta_id }}"
+           				data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
+           				                      
+                      	<select id="asientocontabledetalle_set-{{ forloop.counter0 }}-banco" style="display: {% if ad.cuenta_bancaria_id == None %} none {% else %} block {% endif %};" name="asientocontabledetalle_set-{{ forloop.counter0 }}-banco" >
+                            {% for banco in bancos %}
+                                <option value="{{ banco.id }}" {% if ad.cuenta_bancaria_id == banco.id %} selected {% endif %}>{{ banco.cuenta_bancaria }} - {{ banco.nro_de_cuenta }}</option>
+                            {% endfor %}
+                        </select>
+    					<div id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_on_deck"  class="results_on_deck" >  					
+    					<div id="a-{{ forloop.counter0 }}" ><span onclick="del_content({{ forloop.counter0 }})" class="ui-icon ui-icon-trash" id="kill_undefinedid_asientocontabledetalle_set-{{ forloop.counter }}-cuenta">X</span> 
+    					<div> {{ ad.cuenta.cuenta }}<div> {{ ad.cuenta.codigo }}</div> </div></div>
+    					</div>
+    					<script>
+    					$("#id_asientocontabledetalle_set-"+"{{ forloop.counter0 }}"+"-cuenta_on_deck").bind('added',function() {
+    						id_cuenta = $("#id_asientocontabledetalle_set-"+"{{ forloop.counter0 }}"+"-cuenta").val();
+    			            banco();
+    			    	});
+    					
+    					$("#id_asientocontabledetalle_set-"+"{{ forloop.counter0 }}"+"-cuenta_on_deck").bind('killed',function() {
+    						  remover({{ forloop.counter0 }});
+    			    });
+    					</script>
+                    </td>
+                    
+                    <td class="field-debe">
+                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-debe" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-debe" required="" min="0"  step="0.01" type="number" value="{{ ad.debe|to_int }}">
+                    </td>
+                    <td class="field-haber">
+                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-haber" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-haber" required="" min="0" step="0.01" type="number" value="{{ ad.haber|to_int }}">
+                    </td>
+                 <td class="field-observacion">
+                        <input style="height: 30px" name="asientocontabledetalle_set-{{ forloop.counter0 }}-observacion" maxlength="100" type="text" value="{% if ad.observacion != None %} {{ ad.observacion }} {% endif %}">
+                    </td>
+                    <td class="delete"><div><a class="inline-deletelink" href="javascript:del_fila({{ forloop.counter0 }})">Eliminar</a></div></td>
+                </tr>
+		{% endfor %}
 		{% for z in filas %}
-		<tr {% if forloop.counter0 > 2 %} hidden="hidden" {% endif %}  class="form-row {% cycle 'row1' 'row2' %}  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-{{ z }}">
+		<tr  hidden="hidden"  class="form-row {% cycle 'row1' 'row2' %}  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-{{ z }}">
                     <td class="field-cuenta">     		
                  		<input type="text" style="height: 30px" name="asientocontabledetalle_set-{{ z }}-cuenta_text" 
                   		id="id_asientocontabledetalle_set-{{ z }}-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
@@ -171,26 +220,27 @@
     					<div></div>
     					</div>
     					<script>
-    					$("#id_asientocontabledetalle_set-"+"{{ forloop.counter0 }}"+"-cuenta_on_deck").bind('added',function() {
-    						id_cuenta = $("#id_asientocontabledetalle_set-"+"{{ forloop.counter0 }}"+"-cuenta").val();
+    					$("#id_asientocontabledetalle_set-"+"{{ z }}"+"-cuenta_on_deck").bind('added',function() {
+    						id_cuenta = $("#id_asientocontabledetalle_set-"+"{{ z }}"+"-cuenta").val();
     			            banco();
     			    	});
     					
-    					$("#id_asientocontabledetalle_set-"+"{{ forloop.counter0 }}"+"-cuenta_on_deck").bind('killed',function() {
-    						  remover({{ forloop.counter0 }});
+    					$("#id_asientocontabledetalle_set-"+"{{ z }}"+"-cuenta_on_deck").bind('killed',function() {
+    						  remover({{ z }});
     			    });
     					</script>
                     </td>
                     
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" style="height: 30px; text-align: right" onkeyup="SeparadorDeMiles:puntitos(this,this.value.charAt(this.value.length-1))" name="asientocontabledetalle_set-{{ z }}-debe" required="" min="0"  step="0.01" type="text" value="0">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-debe" required="" min="0"  step="0.01" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" style="height: 30px; text-align: right"  name="asientocontabledetalle_set-{{ z }}-haber" required="" min="0" step="0.01" type="text" value="0" onkeyup="SeparadorDeMiles:puntitos(this,this.value.charAt(this.value.length-1))">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-haber" required="" min="0" step="0.01" type="number" value="0">
                     </td>
                  <td class="field-observacion">
                         <input style="height: 30px" name="asientocontabledetalle_set-{{ z }}-observacion" maxlength="100" type="text" value="">
                     </td>
+                    <td class="delete"><div><a class="inline-deletelink" href="javascript:del_fila({{ z }})">Eliminar</a></div></td>
                 </tr>
 		{% endfor %}
                 <tr class="add-row"><td colspan="6">
@@ -200,18 +250,21 @@
         </fieldset>
     </div>
 </div>
-<input type="hidden" id='cantidad_rows' name='cantidad_rows' value="3">
+<input type="hidden" id='cantidad_rows' name='cantidad_rows' value="{{ asientos_detalles|length }}">
 <script type="text/javascript">
 function addRow(){
     var cantidad = document.getElementById('cantidad_rows')
     var row=document.getElementById('asientocontabledetalle_set-'+cantidad.value.toString())
     row.removeAttribute('hidden')
     cantidad.value=parseInt(cantidad.value)+1
-    
-    
 }
 
-
+/*
+$(document).ajaxComple(function() {
+	  alert("An individual AJAX call has completed successfully");
+	  //banco()
+	  
+	});*/
 </script> 
 
 <!-- TOTALES  -->
@@ -221,14 +274,13 @@ function addRow(){
     <td style="width: 375px"></td>
     <td class="readonly" style="width: 300px">
         <label><b>Total Debe:</b></label>
-        <input type="text" style="height: 30px; text-align: right;" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
+        <input type="number" style="height: 30px; text-align: right;" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
     <td class="readonly" style="width: 250px">
         <label><b>Total Haber:</b></label>
-        <input type="text" style="height: 30px; text-align: right;" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
+        <input type="number" style="height: 30px; text-align: right;" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
     <td class="readonly" style="width: 250px;">
     </tfoot>
 </table>
-
 
 
 
@@ -271,7 +323,6 @@ function addRow(){
     }
 
     function total(){
-    	
         var table = document.getElementById('myTable');
         var rowCount = parseInt(table.rows.length);
         var i;
@@ -282,49 +333,29 @@ function addRow(){
         for (i=0;i<rowCount;i++){
             var element_debe=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe')
             var element_haber=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber')
-            var debe=(element_debe != null)?convertir(element_debe.value) : 0;
-            var haber=(element_haber != null)?convertir(element_haber.value) : 0;
-            var aux_debe=parseFloat(convertir(total_d.value));
-            var aux_haber=parseFloat(convertir(total_h.value));
-            total_d.value=convertir_rever((Math.round((aux_debe+debe)*100)/100).toString());
-            total_h.value=convertir_rever((Math.round((aux_haber+haber)*100)/100).toString());
+            var debe=(element_debe != null)?parseFloat(element_debe.value) : 0;
+            var haber=(element_haber != null)?parseFloat(element_haber.value) : 0;
+            var aux_debe=parseFloat(total_d.value);
+            var aux_haber=parseFloat(total_h.value);
+            total_d.value=Math.round((aux_debe+debe)*100)/100;
+            total_h.value=Math.round((aux_haber+haber)*100)/100;
         }
     }
-    function setear(){
-        var table = document.getElementById('myTable');
-        var rowCount = parseInt(table.rows.length);
-        var i;
-        var  total_d=document.getElementById('total_d')
-        var  total_h=document.getElementById('total_h')
-        total_d.value=0.00
-        total_h.value=0.00
-        for (i=0;i<rowCount;i++){
-            var element_debe=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe')
-            var element_haber=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber')
-            if(element_debe != null){
-            element_debe.value=(element_debe != null)?convertir(element_debe.value) : 0;
-            }
-           if(element_haber != null){
-            element_haber.value=(element_haber != null)?convertir(element_haber.value) : 0;
-           }
-        }
-    }
-    
+
 
     function guardar(){
-        var  total_d=convertir(document.getElementById('total_d').value)
-        var  total_h=convertir(document.getElementById('total_h').value)
+        var  total_d=parseFloat(document.getElementById('total_d').value)
+        var  total_h=parseFloat(document.getElementById('total_h').value)
         if(total_d != total_h){
             document.getElementById('error_0').removeAttribute('hidden')
             document.getElementById('error_1').removeAttribute('hidden')
-        }else if (parseInt(total_d) == 0 || parseInt(total_h) == 0){
+        }else if (total_d == 0 || total_h == 0){
             document.getElementById('error_0').removeAttribute('hidden')
             document.getElementById('error_2').removeAttribute('hidden')
         }else if(cantidad_cuentas()){
             document.getElementById('error_0').removeAttribute('hidden')
             document.getElementById('error_3').removeAttribute('hidden')
         }else{
-        	setear()
             var fecha=document.getElementById('id_fecha').value.toString()
             Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
 
@@ -364,6 +395,7 @@ function addRow(){
         if (id_cuenta != ""){
             var id_cuenta=parseInt(id_cuenta)
         }
+        
     }
     function cantidad_cuentas(){
         var table = document.getElementById('myTable');
@@ -381,12 +413,33 @@ function addRow(){
         }
         return (cont == 0)
     }
+    function del_fila(index){
+    	document.getElementById('asientocontabledetalle_set-'+index.toString()).style.display='none'
+    	document.getElementById('id_asientocontabledetalle_set-'+ index.toString()+'-cuenta').value=""
+    	document.getElementById('id_asientocontabledetalle_set-'+ index.toString()+'-debe').value=0
+    	document.getElementById('id_asientocontabledetalle_set-'+ index.toString()+'-haber').value=0
+    	total();
+    }
+    function del_content(index){
+    	
+    	document.getElementById('a-'+index.toString()).innerHTML=""
+    	document.getElementById('id_asientocontabledetalle_set-'+index.toString()+'-cuenta').value=""
+    		document.getElementById('asientocontabledetalle_set-'+index.toString()+'-banco').style.display='none'
+    			var debe = document.getElementById("id_asientocontabledetalle_set-"+index.toString()+"-debe")
+    	        var haber = document.getElementById("id_asientocontabledetalle_set-"+index.toString()+"-haber")
+    	        debe.readonly=false;
+    	        haber.readonly=false;
+    	        haber.style.background='white'
+    	       	debe.style.background='white'
+    }
     function remover(index){
+    	
     	var cuenta=document.getElementById('id_asientocontabledetalle_set-'+ index.toString()+'-cuenta');
     	 var banco=document.getElementById('asientocontabledetalle_set-'+index.toString()+'-banco')
     	 if (cuenta.value == ''){
     		 banco.style.display='none'
     	 }
+    	alert('removed')
         var debe = document.getElementById("id_asientocontabledetalle_set-"+index.toString()+"-debe")
         var haber = document.getElementById("id_asientocontabledetalle_set-"+index.toString()+"-haber")
         debe.readonly=false;
@@ -404,7 +457,7 @@ function addRow(){
 
 </div>
 <div class="pull-right">
-    
+    <a href="{% url 'asientos_contables.views.nuevo' %}" class="btn btn-default">Limpiar</a>
 <input type="button" value="Grabar"  onclick="guardar()" class="btn btn-primary" name="_save">
 </div>
         </div>
@@ -419,17 +472,6 @@ function addRow(){
     })(django.jQuery);
 </script>
 
-
-	
-	
-   
-   
-
-
-
-
-
-
 </div>
 </form></div>
 
@@ -437,7 +479,7 @@ function addRow(){
 </div>
 <!-- END Content -->
 
-
+<div id="footer"></div>
 </div>
 <!-- END Container -->
 

@@ -1,0 +1,181 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Es-es">
+{% load my_tags %}
+<head>
+    <title>Descripcion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+
+    <!-- Le styles, placed after extrastyle to correctly override default styling -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    
+
+    <!-- <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" /> -->
+    <script type="text/javascript">
+    //<![CDATA[
+        window.__admin_media_prefix__ = "/static/admin/";
+    //]]>
+    </script>
+    <script src="/static/admin/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/admin/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    
+    {% load static %}
+
+
+<link rel="stylesheet" type="text/css" 
+    href="{% static 'admin/css/widgets.css' %}"/>
+
+
+<script type="text/javascript" 
+    src="/admin/jsi18n/"></script>
+<script type="text/javascript" 
+    src="{% static 'admin/js/core.js' %}"></script>
+<script type="text/javascript" 
+    src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+<script type="text/javascript" 
+    src="{% static 'admin/js/jquery.js' %}"></script>
+
+<script type="text/javascript" 
+    src="{% static 'admin/js/actions.js' %}"></script>
+<script type="text/javascript" 
+    src="{% static 'admin/js/calendar.js' %}"></script>
+<script type="text/javascript" 
+    src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script>
+
+    
+
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <script type="text/javascript">
+    //<![CDATA[
+            (function($) {
+                $(document).ready(function() {
+                    $('input[type="submit"]').addClass('btn');
+                    $('[title]').tooltip();
+                });
+            }(jQuery));
+    //]]>
+    </script>
+   
+    
+</head>
+
+
+<body  onload="DateTimeShortcuts.handleCalendarQuickLink(0, 0)">
+
+
+<!-- Container -->
+<div class="container-fluid">
+
+    
+    <!-- Header -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                
+<a class="brand" href="/admin/">Hijas de la Caridad</a>
+
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }} </strong> <b class="caret"></b></a>
+                            <ul class="dropdown-menu pull-right">
+                                
+                                <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
+                                
+                                <li><a href="/admin/logout/">Terminar sesión</a></li>
+                            </ul>
+                        </li>
+                            <li>
+                        <a href="#" class="dropdown-toggle"><strong>Comunidad: {{ request.user.usuario.comunidad.comunidad }}</strong></a>
+                    </li>
+                        
+                              
+                        
+                        
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- END Header -->
+    <div class="row-fluid">
+        <div class="span12">
+  <ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li><a href="{% url 'inventario.views.inventario_comunidad' id_comunidad%}">Inventario</a> <span class="divider">/</span></li>
+<li><a href="{% url 'inventario.views.inventario_comunidad' id_comunidad categoria.id %}">{{ categoria.nombre }}</a> <span class="divider">/</span></li>
+<li>{{ modo }}</li>
+</ul>
+  	   
+        </div>
+    </div>
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">Registrar Movimiento</a>
+                </div>
+            </div>
+        </div>
+        
+
+
+<form method="post">{% csrf_token %}
+<center>
+<table class="table table-striped table-bordered" style="width: 400px">
+<tbody>
+	<tr>
+		<th><label for="id_descripcion">Descripcion:</label></th>
+		<td><input id="id_descripcion" maxlength="200" style="height: 30px" required  name="descripcion" value="{{ categoria_detalle.descripcion }}" type="text"></td>
+	</tr>
+	<tr>
+		<th><label for="id_cantidad">Cantidad:</label></th>
+		<td><input id="id_cantidad" min="0" name="cantidad" style="height: 30px" required {% if categoria_detalle.cantidad != None  %} readonly {% endif %} value="{{ categoria_detalle.cantidad }}" type="number"></td>
+	</tr>
+	<tr>
+		<th><label for="id_precio_unitario">Precio unitario:</label></th>
+		<td>
+		<input id="id_precio_unitario" min="0"  name="precio_unitario" step="0.01" style="height: 30px"  required="required" value="{{ categoria_detalle.precio_unitario }}"  type="number">
+		
+		
+		</td>
+	</tr>
+		<tr>
+		<th><label for="id_fecha">Fecha:</label></th>
+		<td><input class="vDateField" id="id_fecha" name="fecha" style="height: 30px" readonly="readonly" required type="text" value="{{ categoria_detalle.fecha }}">
+		</td></tr>
+</tbody></table>
+
+<input type="submit" value="Grabar" class="btn-primary">
+</center>
+
+  </form>
+         
+    </div>
+    <!-- END Content -->
+
+    <footer id="footer"></footer>
+</div>
+<!-- END Container -->
+
+
+
+</body></html>
