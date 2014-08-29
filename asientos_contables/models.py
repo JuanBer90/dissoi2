@@ -5,6 +5,7 @@ from cuentas.models import Cuenta
 import datetime
 from cuentas_bancarias.models import CuentaBancaria
 from cotizaciones.models import Cotizacion
+from django.db.models.fields.files import ImageField
 
 
 class AsientoContable(models.Model):
@@ -64,3 +65,4 @@ class AsientoContableDetalle(models.Model):
 
     def saldo_en_dolares(self):
         return self.debe_en_dolares() - self.haber_en_dolares()
+

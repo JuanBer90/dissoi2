@@ -98,9 +98,12 @@ ROOT_URLCONF = 'hijasdelacaridad.urls'
 
 WSGI_APPLICATION = 'hijasdelacaridad.wsgi.application'
 
-
+ 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+
+# URL of the login page.
+LOGIN_URL = '/login/'
 
 DATABASES = {
     'default': {
@@ -119,7 +122,7 @@ STATICFILES_FINDERS = (
 )
 
 DAJAXICE_MEDIA_PREFIX = "dajaxice"
-
+AUTHENTICATION_BACKENDS=('django.contrib.auth.backends.ModelBackend',)
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 

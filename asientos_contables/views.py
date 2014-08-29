@@ -22,13 +22,14 @@ from comunidades.models import Comunidad, Pais
 from cotizaciones.models import Cotizacion
 from cuentas.models import Cuenta
 from cuentas_bancarias.models import CuentaBancaria
-from hijasdelacaridad.globales import execute_all_query
+from hijasdelacaridad.globales import execute_all_query, get_comunidad,USUARIO_LIMITADO
 from usuarios.models import Usuario
 from ejercicios.models import Ejercicio
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.core.paginator import Paginator
+
 
 ITEMS_PER_PAGE=100
 
@@ -98,11 +99,13 @@ def sel_comunidad_reporte_mayor(request,id_comunidad,tipo=""):
                                   context_instance=RequestContext(request))
 
 def nuevo(request,id_comunidad=''): 
-    
-    if id_comunidad == '' and not request.user.is_superuser:
-        id_comunidad = request.user.usuario.comunidad_id
+    usuario=request.user
+    if usuario.has_perm(USUARIO_LIMITADO) and id_comunidad=='':
+        id_comunidad = get_comunidad(usuario)
+        if id_comunidad == 0:
+            return HttpResponseRedirect('/admin')
     else:
-        if not request.user.has_perm('can_add_asiento_contable') or id_comunidad == '':
+        if id_comunidad == '':
             return HttpResponseRedirect('/admin')
     bancos = CuentaBancaria.objects.filter(comunidad_id=id_comunidad)
     
@@ -161,13 +164,13 @@ def nuevo(request,id_comunidad=''):
 def editar(request,id):
     asiento=AsientoContable.objects.get(pk=id)
     asientos_detalles=AsientoContableDetalle.objects.filter(asiento_contable_id=id)
-    if not request.user.is_superuser:
-        id_comunidad = request.user.usuario.comunidad_id
+    
+    if request.user.has_perm(USUARIO_LIMITADO):
+        id_comunidad = get_comunidad(request.user)
     else:
         id_comunidad=asiento.comunidad_id
-    usuario_id = request.user.id
-    usuario_objeto = User.objects.get(id=usuario_id)
-    bancos = CuentaBancaria.objects.filter(comunidad=usuario_objeto.usuario.comunidad)
+    
+    bancos = CuentaBancaria.objects.filter(comunidad_id=id_comunidad)
     
     if request.method == 'POST':
         addOther=request.POST.get('_addanother','').encode('utf8')
@@ -229,17 +232,16 @@ def listar(request):
     fecha__gte=request.GET.get('fecha__gte','1900-01-01')
     fecha__lt=request.GET.get('fecha__lt','2050-01-01')
     usuario=request.user
-    
-    
-    
+        
     if usuario.is_superuser:
            objeto_total=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
                                                           asiento_contable__fecha__gt=fecha__gte,
                                                        asiento_contable__fecha__lt=fecha__lt).count()
     else:
+        id_comunidad=get_comunidad(usuario)
         objeto_total=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
                                                           asiento_contable__fecha__gt=fecha__gte,
-                                                       asiento_contable__fecha__lt=fecha__lt,asiento_contable__comunidad_id=usuario.usuario.comunidad_id).count()
+                                                       asiento_contable__fecha__lt=fecha__lt,asiento_contable__comunidad_id=id_comunidad).count()
     page=request.GET.get('page',1)
     
     lines=[]
@@ -270,9 +272,12 @@ def listar(request):
                                                           asiento_contable__fecha__gt=fecha__gte,
                                                        asiento_contable__fecha__lt=fecha__lt)[ini:fin]
     else:
+        id_comunidad=get_comunidad(usuario)
+        if id_comunidad == 0:
+            pass
         asientos=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
                                                           asiento_contable__fecha__gt=fecha__gte,
-                                                       asiento_contable__fecha__lt=fecha__lt,asiento_contable__comunidad_id=usuario.usuario.comunidad_id)
+                                                       asiento_contable__fecha__lt=fecha__lt,asiento_contable__comunidad_id=id_comunidad)
 
     hoy = datetime.datetime.today()
     ayer=hoy+datetime.timedelta(days=-1)
@@ -294,9 +299,8 @@ def listar(request):
 def mayores(request):
     vector_cuentas = Cuenta.get_tree()
     
-    usuario_id = request.user.id
-    usuario_objeto = User.objects.get(id=usuario_id)
-    usuario_comunidad_id = usuario_objeto.usuario.comunidad.id 
+    usuario = request.user
+    id_comunidad=get_comunidad(usuario)
 
 
 #Optimizar la consulta   
@@ -305,8 +309,7 @@ def mayores(request):
             cuenta_id = cuenta.id
             asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
             for asiento in asientos:
-                if asiento.comunidad_id() == usuario_comunidad_id:
-                    print 'asiento_comunidad: '+str(asiento.comunidad_id())+'  usuario_comunidad: '+str(usuario_comunidad_id)
+                if asiento.comunidad_id() == id_comunidad:
                     cuenta.debe += asiento.debe
                     cuenta.haber += asiento.haber
             cuenta.cargado = True
@@ -349,10 +352,9 @@ def mayores(request):
 
 
 def mayor(request,tipo):
-    vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo')
-    usuario_id = request.user.id
-    usuario_objeto = User.objects.get(id=usuario_id)
-    usuario_comunidad_id = usuario_objeto.usuario.comunidad.id
+    vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
+    usuario= request.user
+    id_comunidad= get_comunidad(usuario)
     ejercicio = Ejercicio.objects.get(actual=True)
     anho = ejercicio.anho
 #Optimizar la consulta
@@ -361,7 +363,7 @@ def mayor(request,tipo):
             cuenta_id = cuenta.id
             asientos = AsientoContableDetalle.objects.filter(cuenta=cuenta_id)
             for asiento in asientos:
-                if asiento.comunidad_id() == usuario_comunidad_id and asiento.anho() == anho:
+                if asiento.comunidad_id() == id_comunidad and asiento.anho() == anho:
                     cuenta.debe += asiento.debe
                     cuenta.haber += asiento.haber
             cuenta.cargado = True
@@ -403,13 +405,13 @@ def mayor(request,tipo):
                                         'tipo':tipo}, context_instance=RequestContext(request))
 
 def mayor_general(request,tipo='AC'):
+    usuario=request.user
+    if usuario.has_perm(USUARIO_LIMITADO):
+        return HttpResponseRedirect('/admin')
     tipos=['AC','PA','PN','IN','EG']
     if not tipos.__contains__(tipo):
         tipo='AC'
     vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo')
-    usuario_id = request.user.id
-    usuario_objeto = User.objects.get(id=usuario_id)
-    usuario_comunidad_id = usuario_objeto.usuario.comunidad.id
     ejercicio = Ejercicio.objects.get(actual=True)
     anho = ejercicio.anho
 
@@ -470,14 +472,18 @@ def mayor_detallado_comunidad(request,id,tipo='AC'):
     if not tipos.__contains__(tipo):
         tipo = 'AC'
     if id == '':
-        id_comunidad=request.user.usuario.comunidad.id
+        id=get_comunidad(request.user)
+    if id == 0:
+        return HttpResponseRedirect('/admin')
+    
     ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+    comunidad=Comunidad.objects.get(pk=id)
     query = " select distinct c.id,c.cuenta from cuentas_cuenta c " \
             " join asientos_contables_asientocontabledetalle ad on ad.cuenta_id = c.id " \
             " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id " \
             " where a.comunidad_id=" + str(id) + " and tipo='" + tipo + "'  and extract( year from a.fecha) ="+str(ejercicio_anho)
     cuentas_list = execute_all_query(query)
-    asientos=AsientoContableDetalle.objects.filter(cuenta__tipo=tipo,asiento_contable__fecha__year=ejercicio_anho,asiento_contable__comunidad_id=id).order_by('cuenta__codigo')
+    asientos=AsientoContableDetalle.objects.filter(cuenta__tipo=tipo,asiento_contable__fecha__year=ejercicio_anho,asiento_contable__comunidad_id=id).order_by('cuenta')
     cuentas=[]
     for id_cuenta,cuenta in cuentas_list:
         debe=haber=0
@@ -487,7 +493,7 @@ def mayor_detallado_comunidad(request,id,tipo='AC'):
                 haber+=asiento.haber
         cuentas.append([id_cuenta,cuenta,debe-haber,asiento.cuenta.codigo])
     url='/mayor_detalle_comunidad/'+str(id)+'/'
-    return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'id_comunidad':id,'detalle':'detalle',
+    return render_to_response('balance/mayor_detallado.html', {'asientos': asientos,'url':url,'comunidad':comunidad,'detalle':'detalle',
                                                                'cuentas':cuentas, 'tipo': tipo},
                               context_instance=RequestContext(request))
 
@@ -496,7 +502,9 @@ def mayor_detallado_pais(request,id,tipo='AC'):
     if not tipos.__contains__(tipo):
         tipo = 'AC'
     if id == '':
-        id = request.user.usuario.comunidad_id
+        id = get_comunidad(request.user)
+        if id == 0 :
+            return HttpResponseRedirect('/admin')
         pais = Comunidad.objects.get(pk=id).pais
     else:
         pais = Pais.objects.get(pk=id)
@@ -533,6 +541,8 @@ def mayor_detallado_pais(request,id,tipo='AC'):
 
 
 def mayor_detallado_consolidado(request,tipo='AC'):
+    if request.user.has_perm(USUARIO_LIMITADO):
+        return HttpResponseRedirect('/admin')
     tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
     if not tipos.__contains__(tipo):
         tipo = 'AC'
@@ -559,8 +569,8 @@ def mayor_detallado_consolidado(request,tipo='AC'):
                 debe += asiento.debe_en_dolares()
                 haber += asiento.haber_en_dolares()
         cuentas.append([id_cuenta, cuenta, debe - haber, asiento.cuenta.codigo])
-    print query_cuentas
-    print cuentas
+    #print query_cuentas
+    #print cuentas
     url = '/mayor_detalle_consolidado/'
     return render_to_response('balance/mayor_detallado.html',
                               {'asientos': asientos, 'url': url, 'cuentas': cuentas, 'tipo': tipo,'consolidado':'true'},

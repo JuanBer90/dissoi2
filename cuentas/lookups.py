@@ -7,6 +7,8 @@ from ajax_select import LookupChannel
 class CuentaLookup(LookupChannel):
     model = Cuenta
     def get_query(self, q, request):
+        print (request)
+            
         return Cuenta.objects.filter(Q(cuenta__icontains=q) | Q(codigo__startswith=q), numchild=0).order_by('cuenta')
 
     def get_result(self, obj):

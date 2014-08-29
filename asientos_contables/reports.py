@@ -27,6 +27,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from django.conf import settings
 from inventario.models import Categoria, CategoriaDetalle
+from cuentas.templatetags.my_tags import saldo_anterior
  
 # Register Fonts
 #pdfmetrics.registerFont(TTFont('Arial', settings.STATIC_ROOT + 'fonts/arial.ttf'))
@@ -242,11 +243,12 @@ class MyPrint:
         
         elements.append(libro_mayor)
         for cuenta in cuentas:
-            cont=True
+            band=True
+            contador=0
             for asiento in asientos:
                 if cuenta[0] == asiento.cuenta_id:
-                   if cont:
-                       cont=False
+                   if band:
+                       band=False
                        cuenta_table=Table([['','',''],
                                             ['',Paragraph(cuenta[3]+" - "+cuenta[1]+" : "+str(cuenta[2]), styleBH),''],
                                             ],
@@ -257,9 +259,10 @@ class MyPrint:
                        data.append(t_head)
                    array=[asiento.asiento_contable.fecha,Paragraph(separador_de_miles(asiento.debe),styleRIGTH),
                            Paragraph(separador_de_miles(asiento.haber),styleRIGTH), 
-                           Paragraph(separador_de_miles(asiento.saldo()), styleRIGTH),
+                           Paragraph(separador_de_miles(saldo_anterior(asientos,contador)), styleRIGTH),
                                      asiento.observacion]
                    data.append(array)
+                   contador+=1
             table = Table(data, colWidths=t_widths )
             table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
                                            ('BOX', (0, 0), (-1, -1), 0.25, colors.black)]))

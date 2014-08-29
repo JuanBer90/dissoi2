@@ -20,6 +20,15 @@ def ejercicio_actual(request):
     return render_to_response('balance/ver_ejercicio.html', {'ejercicio': ejercicio},
                               context_instance=RequestContext(request))
 
+def set_ejercicio(request):
+    ejercicios=Ejercicio.objects.all()
+    if request.method == "POST":
+        anho=request.POST.get('ejercicio_select','')
+        if anho != "":
+            request.session['ejercicio']=anho
+    return render_to_response('balance/ver_ejercicio.html', {'ejercicios': ejercicios},
+                              context_instance=RequestContext(request))
+
 
 
 def cerrar_ejercicio(request):

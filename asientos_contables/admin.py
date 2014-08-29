@@ -43,7 +43,10 @@ class AsientoContableAdmin(AsientoContableAdminFilter):
     search_fields = ['fecha']
     fieldsets = [(None, {'fields': ['fecha']}),]
 
+class ImagenAdmin(admin.ModelAdmin):
+    pass
 admin.site.register(AsientoContable, AsientoContableAdmin)
+
 # Register your models here.
 #
 # class CompositionElementFormSet(BaseInlineFormSet):

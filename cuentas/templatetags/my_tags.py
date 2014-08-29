@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django import template
+from hijasdelacaridad.globales import separador_de_miles
 
 #Django template custom math filters
 #Ref : https://code.djangoproject.com/ticket/361
@@ -7,6 +8,8 @@ from django.shortcuts import render
 from django.template.base import Node
 from cuentas.models import TIPOS_DE_CUENTA, Cuenta
 from cuentas_bancarias.models import CuentaBancaria
+from usuarios.models import Usuario
+from django.contrib.auth.models import User
 
 register = template.Library()
 
@@ -54,6 +57,23 @@ def to_int(value):
 
 def to_decimal(value):
     return Decimal(value)
+
+def separar(value):
+   return separador_de_miles(value)
+
+def get_comunidad(usuario):
+    id=0
+    aux=Usuario.objects.filter(user_id=usuario.id).count()   
+    if aux >0:
+       id=Usuario.objects.get(user_id=usuario.id).comunidad_id
+    return id
+
+def limitado(usuario):
+    return usuario.has_perm('usuarios.limitado')
+
+register.filter('limitado',limitado)
+register.filter('get_comunidad', get_comunidad)        
+register.filter('separar', separar)    
 register.filter('to_int', to_int)
 register.filter('to_decimal', to_decimal)
 register.filter('saldo_anterior', saldo_anterior)

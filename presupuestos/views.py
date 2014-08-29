@@ -13,89 +13,20 @@ from django.template.context import RequestContext
 from comunidades.models import Comunidad, Pais
 from cuentas.models import Cuenta
 from ejercicios.models import Ejercicio
-from hijasdelacaridad.globales import execute_all_query
+from hijasdelacaridad.globales import execute_all_query,USUARIO_LIMITADO,get_comunidad
 from presupuestos.models import Presupuesto, MESES
 from decimal import Decimal
 
 
+
 def ver_presupuesto(request):
-    comunidades=Comunidad.objects.all()
-    paises=Pais.objects.all()
+    app_label='Presupuesto'
+    url="/admin/"
     if request.method == 'POST':
-        tipo=request.POST.get('tipo','')
-        print tipo
-        if tipo == 'comunidad':
-            id_comunidad = int(request.POST.get('comunidad', 0))
-            if id_comunidad == 0:
-                messages.error(request, 'Debe Seleccionar una comunidad!')
-            else:
-                return HttpResponseRedirect('/presupuesto_comunidad/' + str(id_comunidad)+'/IN')
-        else:
-            return HttpResponseRedirect('/presupuesto/')
-    return render_to_response('balance/ver_presupuesto.html',
-                              {'comunidades':comunidades,'paises':paises},
-                              context_instance=RequestContext(request))
-
-def presupuesto(request,tipo):
-    if tipo != 'IN' and tipo !='EG':
-        tipo='IN'
-    cuentas=Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
-    ejercicio=Ejercicio.objects.get(actual=True)
-    query="select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p"\
-    " join ejercicios_ejercicio e on e.id=p.ejercicio_id join cuentas_cuenta c on c.id=p.cuenta_id "\
-    " where e.anho = "+str(ejercicio.anho)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.codigo_ordenado"
-    print query
-    presupuestos=execute_all_query(query)
-
-    presupuestos_list=[]
-
-    cuentas_list=[]
-    i=0
-
-    while i < len(presupuestos):
-        aux = [presupuestos[i][0], presupuestos[i][1]]
-        for j in range(i, i+12):
-            aux.append(str(presupuestos[j][3]))
-        aux.append(presupuestos[i][4])
-        presupuestos_list.append(aux)
-        i+=12
-
-    for c in cuentas:
-        existe=esta_en_presupuesto_list(c.id, presupuestos_list)
-        if existe != None:
-            existe.append(False)
-            cuentas_list.append(existe)
-        else:
-            aux = [c.id, c.cuenta]
-            for ii in range(1, 13):
-                aux.append('0.00')
-            aux.append(c.codigo)
-            aux.append(True)
-            cuentas_list.append(aux)
-
-
-    if request.method == 'POST':
-        for c in presupuestos_list:
-            for k in range(1,13):
-                monto=request.POST.get('cuenta-'+str(c[0])+'-'+str(k))
-                cambiar = request.POST.get('cambiar-' + str(c[0])+'-'+str(k),'')
-                print 'cambiaar: ' + str(cambiar)+'  monto: '+str(monto)
-                if cambiar != "True":
-                    p=Presupuesto.objects.get(cuenta_id=c[0],mes=k,ejercicio_id=ejercicio.id,comunidad_id=request.user.usuario.comunidad_id)
-                    p.monto=monto
-                    p.save()
-        messages.info(request, 'Grabado exitosamente!')
-        save_=request.POST.get('_save','')
-        continue_=request.POST.get('_continue','')
-        if save_ != '':
-            return HttpResponseRedirect('/admin/presupuestos/presupuesto/')
-        if continue_ != '':
-            return HttpResponseRedirect('/presupuesto/'+tipo)
-
-
-    return render_to_response('balance/presupuesto.html', {'presupuestos_list':cuentas_list,'tipo':tipo, 'MESES':MESES}, context_instance=RequestContext(request))
-
-
+        id_comunidad=request.POST.get('comunidad_set-0-comunidad','')
+        return HttpResponseRedirect('/presupuesto_comunidad/'+str(id_comunidad)+'/IN/')
+    return render_to_response('balance/sel_comunidad.html',{'app_label':app_label,'url':url},
+                                  context_instance=RequestContext(request))
 def presupuesto_comunidad(request,id,tipo):
     if tipo != 'IN' and tipo !='EG':
         tipo='IN'
@@ -104,19 +35,19 @@ def presupuesto_comunidad(request,id,tipo):
     if int(id)==0 and usuario.is_superuser:
         messages.error(request, 'Debe ingresar una comunidad')
         return HttpResponseRedirect('/admin')
-    if not usuario.is_superuser and int(id) != usuario.usuario.comunidad_id:
-        messages.error(request, 'No Pertenece a la Comunidad a la que desea Acceder!')
+    if usuario.has_perm(USUARIO_LIMITADO):
+        if int(id) != usuario.get_comunidad():
+            messages.error(request, 'No Pertenece a la Comunidad a la que desea Acceder!')
         return HttpResponseRedirect('/admin')
-    #messages.error(request, 'No posee este permiso!')
     if id == 0:
-        comunidad=request.user.usuario.comunidad
+        comunidad=Comunidad.objects.get(pk=request.user.get_comunidad())
     else:
         comunidad=get_object_or_404(Comunidad,pk=id)
     ejercicio=Ejercicio.objects.get(actual=True)
     query="select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p"\
     " join ejercicios_ejercicio e on e.id=p.ejercicio_id join cuentas_cuenta c on c.id=p.cuenta_id "\
     " where e.anho = "+str(ejercicio.anho)+" and p.comunidad_id = "+str(comunidad.id)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.codigo_ordenado"
-    print query
+    
     presupuestos=execute_all_query(query)
 
     presupuestos_list=[]
@@ -166,7 +97,8 @@ def presupuesto_comunidad(request,id,tipo):
             return HttpResponseRedirect('/admin/presupuestos/presupuesto/')
         if continue_ != '':
             return HttpResponseRedirect('/presupuesto/'+tipo)
-    return render_to_response('balance/presupuesto.html', {'presupuestos_list':cuentas_list,'tipo':tipo,'comunidad':comunidad.comunidad, 'MESES':MESES}, context_instance=RequestContext(request))
+    return render_to_response('balance/presupuesto.html', {'presupuestos_list':cuentas_list,'tipo':tipo,
+                                                        'comunidad':comunidad, 'MESES':MESES}, context_instance=RequestContext(request))
 
 
 def esta_en_presupuesto_list(id,presupuesto_list=[]):
@@ -241,21 +173,24 @@ def ejecucion_presupuestaria(request,tipo):
 def ejecucion_presupuestaria_comunidad(request,tipo):
     if tipo != 'IN' and tipo != 'EG':
         tipo = 'IN'
-    comunidad_id=request.user.usuario.comunidad_id
+    id_comunidad=get_comunidad(request.user)
+    if id_comunidad == 0:
+        return HttpResponseRedirect('/admin')
+    comunidad=Comunidad.objects.get(pk=id_comunidad)
     ejercicio=Ejercicio.objects.get(actual=True)
     query_ejecutados="select c.id,c.cuenta, (extract(month from fecha) :: int) as mes, "\
     " (case when c.tipo like 'IN' then sum(haber)-sum(debe) else sum(debe)-sum(haber) end) as saldo, "\
     "  c.codigo from  asientos_contables_asientocontabledetalle ad "\
     " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id "\
     " join cuentas_cuenta c on c.id=ad.cuenta_id join ejercicios_ejercicio e on e.anho=extract(year from a.fecha) "\
-    " where e.actual is true and c.tipo = '"+str(tipo)+"' and a.comunidad_id = "+str(comunidad_id)+" group by extract(month from a.fecha),c.cuenta,c.id,c.codigo, "\
+    " where e.actual is true and c.tipo = '"+str(tipo)+"' and a.comunidad_id = "+str(comunidad.id)+" group by extract(month from a.fecha),c.cuenta,c.id,c.codigo, "\
     " c.codigo_ordenado,c.tipo order by c.codigo_ordenado"
     ejecutados=execute_all_query(query_ejecutados)
 
 
     query_presupuestados = "select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p" \
             " join ejercicios_ejercicio e on e.id=p.ejercicio_id join cuentas_cuenta c on c.id=p.cuenta_id " \
-            " where e.anho = " + str(ejercicio.anho) + " and c.tipo like '" + tipo + "' and p.comunidad_id="+str(comunidad_id)+" group by c.id, c.cuenta,c.codigo,p.mes" \
+            " where e.anho = " + str(ejercicio.anho) + " and c.tipo like '" + tipo + "' and p.comunidad_id="+str(comunidad.id)+" group by c.id, c.cuenta,c.codigo,p.mes" \
             " order by c.codigo_ordenado, mes"
     presupuestados = execute_all_query(query_presupuestados)
 
@@ -300,7 +235,8 @@ def ejecucion_presupuestaria_comunidad(request,tipo):
             cuentas_list.append(existe)
     sumar_padre(cuentas_list)
     url='/ejecucion_presupuestaria_comunidad/'
-    return render_to_response('balance/ejecucion_presupuestaria.html', {'url':url,' vector_cuentas':cuentas_list,'tipo':tipo,'meses':MESES,'comunidad':request.user.usuario.comunidad.comunidad},
+    return render_to_response('balance/ejecucion_presupuestaria.html', {'url':url,' vector_cuentas':cuentas_list,'tipo':tipo,
+                                                                        'meses':MESES,'comunidad':comunidad},
                               context_instance=RequestContext(request))
 
 def get_monto_from_ejecutados(id,mes,ejecutados=[]):

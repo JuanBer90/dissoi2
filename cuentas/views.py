@@ -38,7 +38,7 @@ def ver_balance(request):
 
 def balance_comunidad(request,id):
     if id == '':
-        id=request.user.usuario.comunidad_id
+        id=get_comunidad(request.user)
     comunidad=Comunidad.objects.get(pk=id)
     query="select (case when cuenta.tipo like 'AC' then 'ACTIVO' when cuenta.tipo like 'PA' then 'PASIVO' "\
     " when cuenta.tipo like 'IN' then 'INGRESOS' when cuenta.tipo like 'EG' then 'EGRESOS' else 'PATRIMONIO NETO' end) cuenta," \

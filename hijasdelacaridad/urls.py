@@ -13,12 +13,14 @@ dajaxice_autodiscover()
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    
     (r'^admin/jsi18n', 'django.views.i18n.javascript_catalog'),
     url(r'^search_form',  view='asientos_contables.views.search_form', name='search_form'),
     (r'^admin/lookups/', include(ajax_select_urls)),
     (r'^admin/', include(admin.site.urls)),
     (dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     #REPORTES
+    (r'^set_ejercicio/$', 'ejercicios.views.set_ejercicio'),
     (r'^reporte/$', 'asientos_contables.reports.some_view'),
     (r'^reporte_inventario_general/$', 'asientos_contables.reports.inventario_general'),
     (r'^reporte_inventario/(?P<id_comunidad>\d+)/$', 'asientos_contables.reports.inventario_comunidad'),
@@ -30,7 +32,7 @@ urlpatterns = patterns('',
     #INVENTARIOS
     (r'^inventario/general/$', 'inventario.views.inventario_general'),
     (r'^inventario/comunidad/$', 'inventario.views.seleccionar_comunidad'),
-    (r'^inventario/categoria/(?P<id_comunidad>\d+)$', 'inventario.views.inventario_comunidad'),
+    (r'^inventario/categoria/(?P<id_comunidad>\d*)$', 'inventario.views.inventario_comunidad'),
     (r'^inventario/categoria/(?P<id_comunidad>\d+)/(?P<id>\d+)$', 'inventario.views.inventario_comunidad'),
     (r'^inventario/categoria_detalle/(?P<id_comunidad>\d+)/(?P<id_categoria>\d+)$', 'inventario.views.categoria_detalle'),
     (r'^inventario/categoria_detalle/(?P<id_comunidad>\d+)/(?P<id_categoria>\d+)/(?P<id>\d+)$', 'inventario.views.categoria_detalle'),
@@ -48,7 +50,6 @@ urlpatterns = patterns('',
     (r'^mayorgeneral/(?P<tipo>.*)', 'asientos_contables.views.mayor_general'),
     
     #PRESUPUESTOS
-    (r'^presupuesto/(?P<tipo>.*)', 'presupuestos.views.presupuesto'),
     (r'^presupuesto_comunidad/(?P<id>\d+)/(?P<tipo>\w+)', 'presupuestos.views.presupuesto_comunidad'),
     (r'^ver_presupuesto/', 'presupuestos.views.ver_presupuesto'),
     
@@ -65,6 +66,6 @@ urlpatterns = patterns('',
     (r'^ver_mayor_detalle/', 'asientos_contables.views.ver_mayor_detalle'),
     (r'^asignar_permiso/(?P<tipo>.*)', 'cuentas.views.asignar_permiso'),
     (r'^cerrar_ejercicio/', 'ejercicios.views.cerrar_ejercicio'),
-    (r'^ver_ejercicio/', 'ejercicios.views.ejercicio_actual'),
+    
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
