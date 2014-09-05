@@ -7,6 +7,22 @@
 
 
 {% endblock %}
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li>Balance</li>
+</ul>
+            {% endblock %}
+ {% block navbar %}
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">{{ titulo }} </a>
+                    
+                </div>
+            </div>
+        </div>
+        {% endblock navbar %}
 
 {% block content %}
      <!-- Placed at the end of the document so the pages load faster -->
@@ -17,7 +33,7 @@
         <script src="myOwn.js"></script>
 
     <center>
-    <h1>{{ titulo }}</h1>
+    
 
     <table class="table table-bordered table-striped">
         <tr><th class="navbar-inner"></th>
@@ -40,7 +56,17 @@
         {% endfor %}
     <tr>
             {% for tot in total %}
-                <th style="text-align: right">{{ tot|separar }}</th>
+              
+               
+                {% if forloop.counter0 == 0 %}
+                 <th>
+                {{ tot }}
+                {% else %}
+                 <th style="text-align: right">
+                {{ tot|separar }}
+                {% endif %}
+                
+                </th>
                {% endfor %}
             </tr>
         </table>

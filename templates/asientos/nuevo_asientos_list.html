@@ -1,5 +1,7 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es"><head>
-    <title>Django administration | Sitio de administración de Django</title>
+{% extends 'admin/base_site.html' %}
+
+{% block head %}
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
@@ -72,72 +74,22 @@
             }(jQuery));
     //]]>
     </script>
-</head>
-
-
-<body class="_change-list">
-
-<!-- Container -->
-<div class="container-fluid">
-
-    
-    <!-- Header -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                
-<a class="brand" href="/admin/">Hijas de la Caridad</a>
-
-                <div class="nav-collapse collapse pull-right">
-                    <ul class="nav">
-                        
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }}</strong> <b class="caret"></b></a>
-                            <ul class="dropdown-menu pull-right">
-                                
-                                <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
-                                
-                                <li><a href="/admin/logout/">Terminar sesión</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="divider-vertical"></li>
-
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
-    <!-- END Header -->
-    <div class="row-fluid">
-        <div class="span12">
-            
+{% endblock %}
+{% block breadcrumbs %}
 <ul class="breadcrumb">
 <li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
-<!--<li><a href="/admin/asientos_contables/">asientos_contables</a> <span class="divider">/</span></li>-->
-<li><a href="/admin/asientos_contables/">Asientos_Contables</a> <span class="divider">/</span></li>
 <li>Asientos contables</li>
 </ul>
-
-        </div>
-    </div>
-    
-
-    <!-- Content -->
-    <div id="content" class="flex">
-        
+  {% endblock %}
+  
+  {% block navbar %}
         <div class="row-fluid">
             <div class="navbar">
                 <div class="navbar-inner">
-                    
-                    <a class="brand">Escoja asiento contable a modificar</a>
-                    
-    <ul class="object-tools form-inline pull-left inline">
+               
+                
+                <a class="brand">Escoja asiento contable a modificar</a>
+                <ul class="object-tools form-inline pull-left inline">
         
         
         <li>
@@ -151,29 +103,11 @@
         </a>
         {% endif %}
         </li>
-        
-        
-        
-            
-<div class="actions" style="display:inline-block;">
-    <span style="vertical-align:sub">Acción:</span> <select name="action">
-<option value="" selected="selected">---------</option>
-<option value="delete_selected">Eliminar Asientos contables seleccionado/s</option>
-</select><input class="select-across" name="select_across" type="hidden" value="0">
-    <button type="submit" class="btn" title="" name="index" value="0" data-original-title="Ejecutar la acción seleccionada">Ir</button>
     
-        <script type="text/javascript">var _actions_icnt="{{ asientos|length }}";</script>
-        <span class="action-counter" style="vertical-align:sub">seleccionados 0 de {{ asientos|length }}</span>
-        
-    
-</div>
-
-        
     </ul>
-
     <div class="pull-right">
         
-<form class="navbar-search" id="changelist-search" action="" method="get">{% csrf_token %}
+<form class="navbar-search" id="changelist-search" action="" method="get">
 
 <div><!-- DIV needed for valid HTML -->
 <input type="text" class="search-query" placeholder="Buscar" style="height: 30px" size="40" name="q" value="" id="searchbar">
@@ -206,18 +140,26 @@
         </ul>
         
     </div>
+    
 
+                
+                
                 </div>
             </div>
         </div>
+        {% endblock navbar %}
+  
+    
+ {% block content %}
+
+    
+
+ 
         
 
         
-        
-        
-
-        
-<form class="" id="changelist-form" action="" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="yJZJseK9vcJoSpLaEs7Lkyh9gM7llnkF">
+<form class="" id="changelist-form" action="" method="post">
+<input type="hidden" name="csrfmiddlewaretoken" value="yJZJseK9vcJoSpLaEs7Lkyh9gM7llnkF">
 
 
 
@@ -276,7 +218,7 @@
 {% for asiento in asientos %}
 <tr class="row1">
     <td class="action-checkbox">
-    <input class="action-select" name="_selected_action" type="checkbox" value="9"></td>
+    <input class="action-select" name="_selected_action" type="checkbox" value=""></td>
     <th class="nowrap"><a href="{% url 'asientos_contables.views.editar' asiento.asiento_contable.id %}">{{asiento.fecha }}</a></th>
     <td class="nowrap">{{ asiento.asiento_contable.comunidad.comunidad }}</td></tr>
 
@@ -290,18 +232,7 @@
             </div>
         </div>
         
-        <div class="row-fluid">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="form-inline pull-left">
-                        
-                    </div>
-                    <div class="pull-right">
-                        <input type="submit" name="_save" class="btn btn-primary default" value="Grabar">
-                    </div>
-                </div>
-            </div>
-        </div>
+       
 
         
     </div>
@@ -315,14 +246,6 @@
 
 </form>
 
-        
-    </div>
-    <!-- END Content -->
+      
 
-    <footer id="footer"></footer>
-</div>
-<!-- END Container -->
-
-
-
-</body></html>
+{% endblock %}

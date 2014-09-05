@@ -29,6 +29,22 @@
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 
 {% endblock %}
+{% block navbar %}
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">Ver Balance </a>                   
+                </div>
+            </div>
+        </div>
+        {% endblock navbar %}
+     {% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li>Ver Balance</li>
+</ul>
+            {% endblock %}
+        
 
 {% block content %}
     <script>
@@ -57,7 +73,7 @@
         document.formulario.submit()
     }
     </script>
-    <center><h1>Ver Balance</h1></center>
+    
     <form action="" name="formulario"  method="post">{% csrf_token %}
         <center>
       <table class="table" style="width: 400px">

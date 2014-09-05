@@ -10,6 +10,24 @@
 <script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 {% endblock %}
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li>Ejecuci&oacute;n Presupuestaria</li>
+</ul>
+            {% endblock %}
+{% block navbar %}
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+               
+                <a class="brand">Ejecuci&oacute;n Presupuestaria: {{ comunidad.comunidad }}</a>
+               
+                </div>
+            </div>
+        </div>
+        {% endblock navbar %}
+        
 {% block content %}
 <script>
 function columna(index){
@@ -69,11 +87,14 @@ function fila(index){
         <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.ejecucion_presupuestaria' 'EG' %}">Egresos</a></li>
 </ul>
 
-    <h1>Ejecucion Presupuestaria {{ comunidad }}</h1>
+    
 <div class="pre-scrollable" style=" max-height: 500px; overflow-y:scroll;" >
     <table class="table table-bordered table-striped" id="myTable">
-      <tr><th style=" text-align: center;" rowspan="2" class="navbar-inner"><p style="font-size: 25px; margin-top: 30px">Cuenta</p></th>
-           {% for i,mes in meses %}
+      <tr>
+	      <th style="text-align: center; width:300px;" rowspan="2" class="navbar-inner">
+	      		<p style="font-size: 25px; margin-top: 30px">Cuenta</p>
+	      </th>
+	           {% for i,mes in meses %}
             <th colspan="2"  id="col{{ forloop.counter }}" onclick="columna({{ forloop.counter }})" class="navbar-inner"><p style="font-size: 15px; text-align: center">{{ mes }}</p></th>
             {% endfor %}
             <th colspan="2"  id="col{{ forloop.counter }}" onclick="columna({{ forloop.counter }})" class="navbar-inner"><p style="font-size: 15px; text-align: center">Totales</p></th>
@@ -88,7 +109,7 @@ function fila(index){
       </tr>
     {% for datos in vector_cuentas %}
         <tr>
-        <td id="row{{ forloop.counter }}" onclick="fila({{ forloop.counter }})">
+        <td id="row{{ forloop.counter }}" style="width: 300px" onclick="fila({{ forloop.counter }})">
             {% for dato in datos %}
                 {% if forloop.counter == 2 %}
                 {% if datos.27 %}
@@ -98,7 +119,7 @@ function fila(index){
                  {% endif%}
                 </td>
                 {% elif forloop.counter > 2  and forloop.counter < 27 %}
-            <td  style="text-align: right" >{{ dato }}</td>
+            <td  style="text-align: right" >{{ dato|separar }}</td>
                 {% endif %}
              {% endfor %}
         <td style="text-align: right">0.00</td>

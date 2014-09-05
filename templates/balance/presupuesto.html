@@ -12,12 +12,18 @@
 <script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 {% endblock %}
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li>Presupuesto</li>
+</ul>
+            {% endblock %}
 
 {% block navbar %}
         <div class="row-fluid">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <a class="brand">Presupuesto: {{ comunidad }} </a>
+                    <a class="brand">Presupuesto: {{ comunidad.comunidad }} </a>
                     
                 </div>
             </div>
@@ -28,12 +34,13 @@
 
 <body onload="init()">
     <ul class="nav nav-tabs" role="tablist">
-   <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'IN' %}">Ingresos</a></li>
-        <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto' 'EG' %}">Egresos</a></li>
+   <li {% if tipo == 'IN' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto_comunidad' comunidad.id 'IN' %}">Ingresos</a></li>
+        <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{% url 'presupuestos.views.presupuesto_comunidad' comunidad.id 'EG' %}">Egresos</a></li>
   </ul>
 
             
     <form action="" name="formulario" method="post" >{% csrf_token %}
+
 
     <center>
 	<script src="/static/admin/js/SeparadorDeMiles.js"></script>
@@ -90,7 +97,7 @@
 
 </div>
 <div class="pull-right">
-<input type="button" onclick="fin()" value="Grabar y continuar editando" class="btn" name="_continue">
+<!-- <input type="button" onclick="fin()" value="Grabar y continuar editando" class="btn" name="_continue"> -->
 <input type="button" onclick="fin()" value="Grabar" class="btn btn-primary default" name="_save">
 </div>
 
@@ -187,19 +194,21 @@ function encontrar_hermanos(index){
      if(hermanos.length >0){
          var padre=hermanos[0].slice(0, hermanos[0].length -1);
          padre=padre.slice(0, padre.length -1);
+         if (document.getElementById(padre) != null){
          var row_padre=(document.getElementById(padre).parentNode).parentNode
          for (var j=1;j<=12;j++){
              row_padre.cells[j].getElementsByTagName('input')[0].value=0.00
          }
+         
 
          for(var i=0;i<hermanos.length;i++){
              var row_hermano=(document.getElementById(hermanos[i]).parentNode).parentNode
              for (var j=1;j<=12;j++){
                  var padre_value= row_padre.cells[j].getElementsByTagName('input')[0]
                  var hermano_value=row_hermano.cells[j].getElementsByTagName('input')[0]
-                 
                  padre_value.value=convertir_rever(Math.round((convertir(padre_value.value)+convertir(hermano_value.value))*100)/100)
              }
+         }
          }
      }
  }

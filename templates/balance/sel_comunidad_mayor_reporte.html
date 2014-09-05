@@ -1,5 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es">
-<head>
+{% extends "admin/base_site.html" %}
+{% block extrahead %}
     {% load my_tags %}
     {% load dajaxice_templatetags %}
 
@@ -63,70 +63,33 @@
         padding-right: 40px;
       }
     </style>
-</head>
-
-
-<body class="asientos_contables-asientocontable change-form"  > 
-{#<!-- Container -->#}
-<div class="container-fluid">
-
-
-    <!-- Header -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-
-<a class="brand" href="/admin/">Hijas de la Caridad</a>
-
-                <div class="nav-collapse collapse pull-right">
-                    <ul class="nav">
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }}</strong> <b class="caret"></b></a>
-                            <ul class="dropdown-menu pull-right">
-
-                                <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
-
-                                <li><a href="/admin/logout/">Terminar sesión</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
-    
-    
-    <!-- END Header -->
-    </div>
-    <!-- END Content -->
-    <footer id="footer"></footer>
-</div>
-
-
+{% endblock %}
+{% block breadcrumbs %}
 <ul class="breadcrumb">
 <li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
 <li><a href="{{ url }}">{{ app_label }}</a> <span class="divider">/</span></li>
-<li>Seleccionar Comunidad</li>
+<li>Exportar Mayor</li>
 </ul>
+  {% endblock %}
+    {% block navbar %}
+  
+             <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">Comunidad: {{comunidad.comunidad }}</a>
+                </div>
+                </div>
+        {% endblock navbar %}
+
+
+{% block content %} 
+
+
+
 
 <!-- Content -->
 
 <div id="content" class="colM">
 <div class="row-fluid">
-		
-            <div class="navbar">
-            <center>
-                <div class="navbar-inner">
-                    <a class="brand">Seleccionar Comunidad</a>                   
-                </div>
-                </center>
-            </div>
             
 <div id="content-main">
 
@@ -134,26 +97,14 @@
 <div>
 <center>
 <table>
-<!-- <tr><td>
-<label for="id_comunidad_set-0-comunidad_text"><b>Comunidad:</b> </label>
-<input type="text" style="height: 30px" name="comunidad_set-0-comunidad_text" 
-      id="id_comunidad_set-0-comunidad_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
-	        
-	<input type="hidden" name="comunidad_set-0-comunidad" id="id_comunidad_set-0-comunidad" value=""
-          data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/comunidad&quot;}">
-           			
-    <div id="id_comunidad_set-0-comunidad_on_deck"  class="results_on_deck" >  					
-	<div > </div>	</div>
-	</td>
-	<td style="width: 30px;"></td>
-	</tr> -->
+
 	<tr><td>
 	<label for="id_cuenta_set-0-cuenta_text"><b>Desde:</b> </label>
-<input type="text" style="height: 30px" name="comunidad_set-0-comunidad_text" 
+<input type="text"  name="comunidad_set-0-comunidad_text" 
       id="id_cuenta_set-0-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 	        
 	<input type="hidden" name="cuenta_set-0-cuenta" id="id_cuenta_set-0-cuenta" value=""
-          data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
+          data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta_all&quot;}">
            			
     <div id="id_cuenta_set-0-cuenta_on_deck"  class="results_on_deck" >  					
 	<div > </div>	</div>
@@ -163,11 +114,11 @@
 	</tr>
 	<tr><td>
 	<label for="id_cuenta_set-1-cuenta_text"><b>Hasta:</b> </label>
-<input type="text" style="height: 30px" name="comunidad_set-1-comunidad_text" 
+<input type="text" name="comunidad_set-1-comunidad_text" 
       id="id_cuenta_set-1-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 	        
 	<input type="hidden" name="cuenta_set-1-cuenta" id="id_cuenta_set-1-cuenta" value=""
-          data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta&quot;}">
+          data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/admin/lookups/ajax_lookup/cuenta_all&quot;}">
            			
     <div id="id_cuenta_set-1-cuenta_on_deck"  class="results_on_deck" >  					
 	<div > </div>	</div>
@@ -203,4 +154,4 @@
 </div>
 <!-- END Container -->
 
-</body></html>
+{% endblock %}

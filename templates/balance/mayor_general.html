@@ -10,6 +10,22 @@
 <script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 {% endblock %}
+  {% block breadcrumbs %}
+<ul class="breadcrumb">
+	<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li>Mayor Consolidado</li>
+</ul>
+  {% endblock %}
+{% block navbar %}
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+               
+                <td style="width: 88%"><a class="brand">Mayor Consolidado</a></td>
+                </div>
+            </div>
+        </div>
+        {% endblock navbar %}
 {% block content %}
 
     <center>
@@ -21,23 +37,29 @@
   <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{% url 'asientos_contables.views.mayor_general' 'PN' %}">Patrimonio Neto</a></li>
 </ul>
 
-    <h1>Cuentas</h1>
-    <table>
-      <tr><th style="width: 500px">Cuenta</th><th>Tipo</th><th>Debe</th><th>Haber</th><th>Saldo</th>
+    
+    <table class="table-striped table-bordered table" style="width: 80%">
+       <tr>
+      	<th style="width: 500px; text-align: center" class="navbar-inner"><p style="font-size: 20px">Cuenta</p></th>
+      	<th  class="navbar-inner"><p style="font-size: 20px">Tipo</p></th>
+      	<th  class="navbar-inner"><p style="font-size: 20px">Debe</p></th>
+      	<th  class="navbar-inner"><p style="font-size: 20px">Haber</p></th>
+      	<th  class="navbar-inner"><p style="font-size: 20px">Saldo</p></th>
+      </tr>
     {% for cuenta in vector_cuentas %}
         <tr><td style="width: 300px">
-            <p style="{{ cuenta.depth|espacios }} font-size: 15px">
+            <p style=" font-size: 15px">
                {% if cuenta.have_child  %}
-               <b> {{ cuenta.cuenta }}</b>
+               <b>{{cuenta.codigo}} -  {{ cuenta.cuenta }}</b>
                {% else %}
-                {{ cuenta.cuenta }}
+                {{ cuenta.codigo }} - {{ cuenta.cuenta }}
                 {% endif %}
             </p>
             </td>
             <td style="width: 150px"><p style="font-size: 15px">{{ cuenta.get_tipo_display }}</p></td>
-            <td style="width: 100px"><p style="font-size: 15px">{{ cuenta.debe }}</p></td>
-            <td style="width: 100px"><p style="font-size: 15px">{{ cuenta.haber }}</p></td>
-            <td style="width: 100px"><p style="font-size: 15px">{{ cuenta.saldo }}</p></td>
+            <td style="width: 100px"><p style="font-size: 15px; text-align: right">{{ cuenta.debe|separar }}</p></td>
+            <td style="width: 100px"><p style="font-size: 15px; text-align: right">{{ cuenta.haber|separar }}</p></td>
+            <td style="width: 100px"><p style="font-size: 15px; text-align: right">{{ cuenta.saldo|separar }}</p></td>
         </tr>
     {% endfor %}
     </table>

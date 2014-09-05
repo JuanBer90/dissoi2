@@ -10,6 +10,35 @@
 <script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 {% endblock %}
+  {% block breadcrumbs %}
+<ul class="breadcrumb">
+	<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li>Mayor Detallado</li>
+</ul>
+  {% endblock %}
+{% block navbar %}
+        <div class="row-fluid">
+            <div class="navbar">
+                <div class="navbar-inner">
+                <table>
+                <tr>
+                {% if request.user|limitado %}
+                <td style="width: 88%"><a class="brand">Mayor Detallado: {{ comunidad.comunidad }}</a></td>
+                
+                <td>
+                <a href="{% url 'asientos_contables.views.sel_comunidad_reporte_mayor' comunidad.id detalle %}" class="btn btn-primary">Generar Reporte</a>
+                </td>
+                {% else %}
+                
+                <td style="width: 88%"><a class="brand">Mayor Detalle Consolidado</a></td>
+                {% endif %}
+                </tr>
+                
+                </table>
+                </div>
+            </div>
+        </div>
+        {% endblock navbar %}
 {% block content %}
 
     <center>
@@ -20,13 +49,6 @@
         <li {% if tipo == 'EG' %} class="active" {% endif %}><a href="{{ url }}EG">Egresos</a></li>
   <li {% if tipo == 'PN' %} class="active" {% endif %}><a href="{{ url }}PN">Patrimonio Neto</a></li>
 </ul>
-<table>
-<tr><td style="width: 90%"></td>
-<td>
-	<a href="{% url 'asientos_contables.views.sel_comunidad_reporte_mayor' id_comunidad detalle %}" class="btn btn-primary">Reporte</a>
-	</td>
-	</tr>
-</table>
     {% for id,cuenta,saldo,codigo in cuentas %}
         <p> <span style="font-size: 22px"><b>{{ codigo }} - {{ cuenta }}   -   Saldo:</b> {{ saldo|separar }}  </span>   </p>
       <table class="table-bordered table-striped">
