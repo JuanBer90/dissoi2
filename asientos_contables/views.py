@@ -76,7 +76,7 @@ def sel_comunidad_reporte_mayor(request,id_comunidad,tipo=""):
     else:
         app_label='Mayor'
         url="/mayor/AC"
-    
+    comunidad=Comunidad.objects.get(pk=id_comunidad)
     if request.method == 'POST':
         desde=request.POST.get('cuenta_set-0-cuenta','')
         hasta=request.POST.get('cuenta_set-1-cuenta','')
@@ -95,7 +95,8 @@ def sel_comunidad_reporte_mayor(request,id_comunidad,tipo=""):
             return HttpResponseRedirect('/reporte_mayor_detalle/'+str(id_comunidad)+"/"+desde+"/"+hasta)
         return HttpResponseRedirect('/reporte_mayor/'+str(id_comunidad)+"/"+desde+"/"+hasta)
     print url+tipo+app_label
-    return render_to_response('balance/sel_comunidad_mayor_reporte.html',{'app_label':app_label,'url':url,'tipo':tipo},
+    return render_to_response('balance/sel_comunidad_mayor_reporte.html',
+                              {'app_label':app_label,'url':url,'tipo':tipo,'comunidad':comunidad},
                                   context_instance=RequestContext(request))
 
 def nuevo(request,id_comunidad=''): 
@@ -284,11 +285,12 @@ def listar(request):
     ultimos_7dias = hoy + datetime.timedelta(days=-7)
     manana = hoy + datetime.timedelta(days=1)
     today=timezone_today()
+    
     cant_dias=calendar.monthrange(today.year,1)[1]
-    ultimos_30dias_max=str(today.year)+'-'+str(today.month)+'-'+str(cant_dias)
+    ultimos_30dias_max=  str(today.year)+'-'+str(today.month)+'-'+str(today.day)
     ultimos_30dias_min = str(today.year) + '-' + str(today.month) + '-01'
     este_anho_max=str(today.year+1) + '-01-01'
-    este_anho_min = str(today.year) + '-01-01'
+    este_anho_min=str(today.year) + '-01-01'
     
     return render_to_response('asientos/nuevo_asientos_list.html',
     {'asientos':asientos,'hoy':str(hoy.date()),'ultimos_30dias_max':ultimos_30dias_max,'page' : page,
@@ -298,12 +300,10 @@ def listar(request):
 
 def mayores(request):
     vector_cuentas = Cuenta.get_tree()
-    
     usuario = request.user
     id_comunidad=get_comunidad(usuario)
 
-
-#Optimizar la consulta   
+    #Optimizar la consulta   
     for cuenta in vector_cuentas:
         if cuenta.numchild == 0:
             cuenta_id = cuenta.id
@@ -357,6 +357,8 @@ def mayor(request,tipo):
     id_comunidad= get_comunidad(usuario)
     ejercicio = Ejercicio.objects.get(actual=True)
     anho = ejercicio.anho
+    if id_comunidad == 0:
+        return HttpResponseRedirect('/admin')
 #Optimizar la consulta
     for cuenta in vector_cuentas:
         if cuenta.numchild == 0:
@@ -401,7 +403,7 @@ def mayor(request,tipo):
                 contador += 1
         if contador == longitud:
             seguir = False
-    return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'id_comunidad':usuario_comunidad_id,
+    return render_to_response('balance/mayores.html', {'vector_cuentas':vector_cuentas,'id_comunidad':id_comunidad ,
                                         'tipo':tipo}, context_instance=RequestContext(request))
 
 def mayor_general(request,tipo='AC'):
@@ -471,10 +473,13 @@ def mayor_detallado_comunidad(request,id,tipo='AC'):
     tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
     if not tipos.__contains__(tipo):
         tipo = 'AC'
+    if request.user.has_perm(USUARIO_LIMITADO):
+        if int(id)!= get_comunidad(request.user):
+            return HttpResponseRedirect('/admin')
+    else:
+        id_comunidad=asiento.comunidad_id
     if id == '':
         id=get_comunidad(request.user)
-    if id == 0:
-        return HttpResponseRedirect('/admin')
     
     ejercicio_anho = Ejercicio.objects.get(actual=True).anho
     comunidad=Comunidad.objects.get(pk=id)

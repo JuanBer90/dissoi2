@@ -1,5 +1,6 @@
 from django.db import connection
 from decimal import Decimal
+from usuarios.models import Usuario
 
 USUARIO_LIMITADO="usuarios.limitado"
 def execute_all_query(query):
@@ -23,6 +24,7 @@ def separador_de_miles(numero):
    return a
    
 def get_comunidad(usuario):
+    
     id=0
     aux=Usuario.objects.filter(user_id=usuario.id).count()   
     if aux >0:

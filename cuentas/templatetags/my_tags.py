@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django import template
-from hijasdelacaridad.globales import separador_de_miles
+from hijasdelacaridad.globales import separador_de_miles,USUARIO_LIMITADO
+
 
 #Django template custom math filters
 #Ref : https://code.djangoproject.com/ticket/361
@@ -69,7 +70,7 @@ def get_comunidad(usuario):
     return id
 
 def limitado(usuario):
-    return usuario.has_perm('usuarios.limitado')
+    return usuario.has_perm(USUARIO_LIMITADO)
 
 register.filter('limitado',limitado)
 register.filter('get_comunidad', get_comunidad)        

@@ -28,17 +28,19 @@ def ver_presupuesto(request):
     return render_to_response('balance/sel_comunidad.html',{'app_label':app_label,'url':url},
                                   context_instance=RequestContext(request))
 def presupuesto_comunidad(request,id,tipo):
+    print "id: "+str(id)
     if tipo != 'IN' and tipo !='EG':
         tipo='IN'
     cuentas=Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
     usuario=request.user
+    
     if int(id)==0 and usuario.is_superuser:
         messages.error(request, 'Debe ingresar una comunidad')
         return HttpResponseRedirect('/admin')
     if usuario.has_perm(USUARIO_LIMITADO):
-        if int(id) != usuario.get_comunidad():
+        if int(id) != int(get_comunidad(usuario)):
             messages.error(request, 'No Pertenece a la Comunidad a la que desea Acceder!')
-        return HttpResponseRedirect('/admin')
+            return HttpResponseRedirect('/admin')
     if id == 0:
         comunidad=Comunidad.objects.get(pk=request.user.get_comunidad())
     else:
@@ -46,14 +48,13 @@ def presupuesto_comunidad(request,id,tipo):
     ejercicio=Ejercicio.objects.get(actual=True)
     query="select c.id, c.cuenta, p.mes,sum(p.monto) as monto,c.codigo from presupuestos_presupuesto p"\
     " join ejercicios_ejercicio e on e.id=p.ejercicio_id join cuentas_cuenta c on c.id=p.cuenta_id "\
-    " where e.anho = "+str(ejercicio.anho)+" and p.comunidad_id = "+str(comunidad.id)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.codigo_ordenado"
-    
+    " where e.anho = "+str(ejercicio.anho)+" and p.comunidad_id = "+str(comunidad.id)+" and c.tipo like '"+tipo+"' group by c.id, c.cuenta,c.codigo,p.mes order by c.codigo_ordenado, p.mes"
+    print query
     presupuestos=execute_all_query(query)
-
     presupuestos_list=[]
-
     cuentas_list=[]
     i=0
+
 
     while i < len(presupuestos):
         aux = [presupuestos[i][0], presupuestos[i][1]]
@@ -62,6 +63,8 @@ def presupuesto_comunidad(request,id,tipo):
         aux.append(presupuestos[i][4])
         presupuestos_list.append(aux)
         i+=12
+    for c in presupuestos_list:
+        print c
 
     for c in cuentas:
         existe=esta_en_presupuesto_list(c.id, presupuestos_list)
@@ -75,12 +78,12 @@ def presupuesto_comunidad(request,id,tipo):
             aux.append(c.codigo)
             aux.append(True)
             cuentas_list.append(aux)
-
+            
+   
     if request.method == 'POST':
         for c in presupuestos_list:
             for k in range(1,13):
                 monto=request.POST.get('cuenta-'+str(c[0])+'-'+str(k))
-                
                 cambiar = request.POST.get('cambiar-' + str(c[0])+'-'+str(k),'')
                 if cambiar == "true":
                     print 'cambiaar: ' + str(cambiar)+'  monto: '+str(monto)
@@ -93,10 +96,7 @@ def presupuesto_comunidad(request,id,tipo):
         messages.info(request, 'Grabado exitosamente!')
         save_=request.POST.get('_save','')
         continue_=request.POST.get('_continue','')
-        if save_ != '':
-            return HttpResponseRedirect('/admin/presupuestos/presupuesto/')
-        if continue_ != '':
-            return HttpResponseRedirect('/presupuesto/'+tipo)
+        return HttpResponseRedirect('/presupuesto_comunidad/'+str(id)+"/"+tipo)
     return render_to_response('balance/presupuesto.html', {'presupuestos_list':cuentas_list,'tipo':tipo,
                                                         'comunidad':comunidad, 'MESES':MESES}, context_instance=RequestContext(request))
 

@@ -13,7 +13,7 @@ from hijasdelacaridad.globales import execute_all_query
 from presupuestos.models import Presupuesto
 
 def ejercicio_actual(request):
-    if Ejercicio.objects.filter(actual=True).exists():
+    if Ejercicio.objects.filter(actual=True).count() > 0:
         ejercicio=Ejercicio.objects.get(actual=True)
     else:
         ejercicio=Ejercicio()

@@ -482,7 +482,6 @@ def mayor_detalle(request,id_comunidad,desde,hasta):
     buffer = BytesIO()
  
     report = MyPrint(buffer, 'A4')
-    
     ejercicio_anho = Ejercicio.objects.get(actual=True).anho
     aux_menor=Cuenta(codigo=desde)
     aux_mayor=Cuenta(codigo=hasta)

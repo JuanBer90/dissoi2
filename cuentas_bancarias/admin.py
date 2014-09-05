@@ -20,14 +20,11 @@ class CuentaBancariaAdmin(admin.ModelAdmin):
         return qs.filter(comunidad=usuario_objeto.usuario.comunidad)
 
     def has_change_permission(self, request, obj=None):
-        if not obj:
-            return True # So they can see the change list page
-        if request.user.is_superuser or obj.author == request.user:
-            return True
-        else:
-            return False
+       return True
 
-    
+    def has_add_permission(self, request, obj=None):
+       return True
+
 admin.site.register(CuentaBancaria, CuentaBancariaAdmin)
 
 # Register your models here.
