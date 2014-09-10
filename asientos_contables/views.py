@@ -67,6 +67,8 @@ def sel_comunidad_asiento(request):
     return render_to_response('balance/sel_comunidad.html',{'app_label':app_label,'url':url},
                                   context_instance=RequestContext(request))
 
+
+
 def sel_comunidad_reporte_mayor(request,id_comunidad,tipo=""):
     
     if tipo =="detalle":
@@ -94,7 +96,6 @@ def sel_comunidad_reporte_mayor(request,id_comunidad,tipo=""):
         if tipo == "detalle":
             return HttpResponseRedirect('/reporte_mayor_detalle/'+str(id_comunidad)+"/"+desde+"/"+hasta)
         return HttpResponseRedirect('/reporte_mayor/'+str(id_comunidad)+"/"+desde+"/"+hasta)
-    print url+tipo+app_label
     return render_to_response('balance/sel_comunidad_mayor_reporte.html',
                               {'app_label':app_label,'url':url,'tipo':tipo,'comunidad':comunidad},
                                   context_instance=RequestContext(request))
@@ -153,7 +154,7 @@ def nuevo(request,id_comunidad=''):
     filas=[]
     for i in range(0,50):
          filas.append(i)
-    if request.user.is_superuser:
+    if not request.user.has_perm(USUARIO_LIMITADO):
         return render_to_response('balance/admin_change_form.html',
                                   {'add': True, 'filas':filas,'bancos': bancos, 'hoy': str(timezone_today().strftime('%d/%m/%Y'))},
                                   context_instance=RequestContext(request))
@@ -220,7 +221,7 @@ def editar(request,id):
     for i in range(len(asientos_detalles),50):
          filas.append(i)
     asiento.fecha=str(asiento.fecha.strftime('%d/%m/%Y'))
-    if request.user.is_superuser:
+    if not request.user.has_perm(USUARIO_LIMITADO):
         return render_to_response('balance/admin_edit_asiento.html',{'filas':filas,'bancos': bancos,
               'asiento':asiento, 'asientos_detalles':asientos_detalles}, context_instance=RequestContext(request))
     else:
@@ -234,7 +235,7 @@ def listar(request):
     fecha__lt=request.GET.get('fecha__lt','2050-01-01')
     usuario=request.user
         
-    if usuario.is_superuser:
+    if not usuario.has_perm(USUARIO_LIMITADO):
            objeto_total=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
                                                           asiento_contable__fecha__gt=fecha__gte,
                                                        asiento_contable__fecha__lt=fecha__lt).count()
@@ -268,7 +269,7 @@ def listar(request):
         ini=0
         items = paginator.page(1)
         
-    if usuario.is_superuser:
+    if not usuario.has_perm(USUARIO_LIMITADO):
            asientos=AsientoContableDetalle.objects.filter(asiento_contable__fecha__contains=q,
                                                           asiento_contable__fecha__gt=fecha__gte,
                                                        asiento_contable__fecha__lt=fecha__lt)[ini:fin]
@@ -355,8 +356,10 @@ def mayor(request,tipo):
     vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo_ordenado')
     usuario= request.user
     id_comunidad= get_comunidad(usuario)
-    ejercicio = Ejercicio.objects.get(actual=True)
-    anho = ejercicio.anho
+    if request.user.has_perm(USUARIO_LIMITADO):
+       anho = Ejercicio.objects.get(actual=True).anho
+    else:
+       anho = request.session['ejercicio']
     if id_comunidad == 0:
         return HttpResponseRedirect('/admin')
 #Optimizar la consulta
@@ -414,8 +417,10 @@ def mayor_general(request,tipo='AC'):
     if not tipos.__contains__(tipo):
         tipo='AC'
     vector_cuentas = Cuenta.objects.filter(tipo=tipo).order_by('codigo')
-    ejercicio = Ejercicio.objects.get(actual=True)
-    anho = ejercicio.anho
+    if request.user.has_perm(USUARIO_LIMITADO):
+       anho = Ejercicio.objects.get(actual=True).anho
+    else:
+       anho = request.session['ejercicio']
 
 #Optimizar la consulta
     for cuenta in vector_cuentas:
@@ -480,8 +485,12 @@ def mayor_detallado_comunidad(request,id,tipo='AC'):
         id_comunidad=asiento.comunidad_id
     if id == '':
         id=get_comunidad(request.user)
+    if request.user.has_perm(USUARIO_LIMITADO):
+       ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+    else:
+       ejercicio_anho = request.session['ejercicio']
     
-    ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+   
     comunidad=Comunidad.objects.get(pk=id)
     query = " select distinct c.id,c.cuenta from cuentas_cuenta c " \
             " join asientos_contables_asientocontabledetalle ad on ad.cuenta_id = c.id " \
@@ -513,7 +522,11 @@ def mayor_detallado_pais(request,id,tipo='AC'):
         pais = Comunidad.objects.get(pk=id).pais
     else:
         pais = Pais.objects.get(pk=id)
-    ejercicio_anho=Ejercicio.objects.get(actual=True).anho
+    if request.user.has_perm(USUARIO_LIMITADO):
+       ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+    else:
+       ejercicio_anho = request.session['ejercicio']
+    
     query = " select distinct c.id,c.cuenta from cuentas_cuenta c " \
             " join asientos_contables_asientocontabledetalle ad on ad.cuenta_id = c.id " \
             " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id " \
@@ -551,7 +564,11 @@ def mayor_detallado_consolidado(request,tipo='AC'):
     tipos = ['AC', 'PA', 'PN', 'IN', 'EG']
     if not tipos.__contains__(tipo):
         tipo = 'AC'
-    ejercicio_anho=Ejercicio.objects.get(actual=True).anho
+    if request.user.has_perm(USUARIO_LIMITADO):
+       ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+    else:
+       ejercicio_anho = request.session['ejercicio']
+    
     query_asiento="select distinct * from (select ad.* from  asientos_contables_asientocontabledetalle ad "\
     " join asientos_contables_asientocontable a on a.id=ad.asiento_contable_id "\
     " join cuentas_cuenta c on c.id = ad.cuenta_id "\

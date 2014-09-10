@@ -28,6 +28,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from django.conf import settings
 from inventario.models import Categoria, CategoriaDetalle
 from cuentas.templatetags.my_tags import saldo_anterior
+from cuentas_bancarias.models import CuentaBancaria
  
 # Register Fonts
 #pdfmetrics.registerFont(TTFont('Arial', settings.STATIC_ROOT + 'fonts/arial.ttf'))
@@ -421,7 +422,71 @@ class MyPrint:
         pdf = buffer.getvalue()
         buffer.close()
         return pdf
+    
 
+    def print_cuentas_bancarias_comunidad(self,bancos,comunidad,asientos):
+      
+        buffer = self.buffer
+        doc = SimpleDocTemplate(buffer,
+                                rightMargin=50,
+                                leftMargin=50,
+                                topMargin=50,
+                                bottomMargin=50,
+                                pagesize=self.pagesize,
+                                )
+        
+        # Our container for 'Flowable' objects
+        elements = []
+        cuentas_bancarias=Table([['',Paragraph('<b>CUENTAS BANCARIAS - '+comunidad.comunidad+' </b>', styleBH),''],['','','']],
+                          colWidths=[1 * cm, 14 * cm,1*cm ]
+                          )
+        elements.append(cuentas_bancarias)
+ 
+        # A large collection of style sheets pre-made for us
+        styles = getSampleStyleSheet()
+        t_widths=[3 * cm, 2.7 * cm, 2.7* cm,2.7* cm, 5* cm]
+        
+                
+        hfecha = Paragraph('''<b>Fecha.</b>''', styleBH)
+        hdebe = Paragraph('''<b>Debe</b>''', styleBH)
+        hhaber = Paragraph('''<b>Haber</b>''', styleBH)
+        hsaldo = Paragraph('''<b>Saldo</b>''', styleBH)
+        hobs = Paragraph('''<b>Observacion</b>''', styleBH)
+
+        t_head=[hfecha, hdebe, hhaber,hsaldo,hobs]
+        
+        data=[]
+        
+        for banco in bancos:
+            categoria_table=Table([['','',''],
+                                            ['',Paragraph(banco.cuenta_bancaria,styleBH),''],
+                                            ], colWidths=[1 * cm, 14 * cm,1*cm ]
+                              )
+            elements.append(categoria_table)
+            data=[t_head]
+            
+            for asiento in asientos:
+                if asiento.cuenta_bancaria_id == banco.id:
+                    array=[str(asiento.asiento_contable.fecha),Paragraph(separador_de_miles(asiento.debe),styleRIGTH),
+                           Paragraph(separador_de_miles(asiento.haber),styleRIGTH), 
+                           Paragraph(separador_de_miles(asiento.debe), styleRIGTH),
+                           asiento.observacion ]
+                    data.append(array)
+                       
+            table = Table(data, colWidths=t_widths )
+            table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+                                           ('BOX', (0, 0), (-1, -1), 0.25, colors.black)]))
+            elements.append(table)
+                    
+    
+        doc.build(elements, onFirstPage=self._header_footer, onLaterPages=self._header_footer,
+                  canvasmaker=NumberedCanvas)
+ 
+        # Get the value of the BytesIO buffer and write it to the response.
+        pdf = buffer.getvalue()
+        buffer.close()
+        return pdf
+    print 
 
 class NumberedCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
@@ -482,7 +547,11 @@ def mayor_detalle(request,id_comunidad,desde,hasta):
     buffer = BytesIO()
  
     report = MyPrint(buffer, 'A4')
-    ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+    if request.user.has_perm(USUARIO_LIMITADO):
+       ejercicio_anho = Ejercicio.objects.get(actual=True).anho
+    else:
+       ejercicio_anho = request.session['ejercicio']
+    
     aux_menor=Cuenta(codigo=desde)
     aux_mayor=Cuenta(codigo=hasta)
     
@@ -547,3 +616,20 @@ def inventario_general(request):
     response.write(pdf)
     
     return response
+
+def cuentas_bancarias_comunidad(request,id_comunidad):
+     # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    comunidad=Comunidad.objects.get(pk=id_comunidad)
+    response['Content-Disposition'] = 'attachment; filename="Cuentas Bancarias - '+comunidad.comunidad+'.pdf"'
+ 
+    buffer = BytesIO()
+ 
+    report = MyPrint(buffer, 'A4')
+    bancos=CuentaBancaria.objects.filter(comunidad_id=id_comunidad)
+    asientos=AsientoContableDetalle.objects.filter(asiento_contable__comunidad_id=id_comunidad)
+    pdf = report.print_cuentas_bancarias_comunidad(bancos,comunidad,asientos)
+    response.write(pdf)
+    
+    return response
+    

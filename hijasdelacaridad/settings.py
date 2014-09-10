@@ -138,7 +138,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_ROOT = "/home/juanber/PycharmProjects/dissoi2/bootstrap_toolkit/static"
+STATIC_ROOT = os.path.join(BASE_DIR, 'django_admin_bootstrapped/static')
+                               
+                               
 
 ADMIN_MEDIA_PREFIX=STATIC_ROOT+"/admin/"
 # Static files (CSS, JavaScript, Images)

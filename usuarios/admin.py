@@ -82,7 +82,6 @@ class UsuarioLimitadoAdmin(UsuarioAdmin):
     )
     
     def save_model(self, request, obj, form, change):
-        request.session['ejercicio']="ejercicio actual 2014"
         permission = Permission.objects.get(codename='limitado')
         obj.user_permissions.add(permission)
         obj.is_staff=True

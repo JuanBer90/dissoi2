@@ -23,6 +23,7 @@ def permisos(request, id):
 
 @dajaxice_register
 def existe_cambio(request,fecha):
+    print "HOLAAAAAA MUNDOOOOOO"
     fecha = fecha.split('/')
     nueva_fecha=fecha[2]+"-"+fecha[1]+'-'+fecha[0]
     existe='true'

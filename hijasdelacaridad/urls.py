@@ -19,9 +19,13 @@ urlpatterns = patterns('',
     (r'^admin/lookups/', include(ajax_select_urls)),
     (r'^admin/', include(admin.site.urls)),
     (dajaxice_config.dajaxice_url, include('dajaxice.urls')),
+    #BANCOS
+    (r'^cuentas_bancarias/(?P<id_comunidad>\d+)/(?P<id_banco>\d*)$', 'cuentas_bancarias.views.cuentas_bancarias'),
+    (r'^cuentas_bancarias/comunidad/$', 'cuentas_bancarias.views.sel_comunidad_cuenta_bancaria'),    
     #REPORTES
     (r'^set_ejercicio/$', 'ejercicios.views.set_ejercicio'),
     (r'^reporte/$', 'asientos_contables.reports.some_view'),
+    (r'^reporte_cuentas_bancarias_comunidad/(?P<id_comunidad>\d+)/$', 'asientos_contables.reports.cuentas_bancarias_comunidad'),
     (r'^reporte_inventario_general/$', 'asientos_contables.reports.inventario_general'),
     (r'^reporte_inventario/(?P<id_comunidad>\d+)/$', 'asientos_contables.reports.inventario_comunidad'),
     (r'^reporte_mayor/(?P<id_comunidad>\d+)/(?P<desde>[\w\-.]+)/(?P<hasta>[\w\-.]+)/$', 'asientos_contables.reports.mayor'),

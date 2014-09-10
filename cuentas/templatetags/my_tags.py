@@ -20,12 +20,11 @@ def mult(value, arg):
 
 def sub(value, arg):
     "Subtracts the arg from the value"
-    return int(value) - int(arg)
+    return Decimal(int(value) - int(arg))
 
 def sum(value, arg):
-    "Subtracts the arg from the value"
+    "Add the arg from the value"
     return int(value) + int(arg)
-
 
 def div(value, arg):
     "Divides the value by the arg"

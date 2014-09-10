@@ -8,6 +8,7 @@ from django.http.response import HttpResponseRedirect
 from comunidades.models import Comunidad
 import datetime
 import decimal
+from django.contrib import messages
 from hijasdelacaridad.globales import execute_all_query,USUARIO_LIMITADO,get_comunidad
 from django.views.generic.dates import timezone_today
 from django.utils.datetime_safe import date
@@ -44,7 +45,7 @@ def inventario_general(request):
 def inventario_comunidad(request,id_comunidad,id=0):
     usuario=request.user
     if usuario.has_perm(USUARIO_LIMITADO):
-        if get_comunidad(usuario) != id_comunidad:
+        if get_comunidad(usuario) != int(id_comunidad):
             messages.error(request, 'No Pertenece a la Comunidad a la que desea Acceder!')
             return HttpResponseRedirect('/admin')
     categorias=Categoria.objects.all().order_by('nombre')
@@ -62,7 +63,7 @@ def inventario_comunidad(request,id_comunidad,id=0):
 
 def categoria_detalle(request,id_comunidad,id_categoria,id=0):
     usuario=request.user
-    if get_comunidad(usuario) != id_comunidad and usuario.has_perm(USUARIO_LIMITADO):
+    if get_comunidad(usuario) != int(id_comunidad) and usuario.has_perm(USUARIO_LIMITADO):
         return HttpResponseRedirect('/admin')
     categoria=Categoria.objects.get(pk=id_categoria)
     
@@ -112,7 +113,7 @@ def movimiento_list(request,id_detalle):
     detalle=CategoriaDetalle.objects.get(pk=id_detalle)
     usuario=request.user
     if usuario.has_perm(USUARIO_LIMITADO):
-        if usuario.get_comunidad() != detalle.comunidad_id:
+        if get_comunidad(usuario) != detalle.comunidad_id:
             return HttpResponseRedirect('/admin')
     return render_to_response('balance/movimiento_list.html',
                               {'movimientos':movimientos,'detalle':detalle},
@@ -122,7 +123,7 @@ def movimiento(request,id_detalle,id=0):
     detalle=CategoriaDetalle.objects.get(pk=id_detalle)
     usuario=request.user
     
-    if usuario.get_comunidad() != detalle.comunidad_id and usuario.has_perm(USUARIO_LIMITADO):
+    if get_comunidad(usuario) != detalle.comunidad_id and usuario.has_perm(USUARIO_LIMITADO):
         return HttpResponseRedirect('/admin')
     if id == 0:
         movimiento=CategoriaDetalleMovimiento()
@@ -137,7 +138,6 @@ def movimiento(request,id_detalle,id=0):
             movimiento.observacion=request.POST.get('observacion',0)
             movimiento.movimiento=request.POST.get('movimiento','INI')
             fecha=request.POST.get('fecha','')
-            print request.POST
             fecha=datetime.datetime.strptime(fecha, "%d/%m/%Y")
             movimiento.fecha=fecha
             if id != 0:
