@@ -1,5 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es">
-<head>
+{% extends "admin/base_site.html" %}
+{% block extrahead %}
     {% load my_tags %}
     {% load dajaxice_templatetags %}
 
@@ -16,8 +16,7 @@
 
     <link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/overrides.css">
-{#    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">#}
-
+	<script src="/static/admin/js/SeparadorDeMiles.js"></script>
 
 
     <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
@@ -63,9 +62,26 @@
         padding-right: 40px;
       }
     </style>
-</head>
+{% endblock %}
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
+<li><a href="{% url 'asientos_contables.views.listar' %}">Asientos contables</a> 
+<span class="divider">/</span></li>
+<li>Modificar asiento contable</li>
+</ul>
 
+{% endblock %}
+ {% block navbar %}
+  
+             <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">Modificar asiento contable</a>
+                </div>
+                </div>
+        {% endblock navbar %}
 
+{% block content %}
 <body class="asientos_contables-asientocontable change-form" onload="iniciar()" > 
 <script type="text/javascript">
 function iniciar(){
@@ -73,62 +89,12 @@ function iniciar(){
 	banco();
 }
 </script>
-{#<!-- Container -->#}
-<div class="container-fluid">
 
-
-    <!-- Header -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-
-<a class="brand" href="/admin/">Hijas de la Caridad</a>
-
-                <div class="nav-collapse collapse pull-right">
-                    <ul class="nav">
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }}</strong> <b class="caret"></b></a>
-                            <ul class="dropdown-menu pull-right">
-
-                                <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
-
-                                <li><a href="/admin/logout/">Terminar sesión</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
-    
-    
-    <!-- END Header -->
-    </div>
-    <!-- END Content -->
-    <footer id="footer"></footer>
-</div>
-
-
-<ul class="breadcrumb">
-<li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
-<li><a href="{% url 'asientos_contables.views.listar' %}">Asientos contables</a> <span class="divider">/</span></li>
-<li>Añadir asiento contable</li>
-</ul>
 
 <!-- Content -->
 <div id="content" class="colM">
 <div class="row-fluid">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <a class="brand">Añadir asiento contable</a>
-                </div>
-            </div>
+           
 <div id="content-main">
 <form enctype="multipart/form-data" action="" name="formulario" onchange="total()" onclick="total()" method="post" id="asientocontable_form">{% csrf_token %}
 <div>
@@ -136,16 +102,15 @@ function iniciar(){
     <div class="form-row field-fecha">
         <div>
             <label class="required" for="id_fecha">Fecha:</label>
-            <input style="height: 30px" class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ asiento.fecha }}">
+            <input  class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ asiento.fecha }}">
         </div>
     </div>
 </fieldset>
-
     <div  hidden="hidden" id="error_0" class="alert alert-danger" role="alert">
 <span class="glyphicon glyphicon-minus-sign"></span>
     <p>  Por favor, corrija los siguientes errores. </p>
     </div>
-
+    
 <div class="inline-group" style="border: None" id="asientocontabledetalle_set-group">
     <div class="tabular inline-related last-related">
         <fieldset class="module">
@@ -163,7 +128,7 @@ function iniciar(){
 		<tr class="form-row {% cycle 'row1' 'row2' %}  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-{{ forloop.counter0 }}">
 					
                     <td class="field-cuenta">     		
-                 		<input type="text" style="height: 30px" name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" 
+                 		<input type="text" style=" " name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" 
                   		id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 	        
     					<input type="hidden" name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta" id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta" value="{{ ad.cuenta_id }}"
@@ -191,13 +156,13 @@ function iniciar(){
                     </td>
                     
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-debe" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-debe" required="" min="0"  step="0.01" type="number" value="{{ ad.debe|to_int }}">
+                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-debe" style=" text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-debe" required="" min="0"  step="0.01" type="number" value="{{ ad.debe|to_int }}">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-haber" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-haber" required="" min="0" step="0.01" type="number" value="{{ ad.haber|to_int }}">
+                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-haber" style=" text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-haber" required="" min="0" step="0.01" type="number" value="{{ ad.haber|to_int }}">
                     </td>
                  <td class="field-observacion">
-                        <input style="height: 30px" name="asientocontabledetalle_set-{{ forloop.counter0 }}-observacion" maxlength="100" type="text" value="{% if ad.observacion != None %} {{ ad.observacion }} {% endif %}">
+                        <input style=" " name="asientocontabledetalle_set-{{ forloop.counter0 }}-observacion" maxlength="100" type="text" value="{% if ad.observacion != None %} {{ ad.observacion }} {% endif %}">
                     </td>
                     <td class="delete"><div><a class="inline-deletelink" href="javascript:del_fila({{ forloop.counter0 }})">Eliminar</a></div></td>
                 </tr>
@@ -205,7 +170,7 @@ function iniciar(){
 		{% for z in filas %}
 		<tr  hidden="hidden"  class="form-row {% cycle 'row1' 'row2' %}  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-{{ z }}">
                     <td class="field-cuenta">     		
-                 		<input type="text" style="height: 30px" name="asientocontabledetalle_set-{{ z }}-cuenta_text" 
+                 		<input type="text" style=" " name="asientocontabledetalle_set-{{ z }}-cuenta_text" 
                   		id="id_asientocontabledetalle_set-{{ z }}-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 	        
     					<input type="hidden" name="asientocontabledetalle_set-{{ z }}-cuenta" id="id_asientocontabledetalle_set-{{ z }}-cuenta" value=""
@@ -232,13 +197,13 @@ function iniciar(){
                     </td>
                     
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-debe" required="" min="0"  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" style=" text-align: right" name="asientocontabledetalle_set-{{ z }}-debe" required="" min="0"  step="0.01" type="number" value="0">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-haber" required="" min="0" step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" style="text-align: right" name="asientocontabledetalle_set-{{ z }}-haber" required="" min="0" step="0.01" type="number" value="0">
                     </td>
                  <td class="field-observacion">
-                        <input style="height: 30px" name="asientocontabledetalle_set-{{ z }}-observacion" maxlength="100" type="text" value="">
+                        <input style=" " name="asientocontabledetalle_set-{{ z }}-observacion" maxlength="100" type="text" value="">
                     </td>
                     <td class="delete"><div><a class="inline-deletelink" href="javascript:del_fila({{ z }})">Eliminar</a></div></td>
                 </tr>
@@ -274,18 +239,15 @@ $(document).ajaxComple(function() {
     <td style="width: 375px"></td>
     <td class="readonly" style="width: 300px">
         <label><b>Total Debe:</b></label>
-        <input type="number" style="height: 30px; text-align: right;" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
+        <input type="number" style="text-align: right;" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
     <td class="readonly" style="width: 250px">
         <label><b>Total Haber:</b></label>
-        <input type="number" style="height: 30px; text-align: right;" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
+        <input type="number" style=" text-align: right;" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
     <td class="readonly" style="width: 250px;">
     </tfoot>
 </table>
 
-
-
 <!-- ERRORES -->
-
 
 <div id="error_1" hidden="hidden" class="alert alert-danger" role="alert">
 <p>Error, el Debe no coincide con el Haber</p>
@@ -297,7 +259,7 @@ $(document).ajaxComple(function() {
 <p>Debe registrar al menos una cuenta</p>
  </div>
 
-<script type="text/javascript">
+<script type="text/javascript" >
 
     function total(){
         var table = document.getElementById('myTable');
@@ -334,7 +296,10 @@ $(document).ajaxComple(function() {
             document.getElementById('error_3').removeAttribute('hidden')
         }else{
             var fecha=document.getElementById('id_fecha').value.toString()
+            alert(fecha)
+            if (fecha != null){
             Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
+            }
 
         }
     }
@@ -416,7 +381,7 @@ $(document).ajaxComple(function() {
 
 </div>
 <div class="pull-right">
-    <a href="{% url 'asientos_contables.views.nuevo' %}" class="btn btn-default">Limpiar</a>
+    
 <input type="button" value="Grabar"  onclick="guardar()" class="btn btn-primary" name="_save">
 </div>
         </div>
@@ -436,10 +401,5 @@ $(document).ajaxComple(function() {
 
 <br class="clear">
 </div>
-<!-- END Content -->
-
-<div id="footer"></div>
-</div>
-<!-- END Container -->
-
-</body></html>
+</body>
+{% endblock %}

@@ -1,10 +1,7 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es">
-<head>
+{% extends "admin/base_site.html" %}
+{% block extrahead %}
     {% load my_tags %}
     {% load dajaxice_templatetags %}
-
-
-    <title>Añadir asiento contable | Sitio de administración de Django</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
      {% dajaxice_js_import %}
@@ -37,9 +34,10 @@
     <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
     <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
     <script type="text/javascript" src="/static/ajax_select/js/bootstrap.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
-
-    </script><script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/admin/js/SeparadorDeMiles.js"></script>
+    
+    <script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
 
@@ -63,80 +61,48 @@
         padding-right: 40px;
       }
     </style>
-</head>
-
-
-<body class="asientos_contables-asientocontable change-form" onload="iniciar()" > 
-<script type="text/javascript">
-function iniciar(){
-	total();
-	banco();
-}
-</script>
-{#<!-- Container -->#}
-<div class="container-fluid">
-
-
-    <!-- Header -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-
-<a class="brand" href="/admin/">Hijas de la Caridad</a>
-
-                <div class="nav-collapse collapse pull-right">
-                    <ul class="nav">
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido/a, <strong>{{ request.user.username }}</strong> <b class="caret"></b></a>
-                            <ul class="dropdown-menu pull-right">
-
-                                <li><a href="/admin/password_change/">Cambiar contraseña</a></li>
-
-                                <li><a href="/admin/logout/">Terminar sesión</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
-    
-    
-    <!-- END Header -->
-    </div>
-    <!-- END Content -->
-    <footer id="footer"></footer>
-</div>
-
-
+{% endblock %}
+{% block breadcrumbs %}
 <ul class="breadcrumb">
 <li><a href="/admin/">Inicio</a> <span class="divider">/</span></li>
 <li><a href="{% url 'asientos_contables.views.listar' %}">Asientos contables</a> <span class="divider">/</span></li>
 <li>Añadir asiento contable</li>
 </ul>
 
-<!-- Content -->
-<div id="content" class="colM">
-<div class="row-fluid">
-            <div class="navbar">
+{% endblock %}
+ {% block navbar %}
+             <div class="navbar">
                 <div class="navbar-inner">
                     <a class="brand">Añadir asiento contable</a>
                 </div>
             </div>
+        {% endblock navbar %}
+
+
+{% block content %}
+
+
+<body class="asientos_contables-asientocontable change-form" onload="iniciar()" > 
+<script type="text/javascript">
+function iniciar(){
+	total(null,null);
+	banco();
+}
+</script>
+
+   
+<!-- Content -->
+<div id="content" class="colM">
+<div class="row-fluid">
+            
 <div id="content-main">
-<form enctype="multipart/form-data" action="" name="formulario" onchange="total()" onclick="total()" method="post" id="asientocontable_form">{% csrf_token %}
+<form enctype="multipart/form-data" action="" name="formulario"  method="post" id="asientocontable_form">{% csrf_token %}
 <div>
 <fieldset class="module aligned ">
     <div class="form-row field-fecha">
         <div>
             <label class="required" for="id_fecha">Fecha:</label>
-            <input style="height: 30px" class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ asiento.fecha }}">
+            <input  class="vDateField" readonly id="id_fecha" name="fecha" size="10" type="text" value="{{ asiento.fecha }}">
         </div>
     </div>
 </fieldset>
@@ -163,7 +129,7 @@ function iniciar(){
 		<tr class="form-row {% cycle 'row1' 'row2' %}  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-{{ forloop.counter0 }}">
 					
                     <td class="field-cuenta">     		
-                 		<input type="text" style="height: 30px" name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" 
+                 		<input type="text"  name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" 
                   		id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 	        
     					<input type="hidden" name="asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta" id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-cuenta" value="{{ ad.cuenta_id }}"
@@ -189,15 +155,20 @@ function iniciar(){
     			    });
     					</script>
                     </td>
-                    
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-debe" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-debe" required="" min="0"  step="0.01" type="number" value="{{ ad.debe|to_int }}">
+                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-debe" style=" text-align: right" 
+                        name="asientocontabledetalle_set-{{ forloop.counter0 }}-debe" onclick="this.select()"
+                         required="" min="0"  step="0.01" type="text" value="{{ ad.debe|separar }}"
+                         onkeyup="total(this,this.value.charAt(this.value.length-1))">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-haber" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ forloop.counter0 }}-haber" required="" min="0" step="0.01" type="number" value="{{ ad.haber|to_int }}">
+                        <input id="id_asientocontabledetalle_set-{{ forloop.counter0 }}-haber" style=" text-align: right" 
+                        name="asientocontabledetalle_set-{{ forloop.counter0 }}-haber" onclick="this.select()"
+                         required="" min="0" step="0.01" type="text" value="{{ ad.haber|separar }}"
+                         onkeyup="total(this,this.value.charAt(this.value.length-1))" >
                     </td>
                  <td class="field-observacion">
-                        <input style="height: 30px" name="asientocontabledetalle_set-{{ forloop.counter0 }}-observacion" maxlength="100" type="text" value="{% if ad.observacion != None %} {{ ad.observacion }} {% endif %}">
+                        <input  name="asientocontabledetalle_set-{{ forloop.counter0 }}-observacion" maxlength="100" type="text" value="{% if ad.observacion != None %} {{ ad.observacion }} {% endif %}">
                     </td>
                     <td class="delete"><div><a class="inline-deletelink" href="javascript:del_fila({{ forloop.counter0 }})">Eliminar</a></div></td>
                 </tr>
@@ -205,7 +176,7 @@ function iniciar(){
 		{% for z in filas %}
 		<tr  hidden="hidden"  class="form-row {% cycle 'row1' 'row2' %}  dynamic-asientocontabledetalle_set" id="asientocontabledetalle_set-{{ z }}">
                     <td class="field-cuenta">     		
-                 		<input type="text" style="height: 30px" name="asientocontabledetalle_set-{{ z }}-cuenta_text" 
+                 		<input type="text" name="asientocontabledetalle_set-{{ z }}-cuenta_text" 
                   		id="id_asientocontabledetalle_set-{{ z }}-cuenta_text" autocomplete="off" maxlength="255" class="ui-autocomplete-input">
 	        
     					<input type="hidden" name="asientocontabledetalle_set-{{ z }}-cuenta" id="id_asientocontabledetalle_set-{{ z }}-cuenta" value=""
@@ -232,19 +203,25 @@ function iniciar(){
                     </td>
                     
                     <td class="field-debe">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-debe" required="" min="0"  step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-debe" style=" text-align: right" onclick="this.select()"
+                         name="asientocontabledetalle_set-{{ z }}-debe" required="" type="text" 
+                         value="0,00" onkeyup="total(this,this.value.charAt(this.value.length-1))">
                     </td>
                     <td class="field-haber">
-                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" style="height: 30px; text-align: right" name="asientocontabledetalle_set-{{ z }}-haber" required="" min="0" step="0.01" type="number" value="0">
+                        <input id="id_asientocontabledetalle_set-{{ z }}-haber" style="text-align: right" onclick="this.select()"
+                        name="asientocontabledetalle_set-{{ z }}-haber" required=""  type="text" value="0,00"
+                        onkeyup="total(this,this.value.charAt(this.value.length-1))">
                     </td>
                  <td class="field-observacion">
-                        <input style="height: 30px" name="asientocontabledetalle_set-{{ z }}-observacion" maxlength="100" type="text" value="">
+                        <input  name="asientocontabledetalle_set-{{ z }}-observacion" maxlength="100" type="text" value="">
                     </td>
                     <td class="delete"><div><a class="inline-deletelink" href="javascript:del_fila({{ z }})">Eliminar</a></div></td>
                 </tr>
 		{% endfor %}
-                <tr class="add-row"><td colspan="6">
-                <a href="javascript:addRow()">Agregar Asiento Contable Detalle adicional.</a></td></tr>
+                <tr ><td colspan="6">
+                <a  href="javascript:addRow()" class="btn  addlink">
+                <i class="icon-plus"></i> Agregar Fila</a>
+                </td></tr>
                 </tbody>
             </table>
         </fieldset>
@@ -274,14 +251,15 @@ $(document).ajaxComple(function() {
     <td style="width: 375px"></td>
     <td class="readonly" style="width: 300px">
         <label><b>Total Debe:</b></label>
-        <input type="number" style="height: 30px; text-align: right;" name="total_d" id="total_d" min="0" value="0" step="0.01" readonly ></td>
+        <input type="text" style=" text-align: right;" name="total_d" id="total_d" 
+        step="0.01" readonly ></td>
     <td class="readonly" style="width: 250px">
         <label><b>Total Haber:</b></label>
-        <input type="number" style="height: 30px; text-align: right;" name="total_h" id="total_h" min="0" value="0" step="0.01" readonly  ></td>
+        <input type="text" style="text-align: right;" name="total_h" id="total_h"  
+        step="0.01" readonly  ></td>
     <td class="readonly" style="width: 250px;">
     </tfoot>
 </table>
-
 
 
 <!-- ERRORES -->
@@ -322,7 +300,11 @@ $(document).ajaxComple(function() {
         }
     }
 
-    function total(){
+    function total(a,b){
+    	if (a !=  null || b != null){
+    		SeparadorDeMiles:puntitos(a,b)
+    	}
+    	
         var table = document.getElementById('myTable');
         var rowCount = parseInt(table.rows.length);
         var i;
@@ -333,16 +315,34 @@ $(document).ajaxComple(function() {
         for (i=0;i<rowCount;i++){
             var element_debe=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe')
             var element_haber=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber')
-            var debe=(element_debe != null)?parseFloat(element_debe.value) : 0;
-            var haber=(element_haber != null)?parseFloat(element_haber.value) : 0;
-            var aux_debe=parseFloat(total_d.value);
-            var aux_haber=parseFloat(total_h.value);
-            total_d.value=Math.round((aux_debe+debe)*100)/100;
-            total_h.value=Math.round((aux_haber+haber)*100)/100;
+            var debe=(element_debe != null)?convertir(element_debe.value) : 0;
+            var haber=(element_haber != null)?convertir(element_haber.value) : 0;
+            var aux_debe=convertir(total_d.value);
+            var aux_haber=convertir(total_h.value);
+            total_d.value=convertir_rever(Math.round((aux_debe+debe)*100)/100);
+            total_h.value=convertir_rever(Math.round((aux_haber+haber)*100)/100);
         }
     }
 
-
+    function setear(){
+        var table = document.getElementById('myTable');
+        var rowCount = parseInt(table.rows.length);
+        var i;
+        var  total_d=document.getElementById('total_d')
+        var  total_h=document.getElementById('total_h')
+        total_d.value=0.00
+        total_h.value=0.00
+        for (i=0;i<rowCount;i++){
+            var element_debe=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-debe')
+            var element_haber=document.getElementById('id_asientocontabledetalle_set-'+ i.toString()+'-haber')
+            if(element_debe != null){
+            element_debe.value=(element_debe != null)?convertir(element_debe.value) : 0;
+            }
+           if(element_haber != null){
+            element_haber.value=(element_haber != null)?convertir(element_haber.value) : 0;
+           }
+        }
+    }
     function guardar(){
         var  total_d=parseFloat(document.getElementById('total_d').value)
         var  total_h=parseFloat(document.getElementById('total_h').value)
@@ -357,9 +357,12 @@ $(document).ajaxComple(function() {
             document.getElementById('error_3').removeAttribute('hidden')
         }else{
             var fecha=document.getElementById('id_fecha').value.toString()
-            Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
-
+            //Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
+            setear();
+            document.getElementById('asientocontable_form').submit();
         }
+        
+        //document.getElementById('asientocontable_form').submit();
     }
 
     function return_existe(data){
@@ -439,7 +442,7 @@ $(document).ajaxComple(function() {
     	 if (cuenta.value == ''){
     		 banco.style.display='none'
     	 }
-    	alert('removed')
+    	//alert('removed')
         var debe = document.getElementById("id_asientocontabledetalle_set-"+index.toString()+"-debe")
         var haber = document.getElementById("id_asientocontabledetalle_set-"+index.toString()+"-haber")
         debe.readonly=false;
@@ -453,11 +456,8 @@ $(document).ajaxComple(function() {
 <div class="row-fluid">
         <div class="form-actions">
 
-<div class="pull-left">
 
-</div>
 <div class="pull-right">
-    <a href="{% url 'asientos_contables.views.nuevo' %}" class="btn btn-default">Limpiar</a>
 <input type="button" value="Grabar"  onclick="guardar()" class="btn btn-primary" name="_save">
 </div>
         </div>
@@ -483,4 +483,5 @@ $(document).ajaxComple(function() {
 </div>
 <!-- END Container -->
 
-</body></html>
+</body>
+{% endblock %}

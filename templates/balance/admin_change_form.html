@@ -75,7 +75,6 @@
    
 {% block content %}
 
-
 <div id="content-main">
 <form enctype="multipart/form-data" action="" name="formulario" onchange="total()" onclick="total()" method="post" id="asientocontable_form">{% csrf_token %}
 <div>
@@ -290,10 +289,11 @@ function total(){
         }else{
             var fecha=document.getElementById('id_fecha').value.toString()
             setear()
-            Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
+            //Dajaxice.asientos_contables.existe_cambio(return_existe,{'fecha':fecha})
             
 
         }
+        document.getElementById('asientocontable_form').submit();
     }
 
     function return_existe(data){

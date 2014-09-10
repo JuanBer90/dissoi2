@@ -10,6 +10,7 @@
   
    {% load bootstrap_pagination %}
    {% load bootstrap_toolkit %}
+   {% load my_tags %}	
     
     <script type="text/javascript" src="/admin/jsi18n/"></script>
   
@@ -93,7 +94,7 @@
         
         
         <li>
-        {% if not request.user.is_superuser %}
+        {% if request.user|limitado %}
         <a href="{% url 'asientos_contables.views.nuevo' %}" class="btn btn-primary">
             <i class="icon-plus icon-white"></i> Añadir asiento contable
         </a>

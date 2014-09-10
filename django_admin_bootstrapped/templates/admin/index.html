@@ -183,6 +183,14 @@
                                 </div>
                             </th>
                         </tr>
+                          {% if request.user|get_comunidad != 0 %}
+                         <tr>
+                        
+                            <th scope="row">
+                                <a href="/cuentas_bancarias/{{ request.user|get_comunidad }}/">Cuentas Bancarias Detalles</a>                             
+                            </th>
+                        </tr>
+                        {% endif %}      
                         <tr>
                             <th scope="row">
                             {% if request.user|get_comunidad != 0 %}
@@ -191,6 +199,7 @@
                                 
                             </th>
                         </tr>
+                        
                     </table>
 					{% endif %}
                     </td>
@@ -274,6 +283,11 @@
                         <th scope="row">
                         <a href="/admin/usuarios/usuariolimitado/" >Usuarios</a>
                         </th>
+                        </tr>
+                         <tr>                        
+                            <th scope="row">
+                                <a href="/cuentas_bancarias/comunidad/">Cuentas Bancarias Detalles</a>                             
+                            </th>
                         </tr>
                         
                     </table>
